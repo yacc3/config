@@ -54,7 +54,6 @@ alias yx='~/iconfig/shell/media.sh yixiu'
 alias ck='~/iconfig/shell/media.sh captureVideoKill'
 alias cv='~/iconfig/shell/media.sh captureVideo'
 alias mb='~/iconfig/shell/media.sh broadcast'
-alias mbk='~/iconfig/shell/media.sh broadcastKill'
 
 # open in finder or subl
 alias  rc='code ~/.zshrc  ~/iconfig'

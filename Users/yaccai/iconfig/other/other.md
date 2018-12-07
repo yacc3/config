@@ -1,9 +1,9 @@
-
-
 # 设置分区类型
+
 `sudo asr adjust -target /dev/disk0s3 -settype “Apple_HFS”`
 
 # 修改映像大小，先缩小文件系统，再减小映像体积，待优化
+
 `diskutil resizeVolume disk2s1 30G # px.sparsebundle挂载后 disk2s1`
 然后在磁盘工具，选apple稀疏*，选分区，删除空出来的空间
 `hdiutil resize -size 30g /Volumes/Doc/Doc/px.sparsebundle`
@@ -12,17 +12,20 @@
 /usr/local/bin/expect<<END
     set timeout 15
     spawn hdiutil create -size 5G -volname px -fs HFS+  -type SPARSEBUNDLE -encryption AES-128 -agentpass /Users/yaccai/px.sparsebundle
-    expect "password:"     
-    send "977\r" 
+    expect "password:"
+    send "977\r"
     expect "password:"
     send "977\r"
     expect eof
 END
 ```
+
 # 分割磁盘，调整大小
+
 diskutil resizeVolume  disk0s2 90G JHFS+ W 0
 
 # 长选项参数
+
 ```bash
 temp=`/usr/local/opt/gnu-getopt/bin/getopt -o ab:c:: --long a-long,b-long:,c-long:: -n 'example.bash' -- "$@"`  
 [ $? != 0 ] && exit 1
@@ -121,16 +124,18 @@ sudo route add -net 0.0.0.0 192.168.1.1 默认使用192.168.1.1网关
 sudo route add 10.200.0.0 10.200.22.254 有线网卡使用该网关
 sudo route add 10.0.1.0/24 10.200.22.254 其它网段指定网关
 
-
 # 去掉文件属性中的@
+
 xattr -c <file>
 
 # 均衡  
+
 sudo route  add -net 119.129.117.120 -netmask 255.0.0.0 192.168.1.1 -ifscope en0
 route add -host 192.168.30.122 -iface -link xl0:0:12:3f:2:3:4?????
 
 
 # 内外网
+
 结构 
       192.168.1.1
       /         \
@@ -143,16 +148,16 @@ route add -host 192.168.30.122 -iface -link xl0:0:12:3f:2:3:4?????
 sudo route -n add -net 192.168.12.0/24 192.168.5.1 
 这样就可以在浏览器上进入TP-linkroute 的主页
 
-
 # update sublime c++ package
+
 jthree Aa8-8
 
-
 # 停止spotlight
+
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
 
-
 # 查找指定像素大小的照片
+
 ```bash
 findiPhone6SsreenShot () {
     mkdir -p ~/Downloads/img
@@ -167,7 +172,8 @@ findiPhone6SsreenShot () {
 }
 ```
 
-# 更新sublime 包
+# 更新sublime包
+
 ```bash
 updateSublimePakage () {
     sublpkg=/Applications/Sublime\ Text.app/Contents/MacOS/Packages
@@ -182,4 +188,8 @@ updateSublimePakage () {
 }
 ```
 
+# 挂载硬盘
+
+mount -t exfat /dev/disk3s2 /Volumes/Store
+diskutil umount /Volumes/Store
 <!-- 9?Lj7WT,{2*!].@d -->

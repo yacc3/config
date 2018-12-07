@@ -1,0 +1,17 @@
+astroid
+certifi
+chardet
+idna
+isort
+lazy-object-proxy
+lxml
+mccabe
+pip
+pylint
+requests
+setuptools
+six
+transmissionrpc
+urllib3
+wheel
+wrapt

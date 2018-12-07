@@ -6,25 +6,17 @@ PATH="/usr/local/bin:$PATH"
 bakd="/Volumes/Bak/Backup"
 test -d "$bakd" || exit -1
 
-sfix=`date +'_%Y-%m-%d-%H-%M-%S.bak'`
-nows=`date +%s`
-nowd=`date +%Y-%m-%d`
-
 echo "备份 app列表"
-pip3 list      > "$bakd/pip3"
-brew list      > "$bakd/brew"
-brew cask list > "$bakd/brewc"
+brew list                         > "$bakd/Config/brew"
+brew cask list                    > "$bakd/Config/brewc"
+pip3 list | sed "1,2d;s/ .*//"    > "$bakd/Config/pip3"
 
-mkdir -p "$bakd/$nowd" && {
-    echo "备份 配置文件"
-    cat ~/iconfig/launch/backup/config.include | while read it; do
-        [[ -e "$it" ]] || continue
-        rsync -aR  --delete         "$it" "$bakd/$nowd/conf"
-        rsync -abR --suffix="$sfix" "$it" "$bakd/conf"
-    done
-}
-oldd=`date -v-8d +'%Y-%m-%d'`
-test -d "$bakd/$oldd" && rm -rf "$bakd/$oldd"
+echo "备份 配置文件"
+cat ~/iconfig/launch/backup/config.include | while read it; do
+    [[ -e "$it" ]] && rsync -aR  "$it" "$bakd/Config"
+done
+git -C "$bakd/Config" add -A
+git -C "$bakd/Config" commit -m "$(date +'%Y-%m-%d %T')"
 
 echo "备份 iTunes"
 rsync -a ~/Music/iTunes "$bakd/iTunesMedia"
@@ -70,7 +62,7 @@ tmexclpath=(
 [ `date +%H` -lt 5 ] && {
     for excl in "${tmexclpath[@]}"; do
         test -d "$excl" || continue
-        tmutil isexcluded "$excl" &>/dev/null || continue
+        tmutil isexcluded   "$excl" &>/dev/null && continue
         tmutil addexclusion "$excl"
     done
     tmutil startbackup

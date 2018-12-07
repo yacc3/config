@@ -53,11 +53,12 @@ format() {
 }
 
 search() { 
-    cmd=''
-    [[ "$2" == "-t" ]] && cmd="-exec open -a Typora        {} +"
-    [[ "$2" == "-m" ]] && cmd="-exec open -a MacDown       {} +"
-    [[ "$2" == "-s" ]] && cmd="-exec open -a Sublime\ Text {} +"
-    sh -c "find ~/Code/yaccai.blog/_posts -iname \"*$1*\" -print $cmd"
+    app=""
+    [[ "$2" == "-t" ]] && app="Typora"
+    [[ "$2" == "-m" ]] && app="MacDown"
+    [[ "$2" == "-s" ]] && app="Sublime\ Text"
+    [[ "$2" == "-c" ]] && app="Visual\ Studio\ Code.app"
+    sh -c "find ~/Code/yaccai.blog/_posts -iname \"*$1*\" -print -exec open -a $app {} +"
 }
 
 

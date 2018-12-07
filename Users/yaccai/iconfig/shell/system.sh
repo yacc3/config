@@ -47,6 +47,9 @@ case "$1" in
     "umountEFI" )
         sudo umount /Volumes/EFI
         ;;
+    "createDMG" )            # <folder>    <dmg_name>
+        hdiutil create -srcfolder "$2" "$3"
+        ;;
     "filetime" )
         find "$2" -d 1 ! -name ".DS_Store" | while read it; do
             stat -t "%Y-%m-%d %H:%M:%S" -f "%S${1}  %N" "$it" | sed "s#$2/##"
