@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>             <string>yaccai.onlogin</string>
+    <key>Program</key>           <string>/Users/yaccai/iconfig/launch/onlogin/onlogin.sh</string>
+    <key>WorkingDirectory</key>  <string>/Users/yaccai/iconfig/launch/onlogin</string>
+    <key>StandardOutPath</key>   <string>onlogin.log</string>
+    <key>StandardErrorPath</key> <string>onlogin.log</string>
+
+    <key>Disabled</key>          <false/>
+    <key>RunAtLoad</key>         <true/>
+    <key>KeepAlive</key>         <false/>
+</dict>
+</plist>

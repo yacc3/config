@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>             <string>yaccai.tormove</string>
+    <key>ProgramArguments</key>
+        <array>
+            <string>/usr/local/bin/python3</string>
+            <string>/Users/yaccai/iconfig/launch/torrent/tormove.py</string>
+        </array>
+    <key>WorkingDirectory</key>  <string>/Users/yaccai/iconfig/launch/torrent</string>
+    <key>StandardErrorPath</key> <string>tormove.log</string>
+    <key>StandardOutPath</key>   <string>tormove.log</string>
+    <key>StartInterval</key>     <integer>75</integer>
+</dict>
+</plist>

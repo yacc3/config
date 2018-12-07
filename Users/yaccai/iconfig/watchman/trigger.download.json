@@ -1,0 +1,18 @@
+[
+    "trigger", 
+    "/Users/yaccai/Downloads", 
+    {
+        "name": "download",
+        "expression": ["allof",
+            ["pcre", "\\.(jpg|png|gif|mp4|flv|torrent|dmg|exe|mp3|aac|m4a|wav)$"],
+            ["dirname", "", ["depth", "eq", 0]],
+            ["size", "le", 500000000],
+            ["size", "gt", 10],
+            ["type", "f"],
+            ["exists"]
+        ],
+        "append_files":true,
+        "command": ["/Users/yaccai/iconfig/watchman/command.download.sh"]
+    }
+]
+

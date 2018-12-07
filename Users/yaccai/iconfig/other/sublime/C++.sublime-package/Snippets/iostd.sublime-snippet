@@ -1,0 +1,10 @@
+<snippet>
+    <description>iostd decouple</description>
+    <content><![CDATA[int ${1:_some} = [](){
+        cin.tie(0);
+        ios::sync_with_stdio(false);
+        return 0;
+    }();]]></content>
+    <tabTrigger>_so</tabTrigger>
+    <scope>source.c, source.objc, source.c++</scope>
+</snippet> 

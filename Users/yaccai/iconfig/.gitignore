@@ -1,0 +1,9 @@
+.DS_Store
+*.swp
+*.log
+*.pyc
+*.log
+*.out
+*.pyc
+*.bak
+__pycache__

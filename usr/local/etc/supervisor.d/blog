@@ -1,0 +1,13 @@
+[program:blog]
+command = /usr/local/bin/jekyll serve --incremental --source /Users/yaccai/Code/yaccai.blog --destination /Users/yaccai/Code/yaccai.github.io --port 4000 --watch
+
+autostart=true      ; 在 supervisord 启动的时候也自动启动
+autorestart=true    ; 程序异常退出后自动重启
+startsecs=3         ; 启动 3 秒后没有异常退出，就当作已经正常启动了
+startretries=3      ; 启动失败自动重试次数，默认是 3
+
+
+stderr_logfile=/usr/local/var/log/blog.log
+stdout_logfile=/usr/local/var/log/blog.log
+
+user=yaccai

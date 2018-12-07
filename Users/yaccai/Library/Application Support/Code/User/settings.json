@@ -1,0 +1,9 @@
+{
+    "workbench.colorTheme": "Visual Studio Dark",
+    "editor.minimap.enabled": false,
+    "explorer.confirmDelete": false,
+    "path-intellisense.extensionOnImport": true,
+    "path-intellisense.showHiddenFiles": true,
+    "path-intellisense.absolutePathToWorkspace": false,
+    "path-intellisense.autoSlashAfterDirectory": true
+}

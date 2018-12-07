@@ -1,0 +1,15 @@
+[
+    "trigger", 
+    "/Users/yaccai/Music", 
+    {
+        "name": "music",
+        "expression": [ "allof",
+            ["pcre", "\\.(mp3|aac|m4a|wav)$"],
+            ["not", ["dirname", "iTunes"]],
+            ["type", "f"],
+            ["exists"]
+        ],
+        "append_files":true,
+        "command": ["/Users/yaccai/iconfig/watchman/command.music.sh"]
+    }
+]

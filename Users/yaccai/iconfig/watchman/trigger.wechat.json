@@ -1,0 +1,15 @@
+[
+    "trigger",
+    "/Users/yaccai/Library/Containers/com.tencent.xinWeChat",
+    {
+        "name": "wechat",
+        "expression": ["allof",
+            ["pcre", "\\.jpg$"],
+            ["dirname", "Image", ["depth", "ge", 0]],
+            ["type", "f"],
+            ["exists"]
+        ],
+        "append_files":true,
+        "command": ["/Users/yaccai/iconfig/watchman/command.wechat.sh"]
+    }
+]

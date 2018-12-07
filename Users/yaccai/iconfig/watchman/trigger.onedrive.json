@@ -1,0 +1,23 @@
+[
+    "trigger", 
+    "/Users/yaccai/OneDrive", 
+    {
+        "name": "onedrive",
+        "expression": ["allof",
+            ["anyof",   ["allof", 
+                            ["pcre", "\\.(jpg|png|bmp|gif|mp4|mov|m4a|flv|None|jpeg)$"],
+                            ["dirname", "图片/本机照片", ["depth", "ge", 0]]
+                            ], 
+                        ["allof",
+                            ["pcre", "\\.(torrent)$"],
+                            ["dirname", "文档",         ["depth", "eq", 0]]
+                            ]
+                    ],
+            ["type", "f"],
+            ["exists"]
+        ],
+        "append_files":true,
+        "command": ["/Users/yaccai/iconfig/watchman/command.onedrive.sh"]
+    }
+]
+

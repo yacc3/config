@@ -1,0 +1,15 @@
+[
+    "trigger", 
+    "/Users/yaccai/Code/yaccai.blog", 
+    {
+        "name": "blog",
+        "expression": ["allof",
+            ["pcre", "\\.md$"],
+            ["type", "f"],
+            ["exists"]
+        ],
+        "append_files":true,
+        "command": ["/Users/yaccai/iconfig/watchman/command.blog.sh"]
+    }
+]
+

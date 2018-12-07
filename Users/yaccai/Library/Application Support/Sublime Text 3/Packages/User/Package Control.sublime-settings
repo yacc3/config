@@ -1,0 +1,22 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"AppleScript Extensions",
+		"BinaryPlist",
+		"BracketHighlighter",
+		"Codecs33",
+		"ConvertToUTF8",
+		"LaTeXTools",
+		"Material Theme",
+		"Package Control",
+		"Terminal",
+		"Theme - Soda",
+		"Theme - Spacegray",
+		"Themr",
+		"Zip Browser"
+	]
+}

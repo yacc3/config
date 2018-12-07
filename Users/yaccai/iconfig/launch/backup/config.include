@@ -1,0 +1,58 @@
+/etc/hosts
+/etc/sysctl.conf
+/etc/watchman.json
+
+/usr/local/etc/dnsmasq.conf
+/usr/local/etc/mongod.conf
+/usr/local/etc/my.cnf
+/usr/local/etc/privoxy
+/usr/local/etc/resolv.dnsmasq.conf
+/usr/local/etc/shadowsocks-libev.json
+/usr/local/etc/ss-local-config.json
+/usr/local/etc/supervisor.d
+/usr/local/etc/supervisord.ini
+/usr/local/etc/nginx/nginx.conf
+
+/usr/local/var/transmission/settings.json
+
+/Users/yaccai/iconfig
+/Users/yaccai/.gdbinit
+/Users/yaccai/.zshrc
+/Users/yaccai/.bashrc
+/Users/yaccai/.curlrc
+/Users/yaccai/.gemrc
+/Users/yaccai/.clang-format
+/Users/yaccai/.gitconfig
+/Users/yaccai/.hammerspoon
+/Users/yaccai/.pip
+/Users/yaccai/.docker
+/Users/yaccai/.tmux.conf
+/Users/yaccai/.gvimrc.local
+/Users/yaccai/.vimrc.bundles.local
+/Users/yaccai/.vimrc.common
+/Users/yaccai/.vimrc.local
+/Users/yaccai/.oh-my-zsh/themes/robbyrussell.zsh-theme
+
+/Users/yaccai/Library/Scripts/Folder Action Scripts/copy_neteasy.scpt
+
+/Users/yaccai/Library/Application Support/Sublime Text 3/Packages/User/Package Control.sublime-settings
+/Users/yaccai/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings
+/Users/yaccai/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap
+/Users/yaccai/Library/Application Support/Sublime Text 3/Packages/User/st.tmTheme
+
+/Users/yaccai/Library/Application Scripts/com.apple.iChat/message.applescript
+/Users/yaccai/Library/Application Support/Spectacle/Shortcuts.json
+/Users/yaccai/Library/Application Support/Code/User/settings.json
+/Users/yaccai/Library/Application Support/Code/User/keybindings.json
+/Users/yaccai/Library/Application Support/PopClip
+
+/Users/yaccai/Library/Preferences/com.apple.ServicesMenu.Services.plist
+/Users/yaccai/Library/Preferences/com.apple.Terminal.plist
+/Users/yaccai/Library/Preferences/com.apple.finder.plist
+/Users/yaccai/Library/Preferences/com.apple.menuextra.battery.plist
+/Users/yaccai/Library/Preferences/com.apple.notificationcenterui.plist
+/Users/yaccai/Library/Preferences/com.apple.screencapture.plist
+/Users/yaccai/Library/Preferences/com.apple.systempreferences.plist
+/Users/yaccai/Library/Preferences/com.apple.systemuiserver.plist
+/Users/yaccai/Library/Preferences/com.bittorrent.uTorrent.plist
+/Users/yaccai/Library/Preferences/com.googlecode.iterm2.plist
