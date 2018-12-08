@@ -55,7 +55,6 @@ format() {
 search() { 
     app=""
     [[ "$2" == "-t" ]] && app="Typora"
-    [[ "$2" == "-m" ]] && app="MacDown"
     [[ "$2" == "-s" ]] && app="Sublime\ Text"
     [[ "$2" == "-c" ]] && app="Visual\ Studio\ Code.app"
     sh -c "find ~/Code/yaccai.blog/_posts -iname \"*$1*\" -print -exec open -a $app {} +"

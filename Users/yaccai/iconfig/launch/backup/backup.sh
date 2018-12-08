@@ -15,8 +15,8 @@ echo "备份 配置文件"
 cat ~/iconfig/launch/backup/config.include | while read it; do
     [[ -e "$it" ]] && rsync -aR  "$it" "$bakd/Config"
 done
-git -C "$bakd/Config" add -A
-git -C "$bakd/Config" commit -m "$(date +'%Y-%m-%d %T')"
+git -C "$bakd/Config" add -A &>/dev/null
+git -C "$bakd/Config" commit -m "$(date +'%Y-%m-%d %T')" &>/dev/null
 
 echo "备份 iTunes"
 rsync -a ~/Music/iTunes "$bakd/iTunesMedia"
