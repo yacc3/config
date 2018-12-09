@@ -39,7 +39,7 @@ echo "备份 Fonts"
 rsync -a ~/Library/Fonts "$bakd"
 
 echo "备份 磁盘"
-if [[ -d /Volumes/Store/Picture ]]; then
+if [[ -d /Volumes/Store/Backup ]]; then
     rsync -a /Volumes/Bak/Backup /Volumes/Store
 fi
 
