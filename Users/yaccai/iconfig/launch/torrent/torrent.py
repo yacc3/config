@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*- 
 exit()
 import os
-import re
+# import re
 import time
 import requests
 import common  as com
