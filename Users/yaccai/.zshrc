@@ -42,10 +42,8 @@ alias tor='~/iconfig/shell/torrent.sh'
 
 alias sys='~/iconfig/shell/system.sh'
 alias  js='~/iconfig/shell/system.sh arithmetic'
-alias  b+='~/iconfig/shell/system.sh bright 113'
-alias  b-='~/iconfig/shell/system.sh bright 107'
-alias  v+='~/iconfig/shell/system.sh volume +20'
-alias  v-='~/iconfig/shell/system.sh volume -20'
+alias  b='~/iconfig/shell/system.sh bright0'
+alias  v='~/iconfig/shell/system.sh volume'
 alias  kl='~/iconfig/shell/system.sh killLaunchpad'
 alias  ap='~/iconfig/shell/system.sh accessPoint'
 

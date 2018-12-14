@@ -30,11 +30,6 @@ rsync -a ~/Library/Containers/com.tencent.xinWeChat  "$bakd"
 echo "备份 Code"
 rsync -a ~/Code "$bakd"
 
-echo "备份 Homebrew"
-find ~/Library/Caches/Homebrew -type l | while read it; do 
-    rsync -aL "$it" "${it/*Caches/$bakd}"
-done
-
 echo "备份 Fonts"
 rsync -a ~/Library/Fonts "$bakd"
 

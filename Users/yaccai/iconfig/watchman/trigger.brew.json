@@ -1,0 +1,13 @@
+[
+    "trigger", 
+    "/Users/yaccai/Library/Caches/Homebrew", 
+    {
+        "name": "brew",
+        "expression": [ "allof",
+            ["type", "l"],
+            ["exists"]
+        ],
+        "append_files":true,
+        "command": ["/Users/yaccai/iconfig/watchman/command.brew.sh"]
+    }
+]

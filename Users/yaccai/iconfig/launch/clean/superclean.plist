@@ -2,17 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Label</key>             <string>yaccai.clean</string>
-	<key>Program</key>           <string>/Users/yaccai/iconfig/launch/clean/clean.sh</string> 
+	<key>Label</key>             <string>yaccai.superclean</string>
+	<key>Program</key>           <string>/Users/yaccai/iconfig/launch/clean/superclean.sh</string> 
 	<key>WorkingDirectory</key>  <string>/Users/yaccai/iconfig/launch/clean</string>
-    <key>StandardErrorPath</key> <string>clean.log</string>
-    <key>StandardOutPath</key>   <string>clean.log</string>
+    <key>StandardErrorPath</key> <string>superclean.log</string>
+    <key>StandardOutPath</key>   <string>superclean.log</string>
 
     <key>StartCalendarInterval</key>
     <array>
         <dict>
             <key>Hour</key>      <integer>4</integer>
-            <key>Minute</key>    <integer>45</integer>
+            <key>Minute</key>    <integer>40</integer>
         </dict>
     </array>
 </dict>

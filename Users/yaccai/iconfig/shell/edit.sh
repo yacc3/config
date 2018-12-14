@@ -39,6 +39,7 @@ renameblog() {
     done
 }
 
+
 format() {
     i=0
     ls ~/Code/yaccai.blog/_posts/*.md | while read it; do
@@ -60,7 +61,31 @@ search() {
     sh -c "find ~/Code/yaccai.blog/_posts -iname \"*$1*\" -print -exec open -a $app {} +"
 }
 
+code=(
+    UTF-8
+    GBK
+    GB18030
+    UTF-16
+    WINDOWS-1252
+    ISO-8859
+    )
+transCode() {
+    for file in "${@}"; do
+        ext=${file##*.}
+        i=0
+        for c in "${code[@]}"; do
+            ((i += 1))
+            iconv -f "$c" -t UTF-8 "$file" 1>"$file.UTF8.$ext" 2>/dev/null && break
+        done
 
+        if [[ $i == ${#code[@]} ]]; then
+            rm $file.UTF8.$ext
+            return -1
+        fi
+        printf "\033[32mOK\n"
+    done
+
+}
 
 if [[ $# -eq 0 ]]; then
     echo "subcommand:"
@@ -90,6 +115,7 @@ EOF
         ;;
     "transcode" )
         ~/iconfig/exe/transCode.sh "${@:2}"
+
         ;;
     "newEdit" )
         touch "$2"
