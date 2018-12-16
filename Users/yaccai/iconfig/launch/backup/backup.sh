@@ -54,7 +54,7 @@ tmexclpath=(
     "/Users/yaccai/Downloads"
     )
 
-[ `date +%H` -lt 5 ] && {
+[ `date +%H` -lt 6 ] && {
     for excl in "${tmexclpath[@]}"; do
         test -d "$excl" || continue
         tmutil isexcluded   "$excl" &>/dev/null && continue

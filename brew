@@ -24,6 +24,7 @@ grep
 gzip
 highlight
 htop
+icu4c
 iftop
 imagemagick
 jpeg
@@ -49,6 +50,7 @@ ncurses
 nettle
 nginx
 nmap
+node
 oniguruma
 opencc
 openjpeg
