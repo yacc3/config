@@ -79,10 +79,13 @@ transCode() {
         done
 
         if [[ $i == ${#code[@]} ]]; then
+            echo "ER"
             rm $file.UTF8.$ext
             return -1
+        else :
+            mv "$file.UTF8.$ext" "$file"
         fi
-        printf "\033[32mOK\n"
+        
     done
 
 }
@@ -114,8 +117,7 @@ case "$1" in
 EOF
         ;;
     "transcode" )
-        ~/iconfig/exe/transCode.sh "${@:2}"
-
+        transCode "${@:2}"
         ;;
     "newEdit" )
         touch "$2"

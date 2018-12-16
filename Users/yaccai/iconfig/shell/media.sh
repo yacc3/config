@@ -6,10 +6,10 @@ yixiu () {
     purl="$1"
     while true; do
         curl "$purl" -s > $tmp
-        ~/iconfig/exe/transCode.sh -d $tmp
+        ~/iconfig/shell/edit.sh transcode $tmp
         title=~/Downloads/`cat $tmp | ggrep -oP "(?<=<title>)[^(<]*"`
         [[ -d "$title" ]] || mkdir "$title"
-        cat $tmp | ggrep -oP 'http://[a-z0-9\/]*.yixiu8.com:8080/picture/[a-z0-9\/]*\.jpg' | while read p; do
+        cat $tmp | ggrep -oP 'http://[a-z0-9\/\.:]*/picture/[a-z0-9\/]*\.jpg' | while read p; do
             name=`basename "$p"`
             printf "pull %8s  -- >  %s\n" "$name" "$p"
             curl -s --connect-timeout 5 -m 20 "$p" > "$title/$name"
