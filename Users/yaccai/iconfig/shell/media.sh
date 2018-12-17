@@ -31,6 +31,22 @@ yixiu () {
     done
 }
 
+getimg() {
+    url="${1%/*/*}"    # $1 一个照片的url
+    title="${2:-.}"    # $2 下载位置
+    echo "Fetch  =>  $title"
+    for i in $(seq 0 100); do
+        str=`printf "%03d\n" "$i"`
+        [ $i -eq 0 ] && str=0
+        if wget -P "$title" -q "$url/$str.jpg" -T 30 --show-progress -qcnc; then
+            e=0
+        else
+            ((e += 1))
+        fi
+        [ $e -eq 3 ] && break
+    done
+}
+
 get () {
     cd ~/Downloads
     you-get           --timeout 10 "$1" && exit
@@ -53,6 +69,22 @@ case "$1" in
         ;;
     "yixiu" )
         yixiu "${@:2}"
+        ;;
+    "nvshens" )               # 从nvshens.com 下载
+        html="$(curl -s $2)"
+        root="/Volumes/Bak/Backup/Model"
+        [ -e "$root" ] || root=.
+        if echo "$2" | ggrep album &>/dev/null; then
+            name="$(echo $html | ggrep -oP '(?<=/girl/[0-9]{5}/\" title=\")[^<>]*(?=\")')"
+            echo $html | ggrep -oP "<img alt=[^<>]* src=[^<>]* title=[^<>]*>" | while read it; do
+                getimg  "$(echo $it | cut -d "'" -f4)" \
+                        "$root/$name/$(echo $it | cut -d "'" -f2)"
+                echo
+            done
+        else
+            getimg  "$(echo $html | ggrep -oP 'https:[^<>]*/gallery/[0-9/s]*.jpg' | head -n1)" \
+                    "$root/Others/$(echo $html | ggrep -oP '(?<=htilte\">)[^>]*(?=</h1>)')"
+        fi
         ;;
     "get" )
         get "${@:2}"

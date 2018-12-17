@@ -49,6 +49,7 @@ alias  ap='~/iconfig/shell/system.sh accessPoint'
 
 alias me='~/iconfig/shell/media.sh'
 alias yx='~/iconfig/shell/media.sh yixiu'
+alias nv='~/iconfig/shell/media.sh nvshens'
 alias ck='~/iconfig/shell/media.sh captureVideoKill'
 alias cv='~/iconfig/shell/media.sh captureVideo'
 alias mb='~/iconfig/shell/media.sh broadcast'

@@ -55,10 +55,11 @@ format() {
 
 search() { 
     app=""
-    [[ "$2" == "-t" ]] && app="Typora"
-    [[ "$2" == "-s" ]] && app="Sublime\ Text"
-    [[ "$2" == "-c" ]] && app="Visual\ Studio\ Code.app"
-    sh -c "find ~/Code/yaccai.blog/_posts -iname \"*$1*\" -print -exec open -a $app {} +"
+    [[ "$2" == "-t" ]] && app="-exec open -a Typora {} +"
+    [[ "$2" == "-s" ]] && app="-exec open -a Sublime\ Text {} +"
+    [[ "$2" == "-c" ]] && app="-exec open -a Visual\ Studio\ Code.app {} +"
+    sh -c "find ~/Code/yaccai.blog/_posts -iname \"*$1*\" -print $app"
+    # echo "$app"
 }
 
 code=(
