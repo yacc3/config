@@ -1,40 +1,27 @@
 #!/bin/zsh
 # coding:utf-8
 
-yixiu () {
-    tmp=`mktemp`
-    purl="$1"
-    while true; do
-        curl "$purl" -s > $tmp
-        ~/iconfig/shell/edit.sh transcode $tmp
-        title=~/Downloads/`cat $tmp | ggrep -oP "(?<=<title>)[^(<]*"`
-        [[ -d "$title" ]] || mkdir "$title"
-        cat $tmp | ggrep -oP 'http://[a-z0-9\/\.:]*/picture/[a-z0-9\/]*\.jpg' | while read p; do
-            name=`basename "$p"`
-            printf "pull %8s  -- >  %s\n" "$name" "$p"
-            curl -s --connect-timeout 5 -m 20 "$p" > "$title/$name"
-            if [[ $? -ne 0 ]]; then
-                echo "    timeout, curl $p > $title/$name"
-                curl -s "$p" > "$title/$name"
-            fi
-        done
+Model="/Volumes/Bak/Backup/Model"
 
-        next=`cat $tmp | ggrep -oP "(?<=<a href=')[^<>]*(?='>下一页)"` # 最后是#
-        if [[ "$#next" -lt 3 ]]; then
-            bakd=/Volumes/Bak/Picture/Model/Other
-            mkdir -p "$bakd" &>/dev/null && cp -rf "$title" "$bakd"
-            echo "完"
-            break
+yixiu () {
+    html="$(curl -s $1 | iconv -f gbk)"
+    name="$(echo $html | ggrep -oP '(?<=row wzbt text-center\">)[^<>]*(?=<)')"
+    url=`echo "$html" | ggrep -oP "(?<=<img src=\")[^<>]*.jpg" | head -n1`
+    for i in $(seq 0 100); do
+        if wget "${url%/*}/$i.jpg" -P "$Model/Others/$name" -T 30 --show-progress -qcnc; then
+            e=0
         else
-            purl="$(dirname $1)/$next"
+            ((e += 1))
         fi
+        [ $e -eq 3 ] && break
     done
+    echo "$Model/Others/$name"
 }
 
 getimg() {
     url="${1%/*/*}"    # $1 一个照片的url
     title="${2:-.}"    # $2 下载位置
-    echo "Fetch  =>  $title"
+    printf "\nFetch  =>  $title\n"
     for i in $(seq 0 100); do
         str=`printf "%03d\n" "$i"`
         [ $i -eq 0 ] && str=0
@@ -45,6 +32,7 @@ getimg() {
         fi
         [ $e -eq 3 ] && break
     done
+    echo "$title"
 }
 
 get () {
@@ -72,18 +60,16 @@ case "$1" in
         ;;
     "nvshens" )               # 从nvshens.com 下载
         html="$(curl -s $2)"
-        root="/Volumes/Bak/Backup/Model"
         [ -e "$root" ] || root=.
         if echo "$2" | ggrep album &>/dev/null; then
             name="$(echo $html | ggrep -oP '(?<=/girl/[0-9]{5}/\" title=\")[^<>]*(?=\")')"
             echo $html | ggrep -oP "<img alt=[^<>]* src=[^<>]* title=[^<>]*>" | while read it; do
                 getimg  "$(echo $it | cut -d "'" -f4)" \
-                        "$root/$name/$(echo $it | cut -d "'" -f2)"
-                echo
+                        "$Model/$name/$(echo $it | cut -d "'" -f2)"
             done
         else
             getimg  "$(echo $html | ggrep -oP 'https:[^<>]*/gallery/[0-9/s]*.jpg' | head -n1)" \
-                    "$root/Others/$(echo $html | ggrep -oP '(?<=htilte\">)[^>]*(?=</h1>)')"
+                    "$Model/Others/$(echo $html | ggrep -oP '(?<=htilte\">)[^>]*(?=</h1>)')"
         fi
         ;;
     "get" )

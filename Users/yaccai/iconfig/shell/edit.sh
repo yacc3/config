@@ -22,7 +22,7 @@ new() {
     echo ""                  >> "$file"
     echo ""                  >> "$file"
     echo "<!-- more -->"     >> "$file"
-    subl                        "$file"
+    code                        "$file"
 }
 
 renameblog() {
