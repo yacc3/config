@@ -70,7 +70,7 @@ code=(
     WINDOWS-1252
     ISO-8859
     )
-transCode() {
+toUTF-8() {
     for file in "${@}"; do
         ext=${file##*.}
         i=0
@@ -93,7 +93,7 @@ transCode() {
 
 if [[ $# -eq 0 ]]; then
     echo "subcommand:"
-    cat "$0" | awk  "/\"[a-zA-Z\_\-\+]+\" \)/{print $1}" | sed "s/\"//g; s/)//g"
+    cat "$0" | awk  "/\"[a-zA-Z\_\-\+0-9]+\" \)/{print $1}" | sed "s/\"//g; s/)//g"
     exit
 fi
 
@@ -117,9 +117,6 @@ case "$1" in
         end tell
 EOF
         ;;
-    "transcode" )
-        transCode "${@:2}"
-        ;;
     "newEdit" )
         touch "$2"
         case "${2##*.}" in  
@@ -137,6 +134,9 @@ EOF
     "simpleChinese" )
         opencc -c t2s.json -i "$2" -o "$2"
         ;;
+    "toUTF-8" )
+        toUTF-8 "${@:2}"
+        ;;
     "newBlog" )
         new "$2"
         ;;
@@ -145,7 +145,7 @@ EOF
         find ~/Code/yaccai.github.io ! -regex ".*/.git.*" -type f -delete
         /usr/local/bin/jekyll build --source ~/Code/yaccai.blog --destination ~/Code/yaccai.github.io
         ;;
-    "renameBlog" ) # 根据md头部的日期，更新文件名中的日期
+    "renameBlog" )             # 根据md头部的日期，更新文件名中的日期
         renameblog
         ;;
     "formatBlog" )

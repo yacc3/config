@@ -193,3 +193,8 @@ updateSublimePakage () {
 mount -t exfat /dev/disk3s2 /Volumes/Store
 diskutil umount /Volumes/Store
 <!-- 9?Lj7WT,{2*!].@d -->
+
+# timemachine
+
+设定tm自动备份时的间隔 1800秒
+sudo defaults write /System/Library/LaunchDaemons/com.apple.backupd-auto StartInterval -int 1800

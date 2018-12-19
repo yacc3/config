@@ -3,7 +3,7 @@
 
 if [[ $# -eq 0 ]]; then
     echo "subcommand:"
-    cat "$0" | awk  "/\"[a-zA-Z\_\-\+]+\" \)/{print $1}" | sed "s/\"//g; s/)//g"
+    cat "$0" | awk  "/\"[a-zA-Z\_\-\+0-9]+\" \)/{print $1}" | sed "s/\"//g; s/)//g"
     exit
 fi
 
@@ -23,6 +23,7 @@ case "$1" in
         killall Dock
         ;;
     "killDNS" )
+        sudo dscacheutil -flushcache
         sudo killall -HUP mDNSResponder
         ;;
     "arithmetic" )           # <四则表达式>      : 简单四则混合运算
@@ -31,20 +32,22 @@ case "$1" in
     "ShowAllFiles" )         # <true/false>      : 是否显示隐藏文件
         defaults write com.apple.finder AppleShowAllFiles -bool "$2"
         ;;
-    "bright0" )               # <数字>            : 0 ~ 1 小数
-        osascript <<EOF
+    "bright" )               # <数字>            : 0 ~ 100
+        /usr/bin/osascript <<EOF
         tell application "System Preferences"
             activate
             set current pane to pane "显示器"
+            delay 0.5
             tell application "System Events"
-                set value of value indicator 1 of slider 1 of group 1 of tab group 1 of window "内建视网膜显示器" of process "System Preferences" to 0
+                set brightness to "$2" as real 
+                set value of value indicator 1 of slider 1 of group 1 of tab group 1 of window "内建视网膜显示器" of process "System Preferences" to brightness
             end tell
         end tell
 EOF
         # osascript -e "tell application \"System Events\" to key code $2"
         ;;
     "volume" )               # <-/+数字>         : 0 ~ 100
-        osascript -e "set volume output volume + $2"
+        osascript -e "set volume output volume + $2" # osascript -e 'set volume 4' 效果太猛
         ;;
     "mute" )                 # 静音或关闭静音
         osascript -e "set volume output muted (not output muted of (get volume settings))"
@@ -75,7 +78,6 @@ EOF
                 delay 0.5
                 do shell script "networksetup -setairportpower en3 off"
                 click checkbox 1 of row 7 of table 1 of scroll area 1 of group 1 of window 1 of process "System Preferences"
-                # click button "打开 Wi-Fi" of window 1 of process "System Preferences"
                   click button "打开 Wi-Fi" of sheet 1 of window "共享" of process "System Preferences"
                 delay 0.5
                 click button "启动" of sheet 1 of window 1 of process "System Preferences"
