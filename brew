@@ -63,6 +63,7 @@ python
 python@2
 readline
 rsync
+rtmpdump
 sdl2
 sha2
 shntool

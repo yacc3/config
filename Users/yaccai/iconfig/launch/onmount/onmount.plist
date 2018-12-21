@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>             <string>yaccai.onmount</string>
+    <key>Program</key>           <string>/Users/yaccai/iconfig/launch/onmount/onmount.sh</string>
+    <key>WorkingDirectory</key>  <string>/Users/yaccai/iconfig/launch/onmount</string>
+    <key>StandardOutPath</key>   <string>onmount.log</string>
+    <key>StandardErrorPath</key> <string>onmount.log</string>
+    <key>StartOnMount</key>      <true/>
+</dict>
+</plist>
