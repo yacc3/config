@@ -21,6 +21,7 @@ yixiu () {
 getimg() {
     url="${1%/*/*}"    # $1 一个照片的url
     title="${2:-.}"    # $2 下载位置
+    printf "\nFetch ==>  $title\n"
     for i in $(seq 0 100); do
         str=`printf "%03d\n" "$i"`
         [ $i -eq 0 ] && str=0
@@ -31,7 +32,7 @@ getimg() {
         fi
         [ $e -eq 3 ] && break
     done
-    echo "$title"
+    printf "Done  ==>  $title\n"
 }
 
 get () {
