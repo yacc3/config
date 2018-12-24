@@ -27,7 +27,7 @@ mkdir -p "$bakd/$nowd" && {
     rsync -a ~/Library/Application\ Support/Sublime\ Text\ 3  "$bakd/$nowd"
 
     echo "备份 微信"
-    rsync -a ~/Library/Containers/com.tencent.xinWeChat  "$bakd"
+    rsync -a ~/Library/Containers/com.tencent.xinWeChat  "$bakd/$nowd"
 }
 
 echo "备份 iTunes"
