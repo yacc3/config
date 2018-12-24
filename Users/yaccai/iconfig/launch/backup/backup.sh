@@ -4,6 +4,8 @@
 PATH="/usr/local/bin:$PATH"
 
 bakd="/Volumes/Bak/Backup"
+nowd="$(date       +'%Y-%m-%d')"
+deld="$(date -v-7d +'%Y-%m-%d')"
 test -d "$bakd" || exit -1
 
 echo "备份 app列表"
@@ -19,14 +21,17 @@ done
 git -C "$bakd/Config" add -A &>/dev/null
 git -C "$bakd/Config" commit -m "$(date +'%Y-%m-%d %T')" &>/dev/null
 
+rm   -rf "$bakd/$deld"
+mkdir -p "$bakd/$nowd" && {
+    echo "备份 Sublime Text 3"
+    rsync -a ~/Library/Application\ Support/Sublime\ Text\ 3  "$bakd/$nowd"
+
+    echo "备份 微信"
+    rsync -a ~/Library/Containers/com.tencent.xinWeChat  "$bakd"
+}
+
 echo "备份 iTunes"
 rsync -a ~/Music/iTunes "$bakd/iTunesMedia"
-
-echo "备份 Sublime Text 3"
-rsync -a ~/Library/Application\ Support/Sublime\ Text\ 3  "$bakd"
-
-echo "备份 微信"
-rsync -a ~/Library/Containers/com.tencent.xinWeChat  "$bakd"
 
 echo "备份 Code"
 rsync -a ~/Code "$bakd"
