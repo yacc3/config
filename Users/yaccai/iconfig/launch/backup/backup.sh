@@ -4,8 +4,6 @@
 PATH="/usr/local/bin:$PATH"
 
 bakd="/Volumes/Bak/Backup"
-nowd="$(date       +'%Y-%m-%d')"
-deld="$(date -v-7d +'%Y-%m-%d')"
 test -d "$bakd" || exit -1
 
 echo "备份 app列表"
@@ -17,21 +15,20 @@ pip3 list | sed "1,2d;s/ .*//"    > "$bakd/Config/pip3"
 echo "备份 配置文件"
 cat ~/iconfig/launch/backup/config.include | while read it; do
     [[ -e "$it" ]] && rsync -aR  "$it" "$bakd/Config"
-done
+done 
 git -C "$bakd/Config" add -A &>/dev/null
 git -C "$bakd/Config" commit -m "$(date +'%Y-%m-%d %T')" &>/dev/null
 
-rm   -rf "$bakd/$deld"
-mkdir -p "$bakd/$nowd" && {
-    echo "备份 Sublime Text 3"
-    rsync -a ~/Library/Application\ Support/Sublime\ Text\ 3  "$bakd/$nowd"
-
-    echo "备份 微信"
-    rsync -a ~/Library/Containers/com.tencent.xinWeChat  "$bakd/$nowd"
-}
-
 echo "备份 iTunes"
 rsync -a ~/Music/iTunes "$bakd/iTunesMedia"
+
+echo "备份 Sublime Text 3"
+rsync -a ~/Library/Application\ Support/Sublime\ Text\ 3  "$bakd"
+
+echo "备份 微信"
+suffix="__$(date +%Y%m%d%H%M%S).bak"
+rsync -af '- Backup' ~/Library/Containers/com.tencent.xinWeChat "$bakd" # 排除Backup
+rsync -af '+ Backup' ~/Library/Containers/com.tencent.xinWeChat "$bakd" -b --suffix="$suffix"
 
 echo "备份 Code"
 rsync -a ~/Code "$bakd"
@@ -71,3 +68,6 @@ tmexclpath=(
 
 echo "done"
 echo
+
+
+# rsync -avn -f '+ shell/***' -f '- */*' ~/Code  . # 只传输shell
