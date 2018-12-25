@@ -8,18 +8,20 @@ if [[ $# -eq 0 ]]; then
 fi
 
 case "$1" in
-    "killLaunchpad" )
-        defaults write com.apple.dock   ResetLaunchPad    -bool true
-        killall Dock
-        ;;
     "setLaunchpad" )
         columns="7"
         rows="7"
-        [ $2 -ge 5 ] && rows=$2
-        [ $3 -ge 5 ] && columns=$3
         defaults write com.apple.dock springboard-rows    -int "$rows"    # 设置行数 7
         defaults write com.apple.dock springboard-columns -int "$columns" # 设置列数 9
         defaults write com.apple.dock ResetLaunchPad -bool TRUE  # 重启
+        killall Dock
+        ;;
+    "setDockSize" )
+        defaults write com.apple.dock tilesize -int 50 # 默认值为0
+        killall Dock
+        ;;
+    "killLaunchpad" )
+        defaults write com.apple.dock   ResetLaunchPad    -bool true
         killall Dock
         ;;
     "killDNS" )
@@ -37,9 +39,9 @@ case "$1" in
         tell application "System Preferences"
             activate
             set current pane to pane "显示器"
-            delay 0.5
+            delay 1
             tell application "System Events"
-                set brightness to "$2" as real 
+                set brightness to "$(( $2 / 100.0))" as real
                 set value of value indicator 1 of slider 1 of group 1 of tab group 1 of window "内建视网膜显示器" of process "System Preferences" to brightness
             end tell
         end tell
