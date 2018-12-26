@@ -1,3 +1,7 @@
 #!/bin/zsh
 
-/bin/date +'login @ %Y-%m-%d %T ...'
+/bin/date +'onlogin @ %Y-%m-%d %T ...'
+
+
+echo "done"
+echo

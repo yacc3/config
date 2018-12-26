@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>             <string>yaccai.warn</string>
+    <key>ProgramArguments</key>
+        <array>
+            <string>/usr/local/bin/zsh</string>
+            <string>/Users/yaccai/iconfig/launch/route/warn.sh</string>
+        </array>
+    <key>WorkingDirectory</key>  <string>/Users/yaccai/iconfig/launch/route</string>
+    <key>StandardErrorPath</key> <string>warn.log</string>
+    <key>StandardOutPath</key>   <string>warn.log</string>
+    <key>StartInterval</key>     <integer>1800</integer>
+</dict>
+</plist>

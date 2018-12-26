@@ -61,7 +61,41 @@ cleanSystemDeep() {
 }
 
 cleanOffice() {
-    ~/iconfig/exe/cleanOffice.sh
+    base=/Applications/Microsoft\ Word.app
+    Mapp=(
+        /Applications/Microsoft\ Excel.app
+        /Applications/Microsoft\ OneNote.app
+        /Applications/Microsoft\ Outlook.app
+        /Applications/Microsoft\ PowerPoint.app
+    )
+
+    Paths=(
+        Contents/SharedSupport/Proofing\ Tools
+        Contents/Resources/Fonts
+        Contents/Resources/DocsUIBundle_Mac.bundle
+    )
+
+    for app in "${Mapp[@]}"; do
+        echo
+        echo "${app##*/}"
+        for p in "${Paths[@]}"; do
+            [[ -L "$app/$p" ]] && continue
+            [[ -d "$app/$p" && -d "$base/$p" ]] || continue
+            echo "==>  $p"
+            rsync -av "$app/$p" "$base/${p%/*}" &>/dev/null
+            rm -rf  "$app/$p"
+            ln -sfF "$base/$p"  "$app/${p%/*}"
+        done
+    done
+
+    frame=Contents/Frameworks
+    for app in "${Mapp[@]}"; do
+        if [ ! -L "$app/$frame" ]; then
+            rsync -av "$app/$frame" "$base/${frame%/*}"
+            rm -rf "$app/$frame"
+            ln -sfF "$base/$frame" "$app/${frame%/*}"
+        fi
+    done
 }
 
 cleanXcode() {
@@ -128,7 +162,7 @@ case "$1" in
         cleanSystem
         ;;
     "Office" )
-        cleanOffice
+        # cleanOffice
         ;;
     "Xcode" )
         cleanXcode

@@ -2,6 +2,7 @@ aria2
 bash
 bchunk
 clang-format
+colordiff
 coreutils
 dnsmasq
 ffmpeg

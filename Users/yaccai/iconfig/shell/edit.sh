@@ -39,6 +39,24 @@ renameblog() {
     done
 }
 
+fcontain () {
+    gstat --format=%A:%n "$2"/* | sort -u | cut -d ":" -f2 | while read f2; do
+        f1="$1/$(basename $f2)"
+        [[ -L "$f1" || -L "$f2"  ]] && continue
+
+        if [[ -f "$f1" && "$(md5 -q $f1)" = "$(md5 -q $f2)" ]]; then
+            st="=="
+        else
+            st="\033[31m ×\033[0m"
+            [[ -d "$f1" ]] && st="  "
+        fi
+
+        printf "$3$st %4s $(basename $f2)\n"  "$(du -sh "$f2" | cut -f1)"
+        # [ "${st:0:2}" = "==" ] && ln -sf  "$f1" "$f2"
+        [ -d "$f1"           ] && fcontain "$f1"   "$f2" "$3        "
+    done
+    return 0
+}
 
 format() {
     i=0
@@ -136,6 +154,9 @@ EOF
         ;;
     "toUTF-8" )
         toUTF-8 "${@:2}"
+        ;;
+    "fcontain" )              # 测试$2是否包含 $3的所有文件
+        fcontain "$2" "$3"    # diff -r
         ;;
     "newBlog" )
         new "$2"

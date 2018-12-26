@@ -35,7 +35,6 @@ case "$1" in
         echo "no such pattern"
         ;;
 esac
-
 # ~/Library/LaunchAgents   # for this User
 # /Library/LaunchAgents    # for every User
 # /Library/LaunchDaemons   # for every User, for backgroud
