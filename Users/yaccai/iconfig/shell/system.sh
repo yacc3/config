@@ -51,9 +51,6 @@ EOF
     "volume" )               # <-/+数字>         : 0 ~ 100
         osascript -e "set volume output volume + $2" # osascript -e 'set volume 4' 效果太猛
         ;;
-    "mute" )                 # 静音或关闭静音
-        osascript -e "set volume output muted (not output muted of (get volume settings))"
-        ;;
     "mountEFI" )
         sudo mkdir -p /Volumes/EFI
         sudo mount -t msdos /dev/disk0s1 /Volumes/EFI

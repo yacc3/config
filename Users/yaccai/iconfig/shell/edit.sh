@@ -123,7 +123,7 @@ case "$1" in
         export LANG=zh_CN.UTF-8
         export LC_ALL=zh_CN.UTF-8
         ;;
-    "iTermClean" )
+    "cls" )
         osascript &>/dev/null <<EOF
         tell application "iTerm"
             set theWindow to current window

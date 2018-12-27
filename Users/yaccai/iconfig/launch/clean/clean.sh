@@ -45,7 +45,7 @@ test -e "$GU" && {
     "$GU" --nuke
 }
 
-IC=~/Library/Application Support/com.colliderli.iina/thumb_cache
+IC=~/Library/Application\ Support/com.colliderli.iina/thumb_cache
 test -d "$IC" && {
     echo "clean iina cache"
     rm -rf "$IC"
