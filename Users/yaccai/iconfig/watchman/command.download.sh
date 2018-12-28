@@ -16,10 +16,14 @@ for it in "$@"; do
     type="${it##*.}"
     case "$type" in
         torrent) 
-            # mv "$it" ~/Library/Application\ Support/Vuze/watch
-            # mv "$it" ~/Library/Application\ Support/Transmission/watch
-            # mv "$it" ~/Library/Application\ Support/qBittorrent/watch
-            mv "$it" ~/Library/Application\ Support/uTorrent/watch
+            # test -d /Applications/Vuze.app && \
+            #     mv "$it" ~/Library/Application\ Support/Vuze/watch
+            # test -d /Applications/qBittorrent.app && \
+            #     mv "$it" ~/Library/Application\ Support/qBittorrent/watch
+            # test -d /Applications/Transmission.app && \
+            #     mv "$it" ~/Library/Application\ Support/Transmission/watch
+            test -d /Applications/uTorrent.app && \
+                mv "$it" ~/Library/Application\ Support/uTorrent/watch
             ;;
         dmg) 
             rsync -a -- "$it" "$root/MacOS"

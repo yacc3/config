@@ -5,6 +5,7 @@
         "name": "brew",
         "expression": [ "allof",
             ["type", "l"],
+            ["size", "le", 50000000],
             ["exists"]
         ],
         "append_files":true,

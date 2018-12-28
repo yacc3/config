@@ -5,6 +5,7 @@ clang-format
 colordiff
 coreutils
 dnsmasq
+exif
 ffmpeg
 findutils
 fping
@@ -32,6 +33,7 @@ jpeg
 jq
 json-c
 lame
+libexif
 libffi
 libidn2
 libogg
@@ -60,6 +62,7 @@ openssl
 opus
 p11-kit
 pcre
+popt
 python
 python@2
 readline

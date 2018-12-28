@@ -24,7 +24,8 @@ alias cx='curl  -x  socks5://127.0.0.1:1086'
 
 alias et='~/iconfig/shell/edit.sh'
 alias tx='~/iconfig/shell/edit.sh newEdit'
-alias td="~/iconfig/shell/edit.sh utf8"
+alias td='~/iconfig/shell/edit.sh utf8'å
+alias bs='~/iconfig/shell/edit.sh searchBlog'
 
 alias lh='~/iconfig/shell/launchctl.sh'
 alias wh='~/iconfig/shell/watchman.sh'
