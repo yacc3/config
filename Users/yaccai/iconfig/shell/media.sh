@@ -21,18 +21,19 @@ yixiu () {
 getimg() {
     url=`echo "$1" | grep -oE "^.*gallery/[0-9]*/[0-9]*"`
     title="${2:-.}"    # $2 下载位置
-    printf "\nFetch ==>  $title\n"
+    printf "Fetch ==>  $title\n"
+    [[ -d "$title" && "$title" != '.' ]] && continue
     for i in $(seq 0 100); do
         str=`printf "%03d\n" "$i"`
         [ $i -eq 0 ] && str=0
-        if wget -T 30 --show-progress -qc -P "$title" "$url/$str.jpg"; then
+        if wget -T 30 --show-progress -qnc -P "$title" "$url/$str.jpg"; then
             e=0
         else
             ((e += 1))
         fi
         [ $e -eq 3 ] && break
     done
-    printf "Done  ==>  $title/\n"
+    printf "Done  ==>  $title/\n\n"
 }
 
 if [[ $# -eq 0 ]]; then
