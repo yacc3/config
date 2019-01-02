@@ -6,7 +6,7 @@ Model="/Volumes/Bak/Backup/Model"
 yixiu () {
     html="$(curl -s $1 | iconv -f gbk)"
     name="$(echo $html | ggrep -oP '(?<=row wzbt text-center\">)[^<>]*(?=<)')"
-    url=`echo "$html" | ggrep -oP "(?<=<img src=\")[^<>]*.jpg" | head -n1`
+    url=`echo "$html"  | ggrep -oP "(?<=<img src=\")[^<>]*.jpg" | head -n1`
     for i in $(seq 0 100); do
         if wget -T 30 --show-progress -qc -P "$Model/Others/$name" "${url%/*}/$i.jpg"; then
             e=0
@@ -22,7 +22,7 @@ getimg() {
     url=`echo "$1" | grep -oE "^.*gallery/[0-9]*/[0-9]*"`
     title="${2:-.}"    # $2 下载位置
     printf "Fetch ==>  $title\n"
-    [[ -d "$title" && "$title" != '.' ]] && continue
+    [[ -d "$title" && "$title" != '.' ]] && return
     for i in $(seq 0 100); do
         str=`printf "%03d\n" "$i"`
         [ $i -eq 0 ] && str=0
