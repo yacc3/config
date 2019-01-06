@@ -7,33 +7,21 @@ yixiu () {
     html="$(curl -s $1 | iconv -f gbk)"
     name="$(echo $html | ggrep -oP '(?<=row wzbt text-center\">)[^<>]*(?=<)')"
     url=`echo "$html"  | ggrep -oP "(?<=<img src=\")[^<>]*.jpg" | head -n1`
-    for i in $(seq 0 100); do
-        if wget -T 30 --show-progress -qc -P "$Model/Others/$name" "${url%/*}/$i.jpg"; then
-            e=0
-        else
-            ((e += 1))
-        fi
-        [ $e -eq 3 ] && break
+    for ((i = 0; i<= 300 && e < 3; ++i)); do
+        wget -T5 --show-progress -qc -P "$Model/Others/$name" ${url%/*}/$i.jpg && e=0
+        ((e += 1))
     done
     printf "Done  ==>  $Model/Others/$name/\n"
 }
 
 getimg() {
     url=`echo "$1" | grep -oE "^.*gallery/[0-9]*/[0-9]*"`
-    title="${2:-.}"    # $2 下载位置
-    printf "Fetch ==>  $title\n"
-    [[ -d "$title" && "$title" != '.' ]] && return
-    for i in $(seq 0 100); do
-        str=`printf "%03d\n" "$i"`
-        [ $i -eq 0 ] && str=0
-        if wget -T 30 --show-progress -qnc -P "$title" "$url/$str.jpg"; then
-            e=0
-        else
-            ((e += 1))
-        fi
-        [ $e -eq 3 ] && break
+    for ((i = 0, e = 0; i<= 300 && e < 3; ++i)); do
+        [ $i -eq 0 ] || str=`printf "%03d\n" "$i"`
+        wget -T25 -t3 --show-progress -qnc -P "${2:-.}" "$url/${str:-0}.jpg" && e=0
+        ((e += 1))
     done
-    printf "Done  ==>  $title/\n\n"
+    printf "Done  ==>  ${2:-.}/\n\n"
 }
 
 if [[ $# -eq 0 ]]; then
