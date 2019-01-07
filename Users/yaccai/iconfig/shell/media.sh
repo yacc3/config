@@ -24,6 +24,50 @@ getimg() {
     printf "Done  ==>  ${2:-.}/\n\n"
 }
 
+getimg2() {
+    url=`echo "$1" | grep -oE "^.*gallery/[0-9]*/[0-9]*"`
+    title="${2:-.}"    # $2 下载位置
+    printf "fetch ==>  $title/\n"
+    mkdir -p "$title" || return
+
+    mkfifo /tmp/fd1
+    exec 4<>/tmp/fd1
+    rm -rf /tmp/fd1
+    SUM=0 # 失败数
+    for i in `seq 1 10`; do echo "0">&4; done
+    for i in `seq 0 300`; do
+        [ $SUM -ge 10 ] && break
+        str=`printf "%03d\n" "$i"`
+        [ $i -eq 0 ] && str=0
+        [[ -f "$title/$str.jpg" ]] && continue
+        
+        read -u4 it
+        ((SUM += it))
+        {
+            start=`date +%s`
+            wget --connect-timeout=1 --read-timeout=3 -t3 -qnc -P "$title" "$url/$str.jpg" -O "$title/$str.jpg.tmp"
+            ret=$?
+            end=`date +%s`
+
+            isOK="OK"
+            if [[ "$ret" -eq 0 ]]; then
+                mv "$title/$str.jpg.tmp" "$title/$str.jpg"
+                r=0
+                printf "%2s:%1d  %02ds  -- >  %s\n"  "$isOK" "$ret" "$((end - start))" "$url/$str.jpg"
+            else
+                rm "$title/$str.jpg.tmp"
+                isOK="ER"
+                r=1
+            fi
+            echo "${r}">&4
+        } &
+    done
+    wait
+    exec 4<&-
+    exec 4>&-
+    printf "Done  ==>  $title/\n\n"
+    sleep 1
+}
 if [[ $# -eq 0 ]]; then
     echo "subcommand:"
     cat "$0" | awk  "/\"[a-zA-Z\_\-\+0-9]+\" \)/{print $1}" | sed "s/\"//g; s/)//g"
@@ -40,11 +84,11 @@ case "$1" in
         if echo "$2" | ggrep album &>/dev/null; then
             name="$(echo $html | ggrep -oP '(?<=/girl/[0-9]{5}/\" title=\")[^<>]*(?=\")')"
             echo $html | ggrep -oP "<img alt=[^<>]* src=[^<>]* title=[^<>]*>" | while read it; do
-                getimg  "$(echo $it | cut -d "'" -f4)" \
+                getimg2  "$(echo $it | cut -d "'" -f4)" \
                         "$Model/$name/$(echo $it | cut -d "'" -f2)"
             done
         elif echo "$2" | egrep  '/g/[0-9]{5}' &>/dev/null; then
-            getimg  "$(echo $html | grep -oE 'hgallery.*?</ul>' | grep -oE 'http.*?jpg'| head -n1)" \
+            getimg2 "$(echo $html | grep -oE 'hgallery.*?</ul>' | grep -oE 'http.*?jpg'| head -n1)" \
                     "$Model/Others/$(echo $html | ggrep -oP '(?<=htilte\">)[^>]*(?=</h1>)')"
         elif echo "$2" | egrep  '.tu11.' &>/dev/null; then
             yixiu "${@:2}"
