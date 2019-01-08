@@ -45,7 +45,7 @@ getimg2() {
         ((SUM += it))
         {
             start=`date +%s`
-            wget --connect-timeout=1 --read-timeout=3 -t3 -qnc -P "$title" "$url/$str.jpg" -O "$title/$str.jpg.tmp"
+            wget --connect-timeout=1 --read-timeout=3 -t3 -c -P "$title" "$url/$str.jpg" -O "$title/$str.jpg.tmp"
             ret=$?
             end=`date +%s`
 
@@ -66,7 +66,7 @@ getimg2() {
     exec 4<&-
     exec 4>&-
     printf "Done  ==>  $title/\n\n"
-    sleep 1
+    sleep 1.5
 }
 if [[ $# -eq 0 ]]; then
     echo "subcommand:"
@@ -84,11 +84,11 @@ case "$1" in
         if echo "$2" | ggrep album &>/dev/null; then
             name="$(echo $html | ggrep -oP '(?<=/girl/[0-9]{5}/\" title=\")[^<>]*(?=\")')"
             echo $html | ggrep -oP "<img alt=[^<>]* src=[^<>]* title=[^<>]*>" | while read it; do
-                getimg2  "$(echo $it | cut -d "'" -f4)" \
+                getimg  "$(echo $it | cut -d "'" -f4)" \
                         "$Model/$name/$(echo $it | cut -d "'" -f2)"
             done
         elif echo "$2" | egrep  '/g/[0-9]{5}' &>/dev/null; then
-            getimg2 "$(echo $html | grep -oE 'hgallery.*?</ul>' | grep -oE 'http.*?jpg'| head -n1)" \
+            getimg  "$(echo $html | grep -oE 'hgallery.*?</ul>' | grep -oE 'http.*?jpg'| head -n1)" \
                     "$Model/Others/$(echo $html | ggrep -oP '(?<=htilte\">)[^>]*(?=</h1>)')"
         elif echo "$2" | egrep  '.tu11.' &>/dev/null; then
             yixiu "${@:2}"
