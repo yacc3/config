@@ -84,6 +84,12 @@ EOF
         end tell
 EOF
         ;;
+    "findplist" )
+        find /System/Library/LaunchAgents /System/Library/LaunchDaemons \
+                    /Library/LaunchAgents        /Library/LaunchDaemons \
+            ~/Library/LaunchAgents \
+            -name "*$2*.plist"    
+        ;;
     *)
         echo "no such pattern"
         ;;  

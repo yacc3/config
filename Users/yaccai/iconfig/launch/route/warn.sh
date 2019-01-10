@@ -6,7 +6,7 @@
 sleep 0.2
 H=`date +%H`
 [[ $H -le 23 && $H -gt 11 ]] && {
-    afplay warn.m4a
+    say "叮--- 弯腰 看远方"
 }
 
 

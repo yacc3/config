@@ -37,6 +37,7 @@ libexif
 libffi
 libidn2
 libogg
+libomp
 libpng
 libssh2
 libtasn1
