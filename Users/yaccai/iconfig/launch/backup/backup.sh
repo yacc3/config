@@ -39,6 +39,11 @@ rsync -a ~/Library/Fonts "$bakd"
 echo "备份 磁盘"
 if [[ -d /Volumes/Store/Backup ]]; then
     rsync -a /Volumes/Bak/Backup /Volumes/Store
+    find /Volumes/Bak/Backup/Homebrew -size +20M -delete
+    find /Volumes/Bak/Backup/Homebrew -type f | sort -r | while read it; do
+        [ "$pname" = "${it/--*/}" ] && rm "$it"
+        pname="${it/--*/}"
+    done
 fi
 
 echo "调用 TimeMachine"

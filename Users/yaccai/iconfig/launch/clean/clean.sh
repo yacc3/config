@@ -8,10 +8,6 @@ echo "clean homebrew"
 brew cask upgrade
 brew upgrade
 brew cleanup
-find /Volumes/Bak/Backup/Homebrew -type f | sort -r | while read it; do
-    [ "$pname" = "${it/--*/}" ] && rm "$it"
-    pname="${it/--*/}"
-done
 
 echo "clean caches"
 find ~/Library/Caches                                     -type f -exec rm -rf {} +
