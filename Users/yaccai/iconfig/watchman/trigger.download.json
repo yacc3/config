@@ -6,8 +6,8 @@
         "expression": ["allof",
             ["pcre", "\\.(jpg|png|gif|mp4|flv|torrent|dmg|exe|mp3|aac|m4a|wav)$"],
             ["dirname", "", ["depth", "eq", 0]],
-            ["size", "le", 500000000],
-            ["size", "gt", 10],
+            ["size", "le", 100000000],
+            ["size", "gt", 100],
             ["type", "f"],
             ["exists"]
         ],
