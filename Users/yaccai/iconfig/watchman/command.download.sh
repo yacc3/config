@@ -9,9 +9,8 @@ bakd=$root/Picture/`date +'%Y/%Y-%m-%d'`
 mkdir -p $bakd || exit
 
 
-
 for it in "$@"; do
-    [[ $it =~ "[[0-9]{1,2}]" ]] && continue
+    [[ $it =~ "[[0-9]{1,2}].mp4" ]] && continue
     echo "     catch $it"
     type="${it##*.}"
     case "$type" in
