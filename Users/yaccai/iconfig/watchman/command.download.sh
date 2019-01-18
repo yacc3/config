@@ -5,7 +5,7 @@ PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
 root=/Volumes/Bak/Backup
 [[ -e "$root" ]] || exit
 
-bakd=$root/Picture/`date +'%Y/%Y-%m-%d'`
+bakd=$root/Daily/`date +'%Y/%Y-%m-%d'`
 mkdir -p $bakd || exit
 
 

@@ -7,8 +7,8 @@ yixiu () {
     html="$(curl -s $1 | iconv -f gbk)"
     name="$(echo $html | ggrep -oP '(?<=row wzbt text-center\">)[^<>]*(?=<)')"
     url=`echo "$html"  | ggrep -oP "(?<=<img src=\")[^<>]*.jpg" | head -n1`
-    for ((i = 0; i<= 300 && e < 3; ++i)); do
-        wget -T5 --show-progress -qc -P "$Model/Others/$name" ${url%/*}/$i.jpg && e=0
+    for ((i = 0, e = -1; i<= 300 && e < 3; ++i)); do
+        wget -T5 --show-progress -qc -P "$Model/Others/$name" ${url%/*}/$i.jpg && e=-1
         ((e += 1))
     done
     printf "Done  ==>  $Model/Others/$name/\n"
@@ -16,9 +16,9 @@ yixiu () {
 
 getimg() {
     url=`echo "$1" | grep -oE "^.*gallery/[0-9]*/[0-9]*"`
-    for ((i = 0, e = 0; i<= 300 && e < 3; ++i)); do
+    for ((i = 0, e = -1; i<= 300 && e < 3; ++i)); do
         [ $i -eq 0 ] || str=`printf "%03d\n" "$i"`
-        wget -T20 -t3 --show-progress -qc -P "${2:-.}" "$url/${str:-0}.jpg" && e=0
+        wget -T20 -t3 --show-progress -qnc -P "${2:-.}" "$url/${str:-0}.jpg" && e=-1
         ((e += 1))
     done
     printf "Done  ==>  ${2:-.}/\n\n"

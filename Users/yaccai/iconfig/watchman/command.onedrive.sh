@@ -6,7 +6,7 @@ root=/Volumes/Bak/Backup
 [[ -e "$root" ]] || exit
 
 
-bakd=$root/Picture/`date +'%Y/%Y-%m-%d'`
+bakd=$root/Daily/`date +'%Y/%Y-%m-%d'`
 mkdir -p $bakd || exit
 
 

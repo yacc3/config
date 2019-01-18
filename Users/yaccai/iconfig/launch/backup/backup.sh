@@ -44,6 +44,10 @@ if [[ -d /Volumes/Store/Backup ]]; then
         [ "$pname" = "${it/--*/}" ] && rm "$it"
         pname="${it/--*/}"
     done
+    rsync -a --remove-source-files /Volumes/Bak/Backup/Daily /Volumes/Store/Backup
+    rsync -a --remove-source-files /Volumes/Bak/Backup/Model /Volumes/Store/Backup
+    find /Volumes/Bak/Backup/Daily -type d -mindepth 1 -delete
+    find /Volumes/Bak/Backup/Model -type d -mindepth 1 -delete
 fi
 
 echo "调用 TimeMachine"
