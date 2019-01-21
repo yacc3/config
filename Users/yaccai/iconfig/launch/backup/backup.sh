@@ -29,6 +29,7 @@ echo "备份 微信"
 suffix="__$(date +%Y%m%d%H%M%S).bak"
 rsync -af '- Backup' ~/Library/Containers/com.tencent.xinWeChat "$bakd" # 排除Backup
 rsync -af '+ Backup' ~/Library/Containers/com.tencent.xinWeChat "$bakd" -b --suffix="$suffix"
+# gfind . -regextype posix-egrep -regex '.*__[0-9]{14}.bak$'
 
 echo "备份 Code"
 rsync -a ~/Code "$bakd"

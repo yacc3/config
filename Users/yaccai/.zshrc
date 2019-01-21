@@ -1,7 +1,6 @@
 #!/bin/bash
 export ZSH=~/.oh-my-zsh
-ZSH_THEME="robbyrussell"
-# ZSH_THEME="agnoster"
+ZSH_THEME="robbyrussell" # ZSH_THEME="agnoster"
 fpath=(/usr/local/share/zsh-completions $fpath)
 plugins=(git extract colored-man-pages encode64 osx zsh-syntax-highlighting) 
 source $ZSH/oh-my-zsh.sh
@@ -9,8 +8,10 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export LC_ALL=en_US.UTF-8  
 export LANG=en_US.UTF-8
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
-export PATH="$PATH:/Library/TeX/texbin"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/Library/TeX/texbin"
+export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
 alias  rc='code ~/.zshrc  ~/iconfig'
