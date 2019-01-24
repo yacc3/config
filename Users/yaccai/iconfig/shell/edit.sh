@@ -175,6 +175,13 @@ EOF
     "searchBlog" )
         search "${@:2}"
         ;;
+    "searchPoem" )
+        poemD=/Volumes/Bak/Backup/Doc/txt/诗词/
+        [ -d "$poemD" ] && [ ! -z "$2" ] && (
+            cd "$poemD"
+            grep --colour -nHC0 "$2" *.txt
+        )
+        ;;
     * )
         echo "no such pattern"
         ;;
