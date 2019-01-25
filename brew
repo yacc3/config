@@ -1,6 +1,7 @@
 aria2
 bash
 bchunk
+cairo
 clang-format
 colordiff
 coreutils
@@ -8,12 +9,16 @@ dnsmasq
 exif
 ffmpeg
 findutils
+fontconfig
 fping
 freetype
+frei0r
+fribidi
 gawk
 gdbm
 gettext
 ghostscript
+glib
 gmp
 gnu-getopt
 gnu-indent
@@ -22,8 +27,10 @@ gnu-tar
 gnu-which
 gnutls
 gpatch
+graphite2
 grep
 gzip
+harfbuzz
 highlight
 htop
 icu4c
@@ -33,6 +40,7 @@ jpeg
 jq
 json-c
 lame
+libass
 libexif
 libffi
 libidn2
@@ -57,11 +65,13 @@ nmap
 node
 oniguruma
 opencc
+opencore-amr
 openjpeg
 openssl
 opus
 p11-kit
 pcre
+pixman
 popt
 python
 python@2
@@ -72,6 +82,7 @@ sdl2
 sha2
 shntool
 snappy
+speex
 sqlite
 supervisor
 theora
