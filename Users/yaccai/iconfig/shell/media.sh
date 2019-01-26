@@ -8,7 +8,7 @@ yixiu () {
     name="$(echo $html | ggrep -oP '(?<=row wzbt text-center\">)[^<>]*(?=<)')"
     url=`echo "$html"  | ggrep -oP "(?<=<img src=\")[^<>]*.jpg" | head -n1`
     for ((i = 0, e = -1; i<= 300 && e < 3; ++i)); do
-        wget -T5 --show-progress -qc -P "$Model/Others/$name" ${url%/*}/$i.jpg && e=-1
+        wget -T5 --show-progress -qc -P "$Model/Others/$name" --header="Referer: http://www.tu11.com/qingchunmeinvxiezhen" ${url%/*}/$i.jpg && e=-1
         ((e += 1))
     done
     printf "Done  ==>  $Model/Others/$name/\n"
@@ -76,3 +76,5 @@ case "$1" in
         echo "not such pattern"
         ;;
 esac
+
+
