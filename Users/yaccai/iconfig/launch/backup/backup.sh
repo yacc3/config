@@ -7,7 +7,7 @@ bakd="/Volumes/Bak/Backup"
 test -d "$bakd" || exit -1
 
 echo "备份 app列表"
-mas  list                         > "$bakd/Config/mas"
+ls   /Applications                > "$bakd/Config/app"
 brew list                         > "$bakd/Config/brew"
 brew cask list                    > "$bakd/Config/brewc"
 pip3 list | sed "1,2d;s/ .*//"    > "$bakd/Config/pip3"
