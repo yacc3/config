@@ -1,5 +1,7 @@
 #!/usr/local/bin/python3
 # -*- coding: utf-8 -*- 
+exit()
+
 
 import os
 import sys
