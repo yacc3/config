@@ -72,6 +72,16 @@ case "$1" in
         pid=`pgrep ffmpeg`
         [[ -z "$pid" ]] || kill -9 "$pid"
         ;;
+    "fp" )                    # find picture 6S:4032x3024
+        find . -name '*.jpg' | while read it; do
+            size=`identify $it | awk '{print $3}'` 
+            [[ "4032x3024" == "$size" ]] || continue
+            echo "$it"
+            if [[ "$2" == "move" && -d "$3" ]]; then
+                mv "$it" "$3"
+            fi
+        done
+        ;;
     * )
         echo "not such pattern"
         ;;
