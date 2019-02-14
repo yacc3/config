@@ -135,9 +135,9 @@ cleanWindows() {
 }
 
 cleanDisk () {
-    find /Volumes/Store -name "._*"        -type f -print -exec rm -rf {} \;
-    find /Volumes/Store/.Trashes ~/.Trash  -type f -print -exec rm -rf {} \;
-    find /Volumes/Doc/Torrent -d 1 -name "*_moved" -print -exec rm -rf {} \; 
+    find /Volumes/Googol -name "._*"        -type f -print -exec rm -rf {} \;
+    find /Volumes/Googol/.Trashes ~/.Trash  -type f -print -exec rm -rf {} \;
+    find /Volumes/Store/Torrent -d 1 -name "*_moved" -print -exec rm -rf {} \; 
 }
 
 

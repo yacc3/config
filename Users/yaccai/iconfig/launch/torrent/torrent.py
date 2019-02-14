@@ -164,7 +164,7 @@ def check_tg_Info(data):
         exist_size = 0
         total_size = torrent_info.total_size
         for it in torrent_info.files:
-            if os.path.exists(os.path.join('/Volumes/Store/Torrent', it[0])):
+            if os.path.exists(os.path.join('/Volumes/Googol/Torrent', it[0])):
                 print('exists ', it[0])
                 exist_size += it[1]
         if exist_size / total_size > 0.6:

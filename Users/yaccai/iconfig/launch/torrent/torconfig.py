@@ -51,8 +51,8 @@ def ut_config():
     locations = [
         '/Volumes/Store/Torrent',
         '/Volumes/Store/TorrentR',
-        '/Volumes/Doc/Torrent',
-        '/Volumes/Doc/TorrentR'
+        '/Volumes/Googol/Torrent',
+        '/Volumes/Googol/TorrentR'
     ]
     torrents = app.get_list_my().decode('utf-8')
     torrents = json.loads(torrents).get('torrents')

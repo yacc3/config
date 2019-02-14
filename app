@@ -38,11 +38,6 @@ LyricsX.app
 Mail.app
 Maps.app
 Messages.app
-Microsoft Excel.app
-Microsoft OneNote.app
-Microsoft Outlook.app
-Microsoft PowerPoint.app
-Microsoft Word.app
 Mission Control.app
 Movist.app
 News.app
@@ -94,4 +89,5 @@ iStat Menus.app
 iTerm.app
 iTunes.app
 uTorrent.app
+wpsoffice.app
 央视影音.app

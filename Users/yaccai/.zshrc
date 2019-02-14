@@ -44,6 +44,6 @@ alias yx='~/iconfig/shell/media.sh yixiu'
 alias nv='~/iconfig/shell/media.sh nvshens'
 
 alias stat='/usr/bin/stat -t "%Y-%m-%d %H:%M:%S"'
-alias pday='open /Volumes/Bak/Backup/Daily/`date +"%Y/%Y-%m-%d"`'
+alias pday='open /Volumes/Doc/Daily/`date +"%Y/%Y-%m-%d"`'
 alias top='top -n 15 -o cpu -s 2 -stats pid,command,cpu,mem,pstate,time'
 alias sv='ssh -i ~/.ssh/yaccai root@167.179.82.79'

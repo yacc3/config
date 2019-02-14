@@ -3,7 +3,7 @@
 /bin/date +'%Y-%m-%d %T ...'
 PATH="/usr/local/bin:$PATH"
 
-bakd="/Volumes/Bak/Backup"
+bakd="/Volumes/Doc"
 test -d "$bakd" || exit -1
 
 echo "备份 app列表"
@@ -38,17 +38,17 @@ echo "备份 Fonts"
 rsync -a ~/Library/Fonts "$bakd"
 
 echo "备份 磁盘"
-if [[ -d /Volumes/Store/Backup ]]; then
-    rsync -a /Volumes/Bak/Backup /Volumes/Store
-    find /Volumes/Bak/Backup/Homebrew -size +20M -delete
-    find /Volumes/Bak/Backup/Homebrew -type f | sort -r | while read it; do
-        [ "$pname" = "${it/--*/}" ] && rm "$it"
-        pname="${it/--*/}"
-    done
-    rsync -a --remove-source-files /Volumes/Bak/Backup/Daily /Volumes/Store/Backup
-    rsync -a --remove-source-files /Volumes/Bak/Backup/Model /Volumes/Store/Backup
-    find /Volumes/Bak/Backup/Daily -type d -mindepth 1 -delete
-    find /Volumes/Bak/Backup/Model -type d -mindepth 1 -delete
+if [[ -d /Volumes/Googol/Backup ]]; then
+    rsync -a /Volumes/Doc /Volumes/Googol/Backup
+    # find /Volumes/Doc/Homebrew -size +20M -delete
+    # find /Volumes/Doc/Homebrew -type f | sort -r | while read it; do
+    #     [ "$pname" = "${it/--*/}" ] && rm "$it"
+    #     pname="${it/--*/}"
+    # done
+    # rsync -a --remove-source-files /Volumes/Doc/Daily /Volumes/Googol/Backup
+    # rsync -a --remove-source-files /Volumes/Doc/Model /Volumes/Googol/Backup
+    # find /Volumes/Doc/Daily -type d -mindepth 1 -delete
+    # find /Volumes/Doc/Model -type d -mindepth 1 -delete
 fi
 
 echo "调用 TimeMachine"
@@ -67,14 +67,14 @@ tmexclpath=(
     "/Users/yaccai/Downloads"
     )
 
-[ `date +%H` -lt 6 ] && {
-    for excl in "${tmexclpath[@]}"; do
-        test -d "$excl" || continue
-        tmutil isexcluded   "$excl" &>/dev/null && continue
-        tmutil addexclusion "$excl"
-    done
-    tmutil startbackup
-}
+# [ `date +%H` -lt 6 ] && {
+#     for excl in "${tmexclpath[@]}"; do
+#         test -d "$excl" || continue
+#         tmutil isexcluded   "$excl" &>/dev/null && continue
+#         tmutil addexclusion "$excl"
+#     done
+#     tmutil startbackup
+# }
 
 echo "done"
 echo

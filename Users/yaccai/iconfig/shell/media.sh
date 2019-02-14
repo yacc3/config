@@ -1,7 +1,8 @@
 #!/bin/zsh
 # coding:utf-8
 
-Model="/Volumes/Bak/Backup/Model"
+Model="/Volumes/Doc/Model"
+
 
 yixiu () {
     html="$(curl -s $1 | iconv -f gbk)"

@@ -2,7 +2,7 @@
 printf "\n\n%s trig -- > %s\n" "$(date +'%Y-%m-%d %T')" "$(basename $0)"
 PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
 
-root=/Volumes/Bak/Backup
+root=/Volumes/Doc
 [[ -e "$root" ]] || exit
 
 bakd=$root/Daily/`date +'%Y/%Y-%m-%d'`
@@ -31,7 +31,7 @@ for it in "$@"; do
             rsync -a -- "$it" "$root/Windows"
             ;;
         mp3|aac|m4a|wav)
-            MediaPath=/Volumes/Bak/Backup/iTunesMedia
+            MediaPath=/Volumes/Doc/iTunesMedia
             itmd5="$(md5 -q "$it")"
             count=0
             find "$MediaPath" -name "*${it##*\ }" | while read target; do

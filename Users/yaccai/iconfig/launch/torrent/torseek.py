@@ -27,7 +27,7 @@ def create_seek_data(seed_file, torDir):
 
 
 if __name__ == '__main__':
-    torDir = '/Volumes/Doc/Torrent/Cheat'
+    torDir = '/Volumes/Store/Torrent/Cheat'
     if len(sys.argv) > 1:
         seed_file = sys.argv[1]
         if len(sys.argv) > 2:
