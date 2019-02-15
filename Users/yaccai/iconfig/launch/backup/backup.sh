@@ -20,10 +20,10 @@ git -C "$bakd/Config" add -A &>/dev/null
 git -C "$bakd/Config" commit -m "$(date +'%Y-%m-%d %T')" &>/dev/null
 
 echo "备份 iTunes"
-rsync -a ~/Music/iTunes "$bakd/iTunesMedia"
+rsync -a ~/Music/iTunes "$bakd"
 
 echo "备份 Sublime Text 3"
-rsync -a ~/Library/Application\ Support/Sublime\ Text\ 3  "$bakd"
+rsync -af '- Cache' ~/Library/Application\ Support/Sublime\ Text\ 3  "$bakd"
 
 echo "备份 微信"
 suffix="__$(date +%Y%m%d%H%M%S).bak"
@@ -38,8 +38,8 @@ echo "备份 Fonts"
 rsync -a ~/Library/Fonts "$bakd"
 
 echo "备份 磁盘"
-if [[ -d /Volumes/Googol/Backup ]]; then
-    rsync -a /Volumes/Doc /Volumes/Googol/Backup
+if [[ -d /Volumes/Googol ]]; then
+    rsync -af '- /Doc/.*' /Volumes/Doc /Volumes/Googol
     # find /Volumes/Doc/Homebrew -size +20M -delete
     # find /Volumes/Doc/Homebrew -type f | sort -r | while read it; do
     #     [ "$pname" = "${it/--*/}" ] && rm "$it"
