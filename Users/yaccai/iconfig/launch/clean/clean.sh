@@ -26,13 +26,9 @@ test -d "$XL" && {
 }
 
 GC=/Applications/Google\ Chrome.app/Contents/Versions
-test -d "$GC" && {
-    old=`ls "$GC" | sort | head -n1`
-    new=`ls "$GC" | sort | tail -n1`
-    [[ "$new" == "$old" ]] || {
-        echo "clean Chrome version $old"
-        rm -rf "$GC/$old"
-    }
+[[ -d "$GC" && `ls "$GC" | wc -l` -gt 1 ]] && {
+    echo "clean Chrome version"
+    rm -rf "$GC/$(ls "$GC" | head -n1)"
 }
 
 GU=~/Library/Google/GoogleSoftwareUpdate/GoogleSoftwareUpdate.bundle/Contents/Resources/ksinstall

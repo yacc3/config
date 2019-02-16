@@ -11,12 +11,14 @@ alias mywatchman="/usr/local/bin/watchman \
 
 
 if [[ $# -eq 0 ]]; then
-    echo "subcommand:"
-    cat "$0" | awk  "/\"[a-zA-Z\_\-\+0-9]+\" \)/{print $1}" | sed "s/\"//g; s/)//g"
     exit
 fi
 
 case "$1" in
+    "help" )
+        echo "subcommand:"
+        cat "$0" | awk  '/"[a-zA-Z\_\-\+0-9]+" \)/{print $0}' | sed 's/"//g; s/)//g'
+        ;;
     "log" )         # 显示 监测记录
         tail -n 55 -f /usr/local/var/run/watchman/log
         ;;

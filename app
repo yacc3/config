@@ -38,6 +38,11 @@ LyricsX.app
 Mail.app
 Maps.app
 Messages.app
+Microsoft Excel.app
+Microsoft OneNote.app
+Microsoft Outlook.app
+Microsoft PowerPoint.app
+Microsoft Word.app
 Mission Control.app
 Movist.app
 News.app

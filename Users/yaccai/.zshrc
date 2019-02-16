@@ -14,9 +14,9 @@ export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
 export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
-alias  rc='code ~/.zshrc  ~/iconfig'
+alias  rc='open -a /Applications/Visual\ Studio\ Code.app ~/.zshrc  ~/iconfig'
 alias src='source ~/.zshrc'
-alias etc='code /usr/local/etc /usr/local/var'
+alias etc='open -a /Applications/Visual\ Studio\ Code.app /usr/local/etc /usr/local/var'
 
 alias a='aria2c -c -x 10 --file-allocation=none'
 alias u='you-get -o ~/Downloads'
@@ -25,7 +25,6 @@ alias cx='curl  -x  socks5://127.0.0.1:1086'
 
 alias et='~/iconfig/shell/edit.sh'
 alias tx='~/iconfig/shell/edit.sh newEdit'
-alias td='~/iconfig/shell/edit.sh utf8'
 alias bs='~/iconfig/shell/edit.sh searchBlog'
 alias sp='~/iconfig/shell/edit.sh searchPoem'
 
@@ -43,7 +42,5 @@ alias me='~/iconfig/shell/media.sh'
 alias yx='~/iconfig/shell/media.sh yixiu'
 alias nv='~/iconfig/shell/media.sh nvshens'
 
-alias stat='/usr/bin/stat -t "%Y-%m-%d %H:%M:%S"'
-alias pday='open /Volumes/Doc/Daily/`date +"%Y/%Y-%m-%d"`'
+alias day='open /Volumes/Doc/Daily/`date +"%Y/%Y-%m-%d"`'
 alias top='top -n 15 -o cpu -s 2 -stats pid,command,cpu,mem,pstate,time'
-alias sv='ssh -i ~/.ssh/yaccai root@167.179.82.79'

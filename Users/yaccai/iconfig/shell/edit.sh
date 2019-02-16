@@ -110,12 +110,14 @@ toUTF-8() {
 }
 
 if [[ $# -eq 0 ]]; then
-    echo "subcommand:"
-    cat "$0" | awk  "/\"[a-zA-Z\_\-\+0-9]+\" \)/{print $1}" | sed "s/\"//g; s/)//g"
     exit
 fi
 
 case "$1" in
+    "help" )
+        echo "subcommand:"
+        cat "$0" | awk  '/"[a-zA-Z\_\-\+0-9]+" \)/{print $0}' | sed 's/"//g; s/)//g'
+        ;;
     "gbkenv" )
         export LANG=zh_CN.GBK
         export LC_ALL=zh_CN.GBK

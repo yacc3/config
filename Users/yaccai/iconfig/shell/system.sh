@@ -2,12 +2,14 @@
 # coding:utf-8
 
 if [[ $# -eq 0 ]]; then
-    echo "subcommand:"
-    cat "$0" | awk  "/\"[a-zA-Z\_\-\+0-9]+\" \)/{print $1}" | sed "s/\"//g; s/)//g"
     exit
 fi
 
 case "$1" in
+    "help" )
+        echo "subcommand:"
+        cat "$0" | awk  '/"[a-zA-Z\_\-\+0-9]+" \)/{print $0}' | sed 's/"//g; s/)//g'
+        ;;
     "setLaunchpad" )
         columns="7"
         rows="7"
@@ -89,6 +91,10 @@ EOF
                     /Library/LaunchAgents        /Library/LaunchDaemons \
             ~/Library/LaunchAgents \
             -name "*$2*.plist"    
+        ;;
+    "ftime" )
+        echo "访问时间             内容修改时间         元数据修改时间       创建时间"
+        /usr/bin/stat -t "%Y-%m-%d %H:%M:%S" -f "%Sa  %Sm  %Sc  %SB %11z Byte --> %N" "${@:2}"
         ;;
     *)
         echo "no such pattern"

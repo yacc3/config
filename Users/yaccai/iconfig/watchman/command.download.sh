@@ -31,7 +31,7 @@ for it in "$@"; do
             rsync -a -- "$it" "$root/Windows"
             ;;
         mp3|aac|m4a|wav)
-            MediaPath=/Volumes/Doc/iTunesMedia
+            MediaPath=/Volumes/Doc/iTunes/iTunesMedia
             itmd5="$(md5 -q "$it")"
             count=0
             find "$MediaPath" -name "*${it##*\ }" | while read target; do
