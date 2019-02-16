@@ -143,14 +143,7 @@ cleanDisk () {
 
 if [[ $# -eq 0 ]]; then
     echo "subcommand:"
-    cat "$0" | awk  "/\"[a-zA-Z\_\-\+0-9]+\" \)/{print $1}" | sed "s/\"//g; s/)//g"
-    # echo "           Home"
-    # echo "           System"
-    # echo "           Office"
-    # echo "           Xcode"
-    # echo "           Windows"
-    # echo "           Disk"
-    # echo "           TMshot"
+    cat "$0" | awk  '/"[a-zA-Z\_\-\+0-9]+" \)/{print $0}' | sed 's/"//g; s/)//g'
     exit
 fi
 

@@ -38,35 +38,23 @@ echo "备份 Fonts"
 rsync -a ~/Library/Fonts "$bakd"
 
 echo "备份 磁盘"
-if [[ -d /Volumes/Googol ]]; then
-    rsync -af '- /Doc/.*' /Volumes/Doc /Volumes/Googol
-    # find /Volumes/Doc/Homebrew -size +20M -delete
-    # find /Volumes/Doc/Homebrew -type f | sort -r | while read it; do
-    #     [ "$pname" = "${it/--*/}" ] && rm "$it"
-    #     pname="${it/--*/}"
-    # done
-    # rsync -a --remove-source-files /Volumes/Doc/Daily /Volumes/Googol/Backup
-    # rsync -a --remove-source-files /Volumes/Doc/Model /Volumes/Googol/Backup
-    # find /Volumes/Doc/Daily -type d -mindepth 1 -delete
-    # find /Volumes/Doc/Model -type d -mindepth 1 -delete
-fi
+test -d /Volumes/Googol && rsync -af '- /Doc/.*' /Volumes/Doc /Volumes/Googol
 
-echo "调用 TimeMachine"
-tmexclpath=(
-    "/Users/yaccai/Library/Application Support/com.colliderli.iina"
-    "/Users/yaccai/Library/Application Support/iMazing"
-    "/Users/yaccai/Library/Application Support/iMazing Mini"
-    "/Users/yaccai/Library/Application Support/qBittorrent"
-    "/Users/yaccai/Library/Application Support/Transmission"
-    "/Users/yaccai/Library/Application Support/uTorrent"
-    "/Users/yaccai/Library/Application Support/Vuze/watch"
-    "/Users/yaccai/Library/Application Support/Code"
-    "/Users/yaccai/Library/Containers/com.tencent.xinWeChat"
-    "/Users/yaccai/Library/Metadata"
-    "/Users/yaccai/Code"
-    "/Users/yaccai/Downloads"
-    )
-
+# echo "调用 TimeMachine"
+# tmexclpath=(
+#     "/Users/yaccai/Library/Application Support/com.colliderli.iina"
+#     "/Users/yaccai/Library/Application Support/iMazing"
+#     "/Users/yaccai/Library/Application Support/iMazing Mini"
+#     "/Users/yaccai/Library/Application Support/qBittorrent"
+#     "/Users/yaccai/Library/Application Support/Transmission"
+#     "/Users/yaccai/Library/Application Support/uTorrent"
+#     "/Users/yaccai/Library/Application Support/Vuze/watch"
+#     "/Users/yaccai/Library/Application Support/Code"
+#     "/Users/yaccai/Library/Containers/com.tencent.xinWeChat"
+#     "/Users/yaccai/Library/Metadata"
+#     "/Users/yaccai/Code"
+#     "/Users/yaccai/Downloads"
+#     )
 # [ `date +%H` -lt 6 ] && {
 #     for excl in "${tmexclpath[@]}"; do
 #         test -d "$excl" || continue
@@ -81,3 +69,8 @@ echo
 
 
 # rsync -avn -f '+ shell/***' -f '- */*' ~/Code  . # 只传输shell
+
+
+'*'  matches any path component, but it stops at slashes.
+'**' to match anything, including slashes.
+'?'  matches any character except a slash (/).

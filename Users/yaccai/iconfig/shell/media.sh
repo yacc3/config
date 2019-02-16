@@ -28,14 +28,12 @@ getimg() {
 }
 
 if [[ $# -eq 0 ]]; then
+    echo "subcommand:"
+    cat "$0" | awk  '/"[a-zA-Z\_\-\+0-9]+" \)/{print $0}' | sed 's/"//g; s/)//g'
     exit
 fi
 
 case "$1" in
-    "help" )
-        echo "subcommand:"
-        cat "$0" | awk  '/"[a-zA-Z\_\-\+0-9]+" \)/{print $0}' | sed 's/"//g; s/)//g'
-        ;;
     "flush" )
         aria2c -c -x 10 https://mirrors.aliyun.com/ubuntu-releases/xenial/ubuntu-16.04.5-server-i386.iso
         ;;
