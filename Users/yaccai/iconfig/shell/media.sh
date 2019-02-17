@@ -24,7 +24,7 @@ getimg() {
         wget -T20 -t3 --show-progress -qnc -P "${2:-.}" "$url/${str:-0}.jpg" && e=-1
         ((e += 1))
     done
-    echo
+    printf "Done   ==>  ${2}/\n\n"
 }
 
 if [[ $# -eq 0 ]]; then

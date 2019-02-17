@@ -91,8 +91,8 @@ EOF
             -name "*$2*.plist"    
         ;;
     "ftime" )
-        echo "访问时间             内容修改时间         元数据修改时间       创建时间"
-        /usr/bin/stat -t "%Y-%m-%d %H:%M:%S" -f "%Sa  %Sm  %Sc  %SB %11z Byte --> %N" "${@:2}"
+        echo "访问时间             内容修改时间         元数据修改时间"
+        /usr/bin/stat -t "%Y-%m-%d %H:%M:%S" -f "%Sa  %Sm  %Sc  -->  %N" "${@:2}"
         ;;
     *)
         echo "no such pattern"

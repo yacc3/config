@@ -66,11 +66,3 @@ test -d /Volumes/Googol && rsync -af '- /Doc/.*' /Volumes/Doc /Volumes/Googol
 
 echo "done"
 echo
-
-
-# rsync -avn -f '+ shell/***' -f '- */*' ~/Code  . # 只传输shell
-
-
-'*'  matches any path component, but it stops at slashes.
-'**' to match anything, including slashes.
-'?'  matches any character except a slash (/).
