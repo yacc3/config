@@ -1,4 +1,8 @@
 Adguard.app
+Adobe Audition CC 2018
+Adobe Creative Cloud
+Adobe Photoshop CC 2018
+AirRadar.app
 AirServer.app
 Alfred 3.app
 App Store.app
@@ -59,6 +63,7 @@ QQ.app
 QuickTime Player.app
 Reminders.app
 Safari.app
+Script Debugger.app
 ShadowsocksX-NG.app
 Siri.app
 SiteSucker.app
@@ -90,11 +95,11 @@ WeChat.app
 Wireshark.app
 Xcode.app
 XtraFinder.app
-balenaEtcher.app
 cd to iterm.app
 iStat Menus.app
 iTerm.app
 iTunes.app
 uTorrent.app
+unetbootin.app
 wpsoffice.app
 央视影音.app
