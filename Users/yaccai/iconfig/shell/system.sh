@@ -56,7 +56,8 @@ EOF
         sudo mount -t msdos /dev/disk0s1 /Volumes/EFI
         ;;
     "umountEFI" )
-        sudo umount /Volumes/EFI
+        diskutil unmount /Volumes/EFI
+        # sudo umount /Volumes/EFI
         ;;
     "createDMG" )            # <folder>    <dmg_name>
         hdiutil create -srcfolder "$2" "$3"
