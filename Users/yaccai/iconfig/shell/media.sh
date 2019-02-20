@@ -1,7 +1,7 @@
 #!/bin/zsh
 # coding:utf-8
 
-Model="/Volumes/Doc/Model"
+Model="/Volumes/Bak/Doc/Model"
 
 
 yixiu () {

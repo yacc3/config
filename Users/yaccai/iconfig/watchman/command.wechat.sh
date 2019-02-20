@@ -2,7 +2,10 @@
 printf "\n\n%s trig -- > %s\n" "$(date +'%Y-%m-%d %T')" "$(basename $0)"
 PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
 
-bakd=~/OneDrive/图片/本机照片
+root=/Volumes/Bak/Doc
+[[ -e "$root" ]] || exit
+
+bakd=$root/Daily/`date +'%Y/%Y-%m-%d'`
 mkdir -p $bakd || exit
 
 [[ $# -gt 3            ]] && exit

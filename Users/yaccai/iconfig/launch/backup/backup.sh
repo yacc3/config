@@ -3,7 +3,7 @@
 /bin/date +'%Y-%m-%d %T ...'
 PATH="/usr/local/bin:$PATH"
 
-bakd="/Volumes/Doc"
+bakd="/Volumes/Bak/Doc"
 test -d "$bakd" || exit -1
 
 echo "备份 app列表"
@@ -38,31 +38,32 @@ echo "备份 Fonts"
 rsync -a ~/Library/Fonts "$bakd"
 
 echo "备份 磁盘"
-test -d /Volumes/Googol && rsync -af '- /Doc/.*' /Volumes/Doc /Volumes/Googol
+test -d /Volumes/Googol && rsync -a  /Volumes/Bak/Doc /Volumes/Googol
 
-# echo "调用 TimeMachine"
-# tmexclpath=(
-#     "/Users/yaccai/Library/Application Support/com.colliderli.iina"
-#     "/Users/yaccai/Library/Application Support/iMazing"
-#     "/Users/yaccai/Library/Application Support/iMazing Mini"
-#     "/Users/yaccai/Library/Application Support/qBittorrent"
-#     "/Users/yaccai/Library/Application Support/Transmission"
-#     "/Users/yaccai/Library/Application Support/uTorrent"
-#     "/Users/yaccai/Library/Application Support/Vuze/watch"
-#     "/Users/yaccai/Library/Application Support/Code"
-#     "/Users/yaccai/Library/Containers/com.tencent.xinWeChat"
-#     "/Users/yaccai/Library/Metadata"
-#     "/Users/yaccai/Code"
-#     "/Users/yaccai/Downloads"
-#     )
-# [ `date +%H` -lt 6 ] && {
-#     for excl in "${tmexclpath[@]}"; do
-#         test -d "$excl" || continue
-#         tmutil isexcluded   "$excl" &>/dev/null && continue
-#         tmutil addexclusion "$excl"
-#     done
-#     tmutil startbackup
-# }
+echo "调用 TimeMachine"
+tmexclpath=(
+    "/Users/yaccai/Library/Application Support/com.colliderli.iina"
+    "/Users/yaccai/Library/Application Support/iMazing"
+    "/Users/yaccai/Library/Application Support/iMazing Mini"
+    "/Users/yaccai/Library/Application Support/qBittorrent"
+    "/Users/yaccai/Library/Application Support/Transmission"
+    "/Users/yaccai/Library/Application Support/uTorrent"
+    "/Users/yaccai/Library/Application Support/Vuze/watch"
+    "/Users/yaccai/Library/Application Support/Code"
+    "/Users/yaccai/Library/Containers/com.tencent.xinWeChat"
+    "/Users/yaccai/Library/Metadata"
+    "/Users/yaccai/Code"
+    "/Users/yaccai/Downloads"
+    "/Users/yaccai/Music"
+    )
+[[ `date +%H` -lt 6 ]] && {
+    for excl in "${tmexclpath[@]}"; do
+        test -d "$excl" || continue
+        tmutil isexcluded   "$excl" &>/dev/null && continue
+        tmutil addexclusion "$excl"
+    done
+    tmutil startbackup
+}
 
 echo "done"
 echo
