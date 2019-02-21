@@ -2,8 +2,8 @@
 printf "\n\n%s trig -- > %s\n" "$(date +'%Y-%m-%d %T')" "$(basename $0)"
 PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
 
-MediaPath=/Volumes/Bak/Doc/iTunes/iTunesMedia
-[[ -e "$MediaPath" ]] || exit
+MediaPath=/Volumes/Store/iTunesMedia
+mkdir -p "$bakd" || exit
 
 
 for it in "$@"; do

@@ -42,5 +42,5 @@ alias me='~/iconfig/shell/media.sh'
 alias yx='~/iconfig/shell/media.sh yixiu'
 alias nv='~/iconfig/shell/media.sh nvshens'
 
-alias day='open /Volumes/Doc/Daily/`date +"%Y/%Y-%m-%d"`'
+alias day='open /Volumes/Store/Daily/`date +"%Y/%Y-%m-%d"`'
 alias top='top -n 15 -o cpu -s 2 -stats pid,command,cpu,mem,pstate,time'

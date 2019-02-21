@@ -3,7 +3,7 @@
 /bin/date +'%Y-%m-%d %T ...'
 PATH="/usr/local/bin:$PATH"
 
-bakd="/Volumes/Bak/Doc"
+bakd="/Volumes/Store"
 test -d "$bakd" || exit -1
 
 echo "备份 app列表"
@@ -20,7 +20,7 @@ git -C "$bakd/Config" add -A &>/dev/null
 git -C "$bakd/Config" commit -m "$(date +'%Y-%m-%d %T')" &>/dev/null
 
 echo "备份 iTunes"
-rsync -a ~/Music/iTunes "$bakd"
+rsync -a ~/Music/iTunes "$bakd/iTunesMedia "
 
 echo "备份 Sublime Text 3"
 rsync -af '- Cache' ~/Library/Application\ Support/Sublime\ Text\ 3  "$bakd"
@@ -37,27 +37,43 @@ rsync -a ~/Code "$bakd"
 echo "备份 Fonts"
 rsync -a ~/Library/Fonts "$bakd"
 
-echo "备份 磁盘"
-test -d /Volumes/Googol && rsync -a  /Volumes/Bak/Doc /Volumes/Googol
+[[ -d /Volumes/Googol/Doc ]] && {
+    echo "备份 磁盘"
+    find "$bakd" -name '._*' -or -name '.DS_Store'  -delete
+    for item in Code                   \
+                Config                 \
+                Daily                  \
+                Doc                    \
+                Fonts                  \
+                Homebrew               \
+                Linux                  \
+                MacOS                  \
+                Model                  \
+                Picture                \
+                Sublime\ Text\ 3       \
+                Windows                \
+                com.tencent.xinWeChat  \
+                iTunesMedia            \
+                vuze; do
+        rsync -a "$bakd/$item" /Volumes/Googol/Doc
+    done
+}
 
-echo "调用 TimeMachine"
-tmexclpath=(
-    "/Users/yaccai/Library/Application Support/com.colliderli.iina"
-    "/Users/yaccai/Library/Application Support/iMazing"
-    "/Users/yaccai/Library/Application Support/iMazing Mini"
-    "/Users/yaccai/Library/Application Support/qBittorrent"
-    "/Users/yaccai/Library/Application Support/Transmission"
-    "/Users/yaccai/Library/Application Support/uTorrent"
-    "/Users/yaccai/Library/Application Support/Vuze/watch"
-    "/Users/yaccai/Library/Application Support/Code"
-    "/Users/yaccai/Library/Containers/com.tencent.xinWeChat"
-    "/Users/yaccai/Library/Metadata"
-    "/Users/yaccai/Code"
-    "/Users/yaccai/Downloads"
-    "/Users/yaccai/Music"
-    )
 [[ `date +%H` -lt 6 ]] && {
-    for excl in "${tmexclpath[@]}"; do
+    echo "调用 TimeMachine"
+    for excl in "/Users/yaccai/Library/Application Support/com.colliderli.iina"  \
+                "/Users/yaccai/Library/Application Support/iMazing"              \
+                "/Users/yaccai/Library/Application Support/iMazing Mini"         \
+                "/Users/yaccai/Library/Application Support/qBittorrent"          \
+                "/Users/yaccai/Library/Application Support/Transmission"         \
+                "/Users/yaccai/Library/Application Support/uTorrent"             \
+                "/Users/yaccai/Library/Application Support/Vuze/watch"           \
+                "/Users/yaccai/Library/Application Support/Code"                 \
+                "/Users/yaccai/Library/Containers/com.tencent.xinWeChat"         \
+                "/Users/yaccai/Library/Metadata"                                 \
+                "/Users/yaccai/Code"                                             \
+                "/Users/yaccai/Downloads"                                        \
+                "/Users/yaccai/Music"; do
         test -d "$excl" || continue
         tmutil isexcluded   "$excl" &>/dev/null && continue
         tmutil addexclusion "$excl"
