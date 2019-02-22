@@ -25,7 +25,6 @@ Dashboard.app
 Dictionary.app
 Downie 3.app
 FaceTime.app
-File Juicer.app
 Font Book.app
 Google Chrome.app
 Hammerspoon.app
@@ -66,7 +65,6 @@ Safari.app
 Script Debugger.app
 ShadowsocksX-NG.app
 Siri.app
-SiteSucker.app
 Skim.app
 Spectacle.app
 Stickies.app

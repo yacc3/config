@@ -20,7 +20,7 @@ git -C "$bakd/Config" add -A &>/dev/null
 git -C "$bakd/Config" commit -m "$(date +'%Y-%m-%d %T')" &>/dev/null
 
 echo "备份 iTunes"
-rsync -a ~/Music/iTunes "$bakd/iTunesMedia "
+rsync -a ~/Music/iTunes "$bakd/iTunesMedia"
 
 echo "备份 Sublime Text 3"
 rsync -af '- Cache' ~/Library/Application\ Support/Sublime\ Text\ 3  "$bakd"
