@@ -21,7 +21,6 @@ alias etc='open -a /Applications/Visual\ Studio\ Code.app /usr/local/etc /usr/lo
 alias a='aria2c -c -x 10 --file-allocation=none'
 alias u='you-get -o ~/Downloads'
 alias px='ALL_PROXY=socks5://127.0.0.1:1086'
-alias cx='curl  -x  socks5://127.0.0.1:1086'
 
 alias et='~/iconfig/shell/edit.sh'
 alias tx='~/iconfig/shell/edit.sh newEdit'
@@ -39,7 +38,6 @@ alias  b='~/iconfig/shell/system.sh bright'
 alias  v='~/iconfig/shell/system.sh volume'
 
 alias me='~/iconfig/shell/media.sh'
-alias yx='~/iconfig/shell/media.sh yixiu'
 alias nv='~/iconfig/shell/media.sh nvshens'
 
 alias day='open /Volumes/Store/Daily/`date +"%Y/%Y-%m-%d"`'

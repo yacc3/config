@@ -53,7 +53,7 @@ done
 echo "clean disabled torrents at uTorrent"
 stmp=`ps -eo lstart,command | grep "[u]Torrent" | awk -F '/' '{print $1}'`
 secd=`date -j -f "%a %b %d %T %Y" "$stmp" "+%s" 2>/dev/null` # ut启动时间
-for tor in ~/Library/Application\ Support/uTorrent/*.torrent; do
+find ~/Library/Application\ Support/uTorrent -name "*.torrent" | while read tor; do
     act=`/usr/bin/stat -t '%s' -f "%Sa" "${tor}"`
     [[ $secd -gt $act ]] && rm "${tor}"
 done

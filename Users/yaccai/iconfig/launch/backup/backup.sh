@@ -19,9 +19,6 @@ done
 git -C "$bakd/Config" add -A &>/dev/null
 git -C "$bakd/Config" commit -m "$(date +'%Y-%m-%d %T')" &>/dev/null
 
-echo "备份 iTunes"
-rsync -a ~/Music/iTunes "$bakd/iTunesMedia"
-
 echo "备份 Sublime Text 3"
 rsync -af '- Cache' ~/Library/Application\ Support/Sublime\ Text\ 3  "$bakd"
 
@@ -29,7 +26,6 @@ echo "备份 微信"
 suffix="__$(date +%Y%m%d%H%M%S).bak"
 rsync -af '- Backup' ~/Library/Containers/com.tencent.xinWeChat "$bakd" # 排除Backup
 rsync -af '+ Backup' ~/Library/Containers/com.tencent.xinWeChat "$bakd" -b --suffix="$suffix"
-# gfind . -regextype posix-egrep -regex '.*__[0-9]{14}.bak$'
 
 echo "备份 Code"
 rsync -a ~/Code "$bakd"
@@ -54,7 +50,7 @@ rsync -a ~/Library/Fonts "$bakd"
                 Windows                \
                 com.tencent.xinWeChat  \
                 iTunesMedia            \
-                vuze; do
+                vuze                   \
         rsync -a "$bakd/$item" /Volumes/Googol/Doc
     done
 }
