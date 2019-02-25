@@ -12,6 +12,7 @@ for url in  https://www.nvshens.com/girl/22162/album/ \
             https://www.nvshens.com/girl/25666/album/ \
             https://www.nvshens.com/girl/24691/album/ \
             https://www.nvshens.com/girl/21887/album/ \
+            https://www.nvshens.com/girl/24986/album/ \
             ; do
     ~/iconfig/shell/media.sh nvshens "$url" &>/dev/null
 done

@@ -24,8 +24,9 @@ rsync -af '- Cache' ~/Library/Application\ Support/Sublime\ Text\ 3  "$bakd"
 
 echo "备份 微信"
 suffix="__$(date +%Y%m%d%H%M%S).bak"
-rsync -af '- Backup' ~/Library/Containers/com.tencent.xinWeChat "$bakd" # 排除Backup
-rsync -af '+ Backup' ~/Library/Containers/com.tencent.xinWeChat "$bakd" -b --suffix="$suffix"
+wechat=~/Library/Containers/com.tencent.xinWeChat
+rsync -af '- Backup'  "$wechat"  "$bakd" # 排除Backup
+rsync -af '+ Backup'  "$wechat"  "$bakd" -b --suffix="$suffix"
 
 echo "备份 Code"
 rsync -a ~/Code "$bakd"
@@ -35,7 +36,7 @@ rsync -a ~/Library/Fonts "$bakd"
 
 [[ -d /Volumes/Googol/Doc ]] && {
     echo "备份 磁盘"
-    rsync -a  -f '- /.*' \
+    rsync -a    -f '- /.*' \
                 -f '- ._*' \
                 -f '- .DS_Store' \
                 -f '- /$RECYCLE.BIN' \
