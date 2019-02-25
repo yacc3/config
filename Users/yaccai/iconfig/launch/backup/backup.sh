@@ -50,7 +50,7 @@ rsync -a ~/Library/Fonts "$bakd"
                 Windows                \
                 com.tencent.xinWeChat  \
                 iTunesMedia            \
-                vuze                   \
+                vuze; do
         rsync -a "$bakd/$item" /Volumes/Googol/Doc
     done
 }
