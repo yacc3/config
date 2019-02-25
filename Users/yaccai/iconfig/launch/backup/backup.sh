@@ -35,24 +35,14 @@ rsync -a ~/Library/Fonts "$bakd"
 
 [[ -d /Volumes/Googol/Doc ]] && {
     echo "备份 磁盘"
-    find "$bakd" -name '._*' -or -name '.DS_Store'  -delete
-    for item in Code                   \
-                Config                 \
-                Daily                  \
-                Doc                    \
-                Fonts                  \
-                Homebrew               \
-                Linux                  \
-                MacOS                  \
-                Model                  \
-                Picture                \
-                Sublime\ Text\ 3       \
-                Windows                \
-                com.tencent.xinWeChat  \
-                iTunesMedia            \
-                vuze; do
-        rsync -a "$bakd/$item" /Volumes/Googol/Doc
-    done
+    rsync -avn  -f '- /.*' \
+                -f '- ._*' \
+                -f '- .DS_Store' \
+                -f '- /$RECYCLE.BIN' \
+                -f '- /System Volume Information' \
+                -f '- /Torrent' \
+                -f '- /Downloads' \
+                /Volumes/Store/  /Volumes/Googol/Doc
 }
 
 [[ `date +%H` -lt 6 ]] && {
