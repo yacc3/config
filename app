@@ -9,6 +9,7 @@ App Store.app
 AppCleaner.app
 Automator.app
 BackupLoupe.app
+BaiduNetdisk_mac.app
 Bartender 3.app
 Books.app
 Boom 3D.app
