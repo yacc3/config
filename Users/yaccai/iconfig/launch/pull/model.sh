@@ -13,9 +13,13 @@ for url in  https://www.nvshens.com/girl/22162/album/ \
             https://www.nvshens.com/girl/24691/album/ \
             https://www.nvshens.com/girl/21887/album/ \
             https://www.nvshens.com/girl/24986/album/ \
+            https://www.nvshens.com/girl/23033/album/ \
+            https://www.nvshens.com/girl/21511/album/ \
+            https://www.nvshens.com/girl/18879/album/ \
             ; do
-    ~/iconfig/shell/media.sh nvshens "$url" &>/dev/null
+    ~/iconfig/shell/media.sh nvshens "$url" #&>/dev/null
+    echo 
 done
 
-echo "done"
+echo "<>"
 echo
