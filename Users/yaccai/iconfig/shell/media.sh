@@ -5,7 +5,7 @@ Model="/Volumes/Store/Model"
 
 
 yixiu () {
-    html="$(curl -s $1 | iconv -f gbk)"
+    html="$(curl -s ${1/m.tu11/www.tu11} | iconv -f gbk)"
     name="$(echo $html | ggrep -oP '(?<=row wzbt text-center\">)[^<>]*(?=<)')"
     url=`echo "$html"  | ggrep -oP "(?<=<img src=\")[^<>]*.jpg" | head -n1`
     for ((i = 0, e = -1; i<= 300 && e < 3; ++i)); do

@@ -60,6 +60,7 @@ Photos.app
 Plants vs. Zombies.app
 Preview.app
 QQ.app
+QQLive.app
 QuickTime Player.app
 Reminders.app
 Safari.app

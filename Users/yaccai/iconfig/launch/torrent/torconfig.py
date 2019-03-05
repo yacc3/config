@@ -1,7 +1,5 @@
 #!/usr/local/bin/python3
 # -*- coding: utf-8 -*- 
-exit()
-
 
 import os
 import sys
@@ -40,7 +38,7 @@ def tm_config():
 
 def ut_config():
     if os.system('pgrep uTorrent &>/dev/null') != 0:
-        # print('uTorrent is not running')
+        print('uTorrent is not running')
         return
     try:
         app = utorrentapi.UTorrentAPI('http://127.0.0.1:61130/gui', 'admin', 'admin')
