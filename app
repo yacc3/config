@@ -75,7 +75,6 @@ Sublime Text.app
 System Preferences.app
 Tank 90.app
 TeX
-Texpad.app
 TextEdit.app
 The Unarchiver.app
 Thunder.app

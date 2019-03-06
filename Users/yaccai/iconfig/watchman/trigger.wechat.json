@@ -4,8 +4,8 @@
     {
         "name": "wechat",
         "expression": ["allof",
-            ["pcre", "\\.jpg$"],
-            ["dirname", "Image", ["depth", "ge", 0]],
+            ["pcre", "\\.(jpg|png|gif|mp4|mp3|aac|m4a|mov)$"],
+            ["size", "gt", 20000],
             ["type", "f"],
             ["exists"]
         ],
