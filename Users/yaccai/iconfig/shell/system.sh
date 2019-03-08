@@ -91,6 +91,16 @@ EOF
             ~/Library/LaunchAgents \
             -name "*$2*.plist"    
         ;;
+    "findScreenShop" )       # image_folder  copy_path
+        [[ $# -lt 3 ]] || mkdir -p "$3" || exit
+        [[ -d "$2" ]] && find "$2" -name '*.png' | while read it; do
+            res=`identify "$it" | cut -d ' ' -f3`
+            if [[ "$res" == '750x1334' ]]; then
+                echo "ScreenShot:  ${it##*/}"
+                [[ $# -eq 3 ]] && cp "$it" "$3"
+            fi
+        done
+        ;;
     "ftime" )
         echo "访问时间             内容修改时间         元数据修改时间"
         /usr/bin/stat -t "%Y-%m-%d %H:%M:%S" -f "%Sa  %Sm  %Sc  -->  %N" "${@:2}"

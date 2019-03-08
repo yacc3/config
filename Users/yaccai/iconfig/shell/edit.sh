@@ -146,6 +146,18 @@ EOF
                     echo '#!/bin/bash'              >>"$2"
                     echo '# coding:utf-8'           >>"$2"
                     ;;
+            "tex")  
+                    echo '\\documentclass{article}'  >>"$2"
+                    echo '\\usepackage{fancyhdr}'    >>"$2"
+                    echo '\\usepackage{ctex}'        >>"$2"
+                    echo '\\usepackage{tabularx}\n'  >>"$2"
+                    echo '\\pagestyle{fancy}'        >>"$2"
+                    echo '\\cfoot{}\n'               >>"$2"
+                    echo '\\begin{document}\n\n'     >>"$2"
+                    echo '%\\begin{tabular}{llll}'   >>"$2"
+                    echo '%\\end{tabular}'           >>"$2"
+                    echo '\\end{document}'           >>"$2"
+                    ;;
         esac
         code "$2"; 
         ;;

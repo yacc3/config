@@ -18,9 +18,12 @@ alias  rc='open -a /Applications/Visual\ Studio\ Code.app ~/.zshrc  ~/iconfig'
 alias src='source ~/.zshrc'
 alias etc='open -a /Applications/Visual\ Studio\ Code.app /usr/local/etc /usr/local/var'
 
+alias c='cd /Volumes/Store/Code'
 alias a='aria2c -c -x 10 --file-allocation=none'
-alias u='you-get -o ~/Downloads'
+alias u=' you-get -o ~/Downloads'
+alias uo='you-get -o ~/OneDrive'
 alias px='ALL_PROXY=socks5://127.0.0.1:1086'
+alias cx='curl -x http://127.0.0.1:1087'
 
 alias et='~/iconfig/shell/edit.sh'
 alias tx='~/iconfig/shell/edit.sh newEdit'
