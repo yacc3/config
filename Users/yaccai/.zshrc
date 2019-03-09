@@ -19,6 +19,7 @@ alias src='source ~/.zshrc'
 alias etc='open -a /Applications/Visual\ Studio\ Code.app /usr/local/etc /usr/local/var'
 
 alias c='cd /Volumes/Store/Code'
+alias lt='cd /Volumes/Store/Code/leetcode'
 alias a='aria2c -c -x 10 --file-allocation=none'
 alias u=' you-get -o ~/Downloads'
 alias uo='you-get -o ~/OneDrive'
