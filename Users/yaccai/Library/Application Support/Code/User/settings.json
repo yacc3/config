@@ -35,7 +35,7 @@
         "*.fdb_latexmk",
         "*.gz"
     ],
-    "latex-workshop.latex.autoClean.run": "onBuilt",
+    // "latex-workshop.latex.autoClean.run": "onBuilt",
     "latex-workshop.view.pdf.viewer": "tab",
     "latex-workshop.latex.recipes": [ // compile的调用顺序，默认第一个
             {

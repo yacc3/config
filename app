@@ -58,6 +58,7 @@ Permute.app
 Photo Booth.app
 Photos.app
 Plants vs. Zombies.app
+PopClip.app
 Preview.app
 QQ.app
 QQLive.app

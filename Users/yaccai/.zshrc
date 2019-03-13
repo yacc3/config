@@ -14,9 +14,9 @@ export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
 export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
-alias  rc='open -a /Applications/Visual\ Studio\ Code.app ~/.zshrc  ~/iconfig'
+alias  rc='code ~/.zshrc       ~/iconfig'
 alias src='source ~/.zshrc'
-alias etc='open -a /Applications/Visual\ Studio\ Code.app /usr/local/etc /usr/local/var'
+alias etc='code /usr/local/etc /usr/local/var'
 
 alias c='cd /Volumes/Store/Code'
 alias lt='cd /Volumes/Store/Code/leetcode'
