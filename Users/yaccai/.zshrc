@@ -12,6 +12,7 @@ export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/Libra
 export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
 export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/ruby/bin:$PATH"
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
 alias  rc='code ~/.zshrc       ~/iconfig'
@@ -27,9 +28,15 @@ alias px='ALL_PROXY=socks5://127.0.0.1:1086'
 alias cx='curl -x http://127.0.0.1:1087'
 
 alias et='~/iconfig/shell/edit.sh'
-alias tx='~/iconfig/shell/edit.sh newEdit'
-alias bs='~/iconfig/shell/edit.sh searchBlog'
 alias sp='~/iconfig/shell/edit.sh searchPoem'
+alias gp='~/iconfig/shell/edit.sh gitpush'
+alias tx='~/iconfig/shell/edit.sh newEdit'
+alias bb='~/iconfig/shell/edit.sh buildBlog'
+alias bs='~/iconfig/shell/edit.sh serveBlog'
+alias bp='~/iconfig/shell/edit.sh pushBlog'
+alias bf='~/iconfig/shell/edit.sh findBlog'
+alias be='code /Volumes/Store/Code/yacc3.github.src'
+
 
 alias lh='~/iconfig/shell/launchctl.sh'
 alias wh='~/iconfig/shell/watchman.sh'

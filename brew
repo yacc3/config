@@ -65,6 +65,7 @@ libtool
 libunistring
 libvorbis
 libvpx
+libyaml
 little-cms2
 lsusb
 lua
@@ -91,6 +92,7 @@ readline
 rsync
 rtmpdump
 rubberband
+ruby
 sdl2
 sha2
 shntool

@@ -5,7 +5,7 @@ new() {
     [[ -z "$1" ]] && return
     echo "create new blog: $1"
     date=`/bin/date +%Y-%m-%d`
-    file=~/Code/yaccai.blog/_posts/"${date}-$1.md"
+    file=/Volumes/Store/Code/yacc3.github.src/_posts/"${date}-$1.md"
 
     if [[ -f "$file" ]]; then
         echo "already exists: $1"
@@ -27,7 +27,7 @@ new() {
 
 renameblog() {
     i=0
-    ls ~/Code/yaccai.blog/_posts/*.md | while read it; do
+    ls /Volumes/Store/Code/yacc3.github.src/_posts/*.md | while read it; do
         printf "%3d  ${it##*/}\n" "$((++i))"
         name=`gawk -F ':' '/^title/ {print $2}' "$it" | gsed "s/\ *//g"`
         date=`gawk -F ':' '/^.ate / {print $2}' "$it" | gsed "s/\ *//g"`
@@ -60,7 +60,7 @@ fcontain () {
 
 format() {
     i=0
-    ls ~/Code/yaccai.blog/_posts/*.md | while read it; do
+    ls /Volumes/Store/Code/yacc3.github.src/_posts/*.md | while read it; do
     printf "processing  %3d  ${it##*/}\n" "$((++i))"
     gsed "s/^layout[\ \t]*/layout    /;\
           s/^title[\ \t]*/title     /;\
@@ -69,15 +69,6 @@ format() {
           s/^tags[\ \t]*/tags      /;\
           s/^Published[\ \t]*/published   /"  -i "$it"
     done
-}
-
-search() { 
-    app=""
-    [[ "$2" == "-t" ]] && app="-exec open -a Typora {} +"
-    [[ "$2" == "-s" ]] && app="-exec open -a Sublime\ Text {} +"
-    [[ "$2" == "-c" ]] && app="-exec open -a Visual\ Studio\ Code.app {} +"
-    sh -c "find ~/Code/yaccai.blog/_posts -iname \"*$1*\" -print $app"
-    # echo "$app"
 }
 
 code=(
@@ -167,16 +158,34 @@ EOF
     "toUTF-8" )
         toUTF-8 "${@:2}"
         ;;
-    "fcontain" )              # 测试$2是否包含 $3的所有文件
-        fcontain "$2" "$3"    # diff -r
+    "fcontain" )               # 测试$2是否包含 $3的所有文件
+        fcontain "$2" "$3"     # diff -r
+        ;;
+    "gitpush" )                # 推送 默认master
+        git add .
+        git commit -m "$(date +'%Y-%m-%d %T')"
+        git push origin "${2:-master}"
         ;;
     "newBlog" )
         new "$2"
         ;;
     "buildBlog" )
-        # might /usr/local/bin/gem install jekyll nokogiri jekyll-paginate
-        find ~/Code/yaccai.github.io ! -regex ".*/.git.*" -type f -delete
-        /usr/local/bin/jekyll build --source ~/Code/yaccai.blog --destination ~/Code/yaccai.github.io
+        jekyll build -s /Volumes/Store/Code/yacc3.github.src -d /Volumes/Store/Code/yacc3.github.io
+        ;;
+    "serveBlog" )
+        jekyll serve -s /Volumes/Store/Code/yacc3.github.src -d /Volumes/Store/Code/yacc3.github.io --watch
+        ;;
+    "pushBlog" )
+        jekyll build -s /Volumes/Store/Code/yacc3.github.src \
+                     -d /Volumes/Store/Code/yacc3.github.io
+        # tar -cJf src.xz \
+        #         --exclude='css' \
+        #         --exclude='img' \
+        #         --exclude='js' \
+        #         -C /Volumes/Store/Code/yacc3.github.io ../yacc3.github.src
+        git -C /Volumes/Store/Code/yacc3.github.io add .
+        git -C /Volumes/Store/Code/yacc3.github.io commit -m "$(date +'%Y-%m-%d %T')"
+        git -C /Volumes/Store/Code/yacc3.github.io push origin "${2:-master}"
         ;;
     "renameBlog" )             # 根据md头部的日期，更新文件名中的日期
         renameblog
@@ -184,8 +193,12 @@ EOF
     "formatBlog" )
         format
         ;;
-    "searchBlog" )
-        search "${@:2}"
+    "findBlog" )
+        app=""
+        [[ "$3" == "-t" ]] && app="-exec open -a Typora {} +"
+        [[ "$3" == "-s" ]] && app="-exec open -a Sublime\ Text {} +"
+        [[ "$3" == "-c" ]] && app="-exec open -a Visual\ Studio\ Code.app {} +"
+        sh -c "find /Volumes/Store/Code/yacc3.github.src/_posts -iname \"*$2*\" -print $app"
         ;;
     "searchPoem" )
         poemD=/Volumes/Store/Doc/诗词/

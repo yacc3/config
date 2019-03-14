@@ -5,8 +5,8 @@
 PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
 
 echo "clean homebrew"
-brew cask upgrade
-brew upgrade
+# brew cask upgrade
+# brew upgrade
 brew cleanup
 
 echo "clean caches"
