@@ -28,8 +28,10 @@ wechat=~/Library/Containers/com.tencent.xinWeChat
 rsync -af '- Backup'  "$wechat"  "$bakd" # 排除Backup
 rsync -af '+ Backup'  "$wechat"  "$bakd" -b --suffix="$suffix"
 
-echo "备份 Code"
-rsync -a ~/Code "$bakd"
+test -d ~/Code && {
+    echo "备份 Code"
+    rsync -a ~/Code "$bakd"   
+}
 
 echo "备份 Fonts"
 rsync -a ~/Library/Fonts "$bakd"
