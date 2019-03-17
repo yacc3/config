@@ -16,8 +16,16 @@ echo "备份 配置文件"
 cat ~/iconfig/launch/backup/config.include | while read it; do
     [[ -e "$it" ]] && rsync -aR  "$it" "$bakd/Config"
 done 
-git -C "$bakd/Config" add -A &>/dev/null
-git -C "$bakd/Config" commit -m "$(date +'%Y-%m-%d %T')" &>/dev/null
+
+fping -t 200 114.114.114.114 &>/dev/null && {
+    for repo in /Volumes/Store/Code/yacc3.github.io  \
+                /Volumes/Store/Code/yacc3.github.src \
+                /Volumes/Store/Config; do
+        git -C "$repo" add -A &>/dev/null
+        git -C "$repo" commit -m "$(date +'%Y-%m-%d %T')" &>/dev/null
+        git -C "$repo" push origin master
+    done
+}
 
 echo "备份 Sublime Text 3"
 rsync -af '- Cache' ~/Library/Application\ Support/Sublime\ Text\ 3  "$bakd"

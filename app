@@ -51,6 +51,7 @@ Microsoft PowerPoint.app
 Microsoft Word.app
 Mission Control.app
 Movist.app
+NeteaseMusic.app
 News.app
 Notes.app
 OneDrive.app
@@ -63,6 +64,7 @@ PopClip.app
 Preview.app
 QQ.app
 QQLive.app
+QQMusic.app
 QuickTime Player.app
 Reminders.app
 Safari.app
