@@ -23,7 +23,7 @@ fping -t 200 114.114.114.114 &>/dev/null && {
                 /Volumes/Store/Config; do
         git -C "$repo" add -A &>/dev/null
         git -C "$repo" commit -m "$(date +'%Y-%m-%d %T')" &>/dev/null
-        git -C "$repo" push origin master
+        git -C "$repo" push origin master &>/dev/null
     done
 }
 
