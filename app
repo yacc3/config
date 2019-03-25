@@ -101,6 +101,7 @@ XtraFinder.app
 cd to iterm.app
 iStat Menus.app
 iTerm.app
+iTools.app
 iTunes.app
 uTorrent.app
 unetbootin.app
