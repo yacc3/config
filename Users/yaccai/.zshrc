@@ -45,6 +45,7 @@ alias sy='~/iconfig/shell/system.sh'
 alias js='~/iconfig/shell/system.sh arithmetic'
 alias kl='~/iconfig/shell/system.sh killLaunchpad'
 alias ap='~/iconfig/shell/system.sh accessPoint'
+alias fd='~/iconfig/shell/system.sh gnufind'
 alias  b='~/iconfig/shell/system.sh bright'
 alias  v='~/iconfig/shell/system.sh volume'
 

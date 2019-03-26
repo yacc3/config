@@ -40,6 +40,7 @@ Karabiner-EventViewer.app
 Keyboard Maestro.app
 LaunchControl.app
 Launchpad.app
+Listen1.app
 LyricsX.app
 Mail.app
 Maps.app
@@ -51,7 +52,6 @@ Microsoft PowerPoint.app
 Microsoft Word.app
 Mission Control.app
 Movist.app
-NeteaseMusic.app
 News.app
 Notes.app
 OneDrive.app
@@ -63,8 +63,6 @@ Plants vs. Zombies.app
 PopClip.app
 Preview.app
 QQ.app
-QQLive.app
-QQMusic.app
 QuickTime Player.app
 Reminders.app
 Safari.app

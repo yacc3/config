@@ -105,6 +105,9 @@ EOF
         echo "访问时间             内容修改时间         元数据修改时间"
         /usr/bin/stat -t "%Y-%m-%d %H:%M:%S" -f "%Sa  %Sm  %Sc  -->  %N" "${@:2}"
         ;;
+    "gnufind" )
+        /usr/local/bin/gfind  "$2"  -regextype "posix-egrep" "${@:3}"
+        ;;
     *)
         echo "no such pattern"
         ;;  

@@ -1,9 +1,13 @@
 asn1crypto
 astroid
+beautifulsoup4
+bs4
 certifi
 cffi
 chardet
 cryptography
+gevent
+greenlet
 idna
 isort
 lazy-object-proxy
@@ -13,9 +17,12 @@ pip
 pycparser
 pylint
 PyMySQL
+rarfile
 requests
 setuptools
 six
+soupsieve
+SubFinder
 transmissionrpc
 urllib3
 wheel

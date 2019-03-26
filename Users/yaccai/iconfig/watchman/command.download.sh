@@ -17,10 +17,10 @@ for it in "$@"; do
             #     mv "$it" ~/Library/Application\ Support/Vuze/watch
             # test -d /Applications/qBittorrent.app && \
             #     mv "$it" ~/Library/Application\ Support/qBittorrent/watch
-            # test -d /Applications/Transmission.app && \
-            #     mv "$it" ~/Library/Application\ Support/Transmission/watch
-            test -d /Applications/uTorrent.app && \
-                mv "$it" ~/Library/Application\ Support/uTorrent/watch
+            test -d /Applications/Transmission.app && \
+                mv "$it" ~/Library/Application\ Support/Transmission/watch
+            # test -d /Applications/uTorrent.app && \
+            #     mv "$it" ~/Library/Application\ Support/uTorrent/watch
             ;;
         dmg) 
             rsync -a -- "$it" "$root/MacOS"
