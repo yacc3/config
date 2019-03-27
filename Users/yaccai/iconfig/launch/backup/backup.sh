@@ -47,7 +47,7 @@ rsync -a ~/Library/Fonts "$bakd"
 
 [[ -d /Volumes/Googol/Doc ]] && {
     echo "备份 磁盘"
-    rsync -a    -f '- /.*' \
+    rsync -av   -f '- /.*' \
                 -f '- ._*' \
                 -f '- .DS_Store' \
                 -f '- /$RECYCLE.BIN' \

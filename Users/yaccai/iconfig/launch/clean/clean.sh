@@ -58,6 +58,7 @@ find ~/Library/Application\ Support/uTorrent -name "*.torrent" | while read tor;
     [[ $secd -gt $act ]] && rm "${tor}"
 done
 
+find ~/Library/Application\ Support/Transmission/watch -name "*.torrent" -delete
 
 echo "done"
 echo
