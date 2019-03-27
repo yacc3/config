@@ -30,6 +30,8 @@ case "$1" in
         ;;
     "start" )       # <label>
         launchctl start "yaccai.$2"
+        exf=`launchctl list yaccai."$2" | ggrep -oP '(?<== ")/.*(?=";)'`
+        tail -f "${exf/.sh/.log}"
         ;;
     * )
         echo "no such pattern"

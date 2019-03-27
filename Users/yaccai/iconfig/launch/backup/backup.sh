@@ -22,9 +22,9 @@ fping -t 200 114.114.114.114 &>/dev/null && {
     for repo in /Volumes/Store/Code/yacc3.github.io  \
                 /Volumes/Store/Code/yacc3.github.src \
                 /Volumes/Store/Config; do
-        git -C "$repo" add -A &>/dev/null
-        git -C "$repo" commit -m "$(date +'%Y-%m-%d %T')" &>/dev/null
-        git -C "$repo" push origin master &>/dev/null
+        git -C "$repo" add -A .
+        git -C "$repo" commit -m "$(date +'%Y-%m-%d %T')"
+        git -C "$repo" push origin master
     done
 }
 
