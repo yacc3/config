@@ -95,7 +95,7 @@ EOF
         [[ $# -lt 3 ]] || mkdir -p "$3" || exit
         [[ -d "$2" ]] && find "$2" -name '*.png' | while read it; do
             res=`identify "$it" | cut -d ' ' -f3`
-            if [[ "$res" == '750x1334' ]]; then
+            if [[ "$res" == '750x1334' ]]; then # 4032x3024
                 echo "ScreenShot:  ${it##*/}"
                 [[ $# -eq 3 ]] && cp "$it" "$3"
             fi

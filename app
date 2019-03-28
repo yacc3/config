@@ -97,6 +97,7 @@ Wireshark.app
 Xcode.app
 XtraFinder.app
 cd to iterm.app
+iMazing.app
 iStat Menus.app
 iTerm.app
 iTools.app
