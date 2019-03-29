@@ -40,7 +40,6 @@ Karabiner-EventViewer.app
 Keyboard Maestro.app
 LaunchControl.app
 Launchpad.app
-Listen1.app
 LyricsX.app
 Mail.app
 Maps.app
