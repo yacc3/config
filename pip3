@@ -1,5 +1,9 @@
+aiohttp
+aiosocks
 asn1crypto
 astroid
+async-timeout
+attrs
 beautifulsoup4
 bs4
 certifi
@@ -13,6 +17,7 @@ isort
 lazy-object-proxy
 lxml
 mccabe
+multidict
 pip
 pycparser
 pylint
@@ -27,3 +32,4 @@ transmissionrpc
 urllib3
 wheel
 wrapt
+yarl

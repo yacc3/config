@@ -13,17 +13,17 @@ print('torload   @ ' + com.nowstr + ' ...')
 
 def tm_config():
     if os.system('pgrep Transmission &>/dev/null') != 0:
-        # print('transmission is not running')
+        print('transmission is not running')
         return
     try:
         tc = transmissionrpc.Client('localhost', port=9091, timeout = 3)
         torlist = tc.get_torrents(timeout = 3)
     except Exception as e:
-        # print('transmission rpc error')
+        print(e)
         return
 
     for t in torlist:
-        if t.status == 'seeding':
+        if t.status == 'seeding' or t.totalSize < 5000000:
             t.stop(timeout= 1)
     # for t in torlist:
     #     if t.trackers[0]['announce'].find("im") >= 0:
@@ -38,7 +38,6 @@ def tm_config():
 
 def ut_config():
     if os.system('pgrep uTorrent &>/dev/null') != 0:
-        print('uTorrent is not running')
         return
     try:
         app = utorrentapi.UTorrentAPI('http://127.0.0.1:61130/gui', 'admin', 'admin')

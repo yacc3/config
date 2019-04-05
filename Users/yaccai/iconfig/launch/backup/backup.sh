@@ -78,6 +78,5 @@ rsync -a ~/Library/Fonts "$bakd"
     done
     tmutil startbackup
 }
-
 echo "done"
 echo

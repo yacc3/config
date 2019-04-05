@@ -26,6 +26,7 @@ alias u=' you-get -o ~/Downloads'
 alias uo='you-get -o ~/OneDrive'
 alias px='ALL_PROXY=socks5://127.0.0.1:1086'
 alias cx='curl -x http://127.0.0.1:1087'
+alias cl='~/iconfig/exe/caoliu.py'
 
 alias et='~/iconfig/shell/edit.sh'
 alias sp='~/iconfig/shell/edit.sh searchPoem'
