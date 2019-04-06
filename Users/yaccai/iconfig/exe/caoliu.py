@@ -26,8 +26,8 @@ class Caoliu:
             'https': 'http://127.0.0.1:1087',
         }
         # self.torrent_dir = os.environ['HOME']
-        self.html_dir = '/Volumes/Store/Torrent/XV/t66y_html'
-        self.torrent_dir = os.path.join(os.environ['HOME'], 'Downloads')
+        self.html_dir = '/Volumes/Store/Torrent/10V/t66y_html'
+        self.torrent_dir = os.path.join(os.environ['HOME'], 'Library/Application Support/Transmission/watch')
 
     def download_page(self, url):
         '''
@@ -51,13 +51,13 @@ class Caoliu:
             ref = p_ref.findall(download_text)[0]
             reff = p_reff.findall(download_text)[0]
             torrent_file=os.path.join(self.torrent_dir, ref + ".torrent")
-
             r = requests.get("http://www.rmdown.com/download.php?ref="+ref+"&reff="+reff+"&submit=download", proxies=self.proxies)
             with open(torrent_file, "wb") as f:
                 f.write(r.content) #下载种子到文件
                 print('store torrent: ', ref)
-        except:
+        except Exception as e:
             print("download page " + url + " failed")
+            print(e)
 
     def index_page(self, fid=2, offset=1):
         '''
@@ -67,12 +67,13 @@ class Caoliu:
         try:
             tmp_url = "http://www.t66y.com/thread0806.php?fid=" + str(fid) + "&search=&page=" + str(offset)
             r = requests.get(tmp_url, proxies=self.proxies)
-            for i in p.findall(r.text): # 用i做缓存的标记
-                html_name=os.path.join(self.html_dir, i.split('/')[-1])
+            for url in p.findall(r.text): # 用i做缓存的标记
+                html_name=os.path.join(self.html_dir, url.split('/')[-1])
                 if not os.path.exists(html_name):
-                    self.detail_page(i)
+                    self.detail_page(url)
                     with open(html_name, 'w'):
                         pass
+                    pass
         except:
             print("index page " + str(offset) + " get failed")
 

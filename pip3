@@ -18,6 +18,7 @@ lazy-object-proxy
 lxml
 mccabe
 multidict
+Pillow
 pip
 pycparser
 pylint

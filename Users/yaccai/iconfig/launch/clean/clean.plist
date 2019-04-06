@@ -3,7 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>Label</key>             <string>yaccai.clean</string>
-	<key>Program</key>           <string>/Users/yaccai/iconfig/launch/clean/clean.sh</string> 
+    <key>ProgramArguments</key>
+        <array>
+            <string>/usr/local/bin/zsh</string>
+            <string>/Users/yaccai/iconfig/launch/clean/clean.sh</string>
+        </array>       
 	<key>WorkingDirectory</key>  <string>/Users/yaccai/iconfig/launch/clean</string>
     <key>StandardErrorPath</key> <string>clean.log</string>
     <key>StandardOutPath</key>   <string>clean.log</string>

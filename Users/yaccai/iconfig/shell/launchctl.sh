@@ -30,7 +30,7 @@ case "$1" in
         ;;
     "start" )       # <label>
         launchctl start "yaccai.$2"
-        exf=`launchctl list yaccai."$2" | ggrep -oP '(?<== ")/.*(?=";)'`
+        exf=`launchctl list "yaccai.$2"  | grep -A2 "ProgramArguments" | tail -n1 | ggrep -oP "(?<=\").*(?=\")"`
         tail -f "${exf/.sh/.log}"
         ;;
     * )

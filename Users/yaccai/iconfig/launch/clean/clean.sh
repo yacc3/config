@@ -50,15 +50,14 @@ for app in Vuze uTorrent qBittorrent Transmission; do
     find "$wp" -name "*.torrent" -or -name "*.imported" -Btime +3m -print -delete
 done
 
-echo "clean disabled torrents at uTorrent"
-stmp=`ps -eo lstart,command | grep "[u]Torrent" | awk -F '/' '{print $1}'`
-secd=`date -j -f "%a %b %d %T %Y" "$stmp" "+%s" 2>/dev/null` # ut启动时间
-find ~/Library/Application\ Support/uTorrent -name "*.torrent" | while read tor; do
-    act=`/usr/bin/stat -t '%s' -f "%Sa" "${tor}"`
-    [[ $secd -gt $act ]] && rm "${tor}"
-done
-
-find ~/Library/Application\ Support/Transmission/watch -name "*.torrent" -delete
+# echo "clean disabled torrents at uTorrent"
+# stmp=`ps -eo lstart,command | grep "[u]Torrent" | awk -F '/' '{print $1}'`
+# secd=`date -j -f "%a %b %d %T %Y" "$stmp" "+%s" 2>/dev/null` # ut启动时间
+# find ~/Library/Application\ Support/uTorrent -name "*.torrent" | while read tor; do
+#     act=`/usr/bin/stat -t '%s' -f "%Sa" "${tor}"`
+#     [[ $secd -gt $act ]] && rm "${tor}"
+# done
+# find ~/Library/Application\ Support/Transmission/watch -name "*.torrent" -delete
 
 echo "done"
 echo

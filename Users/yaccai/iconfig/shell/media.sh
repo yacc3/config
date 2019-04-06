@@ -15,17 +15,6 @@ yixiu () {
     printf "Done  ==>  $Model/Others/$name/\n"
 }
 
-getimg() {
-    url=`echo "$1" | grep -oE "^.*gallery/[0-9]*/[0-9]*"`
-    printf "fetch  ==>  ${2}/\n"
-    test -d "${2}" || for ((i = 0, e = -1; i<= 300 && e < 3; ++i)); do
-        [ $i -eq 0 ] || str=`printf "%03d\n" "$i"`
-        wget -T20 -t3 --show-progress -qnc -P "${2:-.}" "$url/${str:-0}.jpg" && e=-1
-        ((e += 1))
-    done
-    printf "Done   ==>  ${2}/\n\n"
-}
-
 if [[ $# -eq 0 ]]; then
     echo "subcommand:"
     cat "$0" | awk  '/"[a-zA-Z\_\-\+0-9]+" \)/{print $0}' | sed 's/"//g; s/)//g'
@@ -39,22 +28,7 @@ case "$1" in
     "nvshens" )               # 从nvshens.com 下载
         html="$(curl -s $2)"
         [ -e "$root" ] || root=.
-        if echo "$2" | egrep -q album; then
-            name="$(echo $html | ggrep -oP '(?<=/girl/[0-9]{5}/\" title=\")[^<>]*(?=\")')"
-            echo $html | ggrep -oP "<img alt=[^<>]* src=[^<>]* title=[^<>]*>" | while read it; do
-                getimg  "$(echo $it | cut -d "'" -f4)" \
-                        "$Model/$name/$(echo $it | cut -d "'" -f2)"
-            done
-        elif echo "$2" | egrep -q '/girl/'; then
-            name="$(echo $html | ggrep -oP '(?<=&gt; ).*?(?=<)')"
-            echo $html | egrep -o "<img alt=[^<>]* data-original=[^<>]*" | while read it; do
-                getimg  "$(echo $it | cut -d "'" -f4)" \
-                        "$Model/$name/$(echo $it | cut -d "'" -f2)"
-            done
-        elif echo "$2" | egrep -q '/g/[0-9]{5}'; then
-            getimg  "$(echo $html | grep -oE 'http[^=]*?/s/.*?jpg' | head -n1)" \
-                    "$Model/Others/$(echo $html | ggrep -oP '(?<=htilte\">)[^>]*(?=</h1>)')"
-        elif echo "$2" | egrep -q '.tu11.' ; then
+        if echo "$2" | egrep -q '.tu11.' ; then
             yixiu "${@:2}"
         fi
         ;;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>             <string>yaccai.check15m</string>
+    <key>ProgramArguments</key>
+        <array>
+            <string>/usr/local/bin/zsh</string>
+            <string>/Users/yaccai/iconfig/launch/check/check15m.sh</string>
+        </array>
+    <key>WorkingDirectory</key>  <string>/Users/yaccai/iconfig/launch/check</string>
+    <key>StandardErrorPath</key> <string>check15m.log</string>
+    <key>StandardOutPath</key>   <string>check15m.log</string>
+    <key>StartInterval</key>     <integer>900</integer>
+</dict>
+</plist>

@@ -3,7 +3,12 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>             <string>yaccai.onlogin</string>
-    <key>Program</key>           <string>/Users/yaccai/iconfig/launch/onlogin/onlogin.sh</string>
+    <key>ProgramArguments</key>
+        <array>
+            <string>/usr/local/bin/zsh</string>
+            <string>/Users/yaccai/iconfig/launch/onlogin/onlogin.sh</string>
+        </array>
+
     <key>WorkingDirectory</key>  <string>/Users/yaccai/iconfig/launch/onlogin</string>
     <key>StandardOutPath</key>   <string>onlogin.log</string>
     <key>StandardErrorPath</key> <string>onlogin.log</string>

@@ -25,6 +25,7 @@ def tm_config():
     for t in torlist:
         if t.status == 'seeding' or t.totalSize < 5000000:
             t.stop(timeout= 1)
+            # tc.remove_torrent(t.id)
     # for t in torlist:
     #     if t.trackers[0]['announce'].find("im") >= 0:
     #         t.download_limit = 2500

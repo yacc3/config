@@ -3,7 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>Label</key>             <string>yaccai.backup</string>
-	<key>Program</key>           <string>/Users/yaccai/iconfig/launch/backup/backup.sh</string> 
+    <key>ProgramArguments</key>
+        <array>
+            <string>/usr/local/bin/zsh</string>
+            <string>/Users/yaccai/iconfig/launch/backup/backup.sh</string> 
+        </array>
 	<key>WorkingDirectory</key>  <string>/Users/yaccai/iconfig/launch/backup</string>
     <key>StandardErrorPath</key> <string>backup.log</string>
     <key>StandardOutPath</key>   <string>backup.log</string>

@@ -3,7 +3,12 @@
 <plist version="1.0">
 <dict>
 	<key>Label</key>             <string>yaccai.superclean</string>
-	<key>Program</key>           <string>/Users/yaccai/iconfig/launch/clean/superclean.sh</string> 
+    <key>ProgramArguments</key>
+        <array>
+            <string>/usr/local/bin/zsh</string>
+            <string>/Users/yaccai/iconfig/launch/clean/superclean.sh</string> 
+        </array>
+        
 	<key>WorkingDirectory</key>  <string>/Users/yaccai/iconfig/launch/clean</string>
     <key>StandardErrorPath</key> <string>superclean.log</string>
     <key>StandardOutPath</key>   <string>superclean.log</string>
