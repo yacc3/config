@@ -5,15 +5,14 @@ import requests
 import re
 import os
 import sys
-from PIL import Image
-from io import BytesIO
+
+from PIL                import Image
+from io                 import BytesIO
+from concurrent.futures import ThreadPoolExecutor
 
 
 class nvshen:
     def __init__(self):
-        '''
-        初始化head
-        '''
         self.header_html = {
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
             'Accept-Encoding': '',
@@ -41,6 +40,20 @@ class nvshen:
         }
         self.Model = '/Volumes/Store/Model'
         self.server = 'https://www.nvshens.com'
+        self.models = set([
+            'https://www.nvshens.com/girl/22162/album/',
+            'https://www.nvshens.com/girl/17936/album/',
+            'https://www.nvshens.com/girl/24936/album/',
+            'https://www.nvshens.com/girl/23448/album/',
+            'https://www.nvshens.com/girl/20763/album/',
+            'https://www.nvshens.com/girl/25666/album/',
+            'https://www.nvshens.com/girl/24691/album/',
+            'https://www.nvshens.com/girl/21887/album/',
+            'https://www.nvshens.com/girl/24986/album/',
+            'https://www.nvshens.com/girl/23033/album/',
+            'https://www.nvshens.com/girl/21511/album/',
+            'https://www.nvshens.com/girl/18879/album/'
+        ])
 
 
     def getAlbum(self, Album_url, Model='Others'): # url => https://www.nvshens.com/g/29365/
@@ -50,71 +63,78 @@ class nvshen:
         title = title_pattern.findall(res.text)[0]
         fpath = os.path.join(self.Model, Model, title)
         if not os.path.exists(fpath):
-            os.mkdir(fpath)
-            print("fetch", fpath)
-        else:
-            print("exist", fpath)
-            return
+            os.makedirs(fpath)
+        print("fetch  ", fpath + '/')
 
         img_pattern = re.compile('http[^=]*?/gallery/[0-9]+/[0-9]+[/s]*/0.jpg')
         img_urlpart = img_pattern.findall(res.text)[0].replace('/s', '').replace('/0.jpg', '')
-        ne = 0
-        for i in range(0, 100):
-            img_name = "0.jpg" if i is 0 else ("%03d.jpg" % i)
-            img_url = os.path.join(img_urlpart, img_name)
-            res = requests.get(img_url, headers = self.header_img)
-            if res.ok:
-                print("fetching  -->  ", img_name)
-                Image.open(BytesIO(res.content)).save(os.path.join(fpath, img_name), 'JPEG')
-                ne = 0
-            else: # print('ER: ', img_name)
-                ne += 1
-            if ne >= 3:
-                print()
-                break
+        
+        num_pattern = re.compile('(?<=>)[0-9]+(?=张照片</span>)')
+        num = int(num_pattern.findall(res.text)[0])
+        print('%d 张   %s' % (num, Album_url))
+        
+        args = []
+        for i in range(0, num):
+            args.append((img_urlpart, i, fpath))
 
-    
-    def processModel(self, url): # url => https://www.nvshens.com/girl/22162/album/
+        with ThreadPoolExecutor(max_workers = 5) as executor:
+            executor.map(lambda p: self.getimg(*p), args)
+
+        print("done   ", fpath + '/\n')
+
+
+    def getimg(self, img_urlpart, i, img_dir):
+        img_name = "0.jpg" if i is 0 else ("%03d.jpg" % i)
+        img_file = os.path.join(img_dir, img_name)
+        if os.path.exists(img_file):
+            print('exists  ==>  %7s' % img_name)
+            return
+
+        img_url  = os.path.join(img_urlpart, img_name)
+        try:
+            res = requests.get(img_url, headers = self.header_img, timeout = 5)
+        except Exception as e:
+            print('x       ==>  %s' % img_url)
+            # print(e)
+        if res.ok:
+            img = Image.open(BytesIO(res.content))
+            img.save(img_file, 'JPEG')
+            print('√       ==>  %7s  %4d x %4d  %5.1f KB' % (img_name, img.width, img.height, len(res.content)/1024))        
+
+
+    def processModel(self, url):       # https://www.nvshens.com/girl/22162/album/
         res = requests.get(url, headers=self.header_html)
         res.encoding='UTF-8'
-        model_pattern = re.compile('(?<=/girl/[0-9]{5}/" title=").*?(?=")')
+
+        if url.find('/g/') >= 0:       # https://www.nvshens.com/g/23951/
+            self.getAlbum(url)
+            return
+        elif url.find('/album/') >= 0: # https://www.nvshens.com/girl/22162/album/
+            model_pattern = '(?<=/girl/[0-9]{5}/" title=").*?(?=")'
+            album_pattern = "(?<=igalleryli_link' href=')/g/[0-9]{5}/(?=')"
+        else:                          # https://www.nvshens.com/girl/26982/
+            model_pattern = '(?<=/a> &gt; )[^<>]*?(?=</div)'
+            album_pattern = "(?<=igalleryli_link' href=')[^<>']*"
+
+        model_pattern = re.compile(model_pattern)
+        album_pattern = re.compile(album_pattern)
+
         model = model_pattern.findall(res.text)[0]
-
-        album_pattern = re.compile("(?<=igalleryli_link' href=')/g/[0-9]{5}/(?=')")
-        for album in album_pattern.findall(res.text):
-            self.getAlbum(self.server + album, model)
-
-    def processModel2(self, url): # https://www.nvshens.com/girl/27023/
-        res = requests.get(url, headers=self.header_html)
-        res.encoding='UTF-8'
-        model_pattern = re.compile('(?<=/a> &gt; )[^<>]*?(?=</div)')
-        model = model_pattern.findall(res.text)[0]
-
-        album_pattern = re.compile("(?<=igalleryli_link' href=')[^<>']*")
-        for album in album_pattern.findall(res.text):
+        album_list = album_pattern.findall(res.text)
+        album_count = len(album_list)
+        i = 0
+        for album in album_list:
+            i += 1
+            print('Album   %d/%d' % (i, album_count))
             self.getAlbum(self.server + album, model)
 
 
 if __name__ == "__main__":
     argc = len(sys.argv)
-    if argc == 2:
+    if argc >= 2:
         nv = nvshen()
-        url = sys.argv[1]
-        if url.find('album') == -1:
-            nv.processModel2(url)
+        if sys.argv[1] == 'update':
+            for url in nv.models:
+                nv.processModel(url)
         else:
-            nv.processModel(url)
-
-# https://www.nvshens.com/girl/22162/album/
-# https://www.nvshens.com/girl/17936/album/
-# https://www.nvshens.com/girl/24936/album/
-# https://www.nvshens.com/girl/23448/album/
-# https://www.nvshens.com/girl/20763/album/
-# https://www.nvshens.com/girl/25666/album/
-# https://www.nvshens.com/girl/24691/album/
-# https://www.nvshens.com/girl/21887/album/
-# https://www.nvshens.com/girl/24986/album/
-# https://www.nvshens.com/girl/23033/album/
-# https://www.nvshens.com/girl/21511/album/
-# https://www.nvshens.com/girl/18879/album/
-# https://www.nvshens.com/girl/27023/
+            nv.processModel(sys.argv[1])
