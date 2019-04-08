@@ -5,6 +5,7 @@ import requests
 import re
 import os
 import sys
+import datetime
 
 from PIL                import Image
 from io                 import BytesIO
@@ -64,14 +65,14 @@ class nvshen:
         fpath = os.path.join(self.Model, Model, title)
         if not os.path.exists(fpath):
             os.makedirs(fpath)
-        print("fetch  ", fpath + '/')
+        print("fetch  ", Album_url)
 
         img_pattern = re.compile('http[^=]*?/gallery/[0-9]+/[0-9]+[/s]*/0.jpg')
         img_urlpart = img_pattern.findall(res.text)[0].replace('/s', '').replace('/0.jpg', '')
         
         num_pattern = re.compile('(?<=>)[0-9]+(?=张照片</span>)')
         num = int(num_pattern.findall(res.text)[0])
-        print('%d 张   %s' % (num, Album_url))
+        print('%d 张   %s' % (num, fpath + '/'))
         
         args = []
         for i in range(0, num):
@@ -99,7 +100,7 @@ class nvshen:
         if res.ok:
             img = Image.open(BytesIO(res.content))
             img.save(img_file, 'JPEG')
-            print('√       ==>  %7s  %4d x %4d  %5.1f KB' % (img_name, img.width, img.height, len(res.content)/1024))        
+            print('√       ==>  %7s  %4d x %4d  %5.1f KB  %5.2f s' % (img_name, img.width, img.height, len(res.content)/1024, res.elapsed.microseconds/1000000))        
 
 
     def processModel(self, url):       # https://www.nvshens.com/girl/22162/album/

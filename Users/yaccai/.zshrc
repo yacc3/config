@@ -9,9 +9,6 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export LC_ALL=en_US.UTF-8  
 export LANG=en_US.UTF-8
 export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/Library/TeX/texbin"
-export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
@@ -52,6 +49,7 @@ alias  v='~/iconfig/shell/system.sh volume'
 
 alias me='~/iconfig/shell/media.sh'
 alias nv='~/iconfig/exe/nvshen.py'
+alias yx='~/iconfig/shell/media.sh yixiu'
 
 alias day='open /Volumes/Store/Daily/`date +"%Y/%Y-%m-%d"`'
 alias top='top -n 15 -o cpu -s 2 -stats pid,command,cpu,mem,pstate,time'

@@ -28,6 +28,20 @@ class Caoliu:
         # self.torrent_dir = os.environ['HOME']
         self.html_dir = '/Volumes/Store/Torrent/10V/t66y_html'
         self.torrent_dir = os.path.join(os.environ['HOME'], 'Library/Application Support/Transmission/watch')
+        self.titleInterest = {
+            15: [ # fid = 15 亚洲有码区的 兴趣关键词
+                'ABP-',
+                '西野翔',
+                '本田岬'
+            ],
+            25: [ # fid = 25 国产原创区
+                ''
+            ]
+        }
+        self.titleInterest[26] = self.titleInterest[15] # 中字原创区
+        self.titleInterest[27] = self.titleInterest[15] # 转帖交流区
+        # print(self.titleInterest)
+        
 
     def download_page(self, url):
         '''
@@ -63,19 +77,27 @@ class Caoliu:
         '''
         针对草榴的第一级页面(浏览帖子题目的页面)
         '''
-        p = re.compile("<h3><a href=\"(htm_data.+?)\"")
+        p = re.compile("<h3><a href=\"(htm_data[^<]+?)</a></h3>")
         try:
             tmp_url = "http://www.t66y.com/thread0806.php?fid=" + str(fid) + "&search=&page=" + str(offset)
             r = requests.get(tmp_url, proxies=self.proxies)
-            for url in p.findall(r.text): # 用i做缓存的标记
+            r.encoding='gbk'
+            for it in p.findall(r.text): # 用i做缓存的标记
+                url = it.split('\"')[0]
                 html_name=os.path.join(self.html_dir, url.split('/')[-1])
-                if not os.path.exists(html_name):
+
+                isInterest = False # 兴趣白名单
+                for key in self.titleInterest[fid]:
+                    if it.upper().find(key) >= 0:
+                        isInterest = True
+                        break
+
+                if isInterest and not os.path.exists(html_name):
                     self.detail_page(url)
-                    with open(html_name, 'w'):
-                        pass
-                    pass
-        except:
+                    with open(html_name, 'w'):pass
+        except Exception as e:
             print("index page " + str(offset) + " get failed")
+            print(e)
 
     def detail_page(self, url):
         '''
@@ -121,9 +143,10 @@ class Caoliu:
             fid = 5
         elif type == "guochanyuanchuang":
             fid = 25 # fid 是类型码
-            # print('国产原创')
         elif type == "zhongziyuanchuang":
             fid = 26
+        elif type == "zhuantiejieliuqu":
+            fid = 27
         else:
             raise ValueError("type wrong!")
     
@@ -133,3 +156,6 @@ class Caoliu:
 if __name__ == "__main__":
     c = Caoliu()
     c.start(type="guochanyuanchuang",page_start = 1, page_end = 1)
+    c.start(type="yazhouyouma",page_start = 1, page_end = 1)
+    c.start(type="zhongziyuanchuang",page_start = 1, page_end = 1)
+    c.start(type="zhuantiejieliuqu",page_start = 1, page_end = 1)

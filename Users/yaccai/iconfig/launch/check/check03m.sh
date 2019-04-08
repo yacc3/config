@@ -3,20 +3,16 @@
 
 /bin/date +'check @ %Y-%m-%d %T ...'
 
-# curl -s 'http://192.168.1.1/login.cgi?username=useradmin&psd=puv6f' &>/dev/null
-# curl -s myip.ipip.net
-find /Volumes/Store/Downloads/t66ydone -type f | while read it; do
-    [[ "${it##*.}" == 'rar' ]] && rm "$it"
-    [[ "${it##*.}" == 'zip' ]] && rm "$it"
-
-    sizem=`du -sm "$it" | awk '{print $1}'`
-    if [ $sizem -lt 100 ]; then
-        rm "$it"
-    else
-        mv "$it" /Volumes/Store/Torrent/10V
-    fi
-done
-# find /Volumes/Store/Downloads/t66ydone -type d -delete
-
+test -d /Volumes/Store && {
+    /usr/local/bin/gfind /Volumes/Store/Downloads/t66ydone -type f \
+        \( -iname '*.zip' -or -iname '*.rar' -or -size -120M \) -delete
+    /usr/local/bin/gfind /Volumes/Store/Downloads/t66ydone -type f -print0 \
+        | /usr/local/bin/gxargs -0 -I {} mv {} /Volumes/Store/Torrent/10V
+    /usr/local/bin/gfind /Volumes/Store -maxdepth 1 -type f -size +120M -print0 \
+        | /usr/local/bin/gxargs -0 -I {} mv {} /Volumes/Store/Torrent/10V
+    
+    # /usr/local/bin/gfind /Volumes/Store/Torrent/10V/t66y_html -ctime +4 -delete # ctime 大于4天   
+}
+ 
 echo "done"
 echo
