@@ -11,6 +11,7 @@ class Caoliu:
         '''
         初始化定义一个请求头，后面省的重复定义。同时创建存种子的文件夹
         '''
+
         self.header_data = {
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
             'Accept-Encoding': '',
@@ -19,7 +20,7 @@ class Caoliu:
             'Connection': 'keep-alive',
             'Host': 'www.t66y.com',
             'Upgrade-Insecure-Requests': '1',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36',
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36',
         }
         self.proxies = {
             'http': 'http://127.0.0.1:1087',
@@ -30,7 +31,7 @@ class Caoliu:
         self.torrent_dir = os.path.join(os.environ['HOME'], 'Library/Application Support/Transmission/watch')
         self.titleInterest = {
             15: [ # fid = 15 亚洲有码区的 兴趣关键词
-                'ABP-',
+                'ABP',
                 '西野翔',
                 '本田岬'
             ],
@@ -56,7 +57,7 @@ class Caoliu:
             'Host': 'rmdown.com',
             'Referer': 'http://www.viidii.info/?http://rmdown______com/link______php?' + url.split("?")[1],
             'Upgrade-Insecure-Requests': '1',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36'
         }
         try:
             download_text = requests.get(url, headers=header_data2, proxies=self.proxies).text
@@ -156,6 +157,9 @@ class Caoliu:
 if __name__ == "__main__":
     c = Caoliu()
     c.start(type="guochanyuanchuang",page_start = 1, page_end = 1)
-    c.start(type="yazhouyouma",page_start = 1, page_end = 1)
+    c.start(type="yazhouyouma",      page_start = 1, page_end = 1)
     c.start(type="zhongziyuanchuang",page_start = 1, page_end = 1)
-    c.start(type="zhuantiejieliuqu",page_start = 1, page_end = 1)
+    c.start(type="zhuantiejieliuqu", page_start = 1, page_end = 1)
+
+
+

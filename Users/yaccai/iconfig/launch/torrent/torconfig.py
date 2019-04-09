@@ -23,7 +23,7 @@ def tm_config():
         return
 
     for t in torlist:
-        if t.status == 'seeding' or t.totalSize < 5000000:
+        if t.percentDone == 1.0 or t.totalSize < 5000000:
             t.stop(timeout= 1)
             # tc.remove_torrent(t.id)
     # for t in torlist:
