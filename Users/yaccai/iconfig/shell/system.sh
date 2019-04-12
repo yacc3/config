@@ -106,7 +106,7 @@ EOF
         /usr/bin/stat -t "%Y-%m-%d %H:%M:%S" -f "%Sa  %Sm  %Sc  -->  %N" "${@:2}"
         ;;
     "gnufind" )
-        /usr/local/bin/gfind  "$2"  -regextype "posix-egrep" "${@:3}"
+        /usr/local/bin/gfind  "$2"  -regextype "egrep" "${@:3}"
         ;;
     *)
         echo "no such pattern"
