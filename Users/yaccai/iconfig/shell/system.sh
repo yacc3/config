@@ -89,7 +89,7 @@ EOF
         find /System/Library/LaunchAgents /System/Library/LaunchDaemons \
                     /Library/LaunchAgents        /Library/LaunchDaemons \
             ~/Library/LaunchAgents \
-            -name "*$2*.plist"    
+            -iname "*$2*.plist"    
         ;;
     "findScreenShop" )       # image_folder  copy_path
         [[ $# -lt 3 ]] || mkdir -p "$3" || exit
