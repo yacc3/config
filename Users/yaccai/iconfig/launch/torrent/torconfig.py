@@ -26,8 +26,9 @@ def tm_config():
         tracker = t.trackers[0]['announce']
         if t.percentDone == 1.0 or t.totalSize < 5000000:
             t.stop(timeout= 1)
-            if tracker.find("totheglory.im") == -1 and tracker.find("sjtu") == -1: # 不是种子
+            if tracker.find("totheglory.im") == -1 and tracker.find("sjtu") == -1: # 不是pt种子
                 tc.move_torrent_data(t.id, '/Volumes/Store/Downloads/t66ydone')
+                tc.remove_torrent(t.id)
     # for t in torlist:
     #     if t.trackers[0]['announce'].find("im") >= 0:
     #         t.download_limit = 2500
