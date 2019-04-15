@@ -61,7 +61,11 @@ class nvshen:
         res = requests.get(Album_url, headers=self.header_html)
 
         title_pattern = re.compile('(?<=htilte\">)[^>]*(?=</h1>)')
-        title = title_pattern.findall(res.text)[0]
+        try:
+            title = title_pattern.findall(res.text)[0]
+        except Exception as e:
+            print('no title \n')
+            return
         fpath = os.path.join(self.Model, Model, title)
         if not os.path.exists(fpath):
             os.makedirs(fpath)
@@ -78,7 +82,7 @@ class nvshen:
         for i in range(0, num):
             args.append((img_urlpart, i, fpath))
 
-        with ThreadPoolExecutor(max_workers = 5) as executor:
+        with ThreadPoolExecutor(max_workers = 10) as executor:
             executor.map(lambda p: self.getimg(*p), args)
 
         print("done   ", fpath + '/\n')
@@ -95,12 +99,12 @@ class nvshen:
         try:
             res = requests.get(img_url, headers = self.header_img, timeout = 5)
         except Exception as e:
-            print('x       ==>  %s' % img_url)
+            print('\033[31mx\033[0m       ==>  %s' % img_url)
             # print(e)
         if res.ok:
             img = Image.open(BytesIO(res.content))
             img.save(img_file, 'JPEG')
-            print('√       ==>  %7s  %4d x %4d  %5.1f KB  %5.2f s' % (img_name, img.width, img.height, len(res.content)/1024, res.elapsed.microseconds/1000000))        
+            print('\033[32m√\033[0m       ==>  %7s  %4d x %4d  %5.1f KB  %5.2f s' % (img_name, img.width, img.height, len(res.content)/1024, res.elapsed.microseconds/1000000))        
 
 
     def processModel(self, url):       # https://www.nvshens.com/girl/22162/album/
