@@ -29,6 +29,7 @@ gnu-sed
 gnu-tar
 gnu-which
 gnutls
+go
 gpatch
 graphite2
 grep
@@ -100,7 +101,9 @@ shared-mime-info
 shntool
 snappy
 speex
+sqlcipher
 sqlite
+sqlite-analyzer
 supervisor
 tesseract
 theora

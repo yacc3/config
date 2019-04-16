@@ -7,6 +7,8 @@ test -d /Volumes/Store && {
     /usr/local/bin/gfind /Volumes/Store/Downloads/t66ydone -type f -size -80M -delete
     /usr/local/bin/gfind /Volumes/Store/Downloads/t66ydone -type f -print0 \
         | /usr/local/bin/gxargs -0 -I {} mv {} /Volumes/Store/Torrent/10V
+    /usr/local/bin/gfind /Volumes/Store/Downloads/t66ydone -depth -mindepth 1 -type d -delete
+
     /usr/local/bin/gfind /Volumes/Store -maxdepth 1 -type f -size +80M -print0 \
         | /usr/local/bin/gxargs -0 -I {} mv {} /Volumes/Store/Torrent/10V
     

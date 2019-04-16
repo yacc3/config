@@ -50,6 +50,7 @@ alias  v='~/iconfig/shell/system.sh volume'
 alias me='~/iconfig/shell/media.sh'
 alias nv='~/iconfig/exe/nvshen.py'
 alias yx='~/iconfig/shell/media.sh yixiu'
+alias sc='~/iconfig/shell/media.sh captureScreen'
 
 alias day='open /Volumes/Store/Daily/`date +"%Y/%Y-%m-%d"`'
 alias top='top -n 15 -o cpu -s 2 -stats pid,command,cpu,mem,pstate,time'

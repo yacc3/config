@@ -24,6 +24,11 @@ case "$1" in
         done
         printf "Done  ==>  $Model/$name/\n"
         ;;
+    "captureScreen" )
+        name=$(date +%s)
+        screencapture -t 'jpg' ~/Library/Caches/$name.jpg
+        convert -quality 75%   ~/Library/Caches/$name.jpg ~/OneDrive/图片/$name.jpg
+        ;;
     "captureVideo" )
         pid=`pgrep videosnap`
         [[ -z "$pid" ]] || kill -9 "$pid"

@@ -91,6 +91,7 @@ VLC.app
 VNC Viewer.app
 Visual Studio Code.app
 VoiceMemos.app
+WeBack.app
 WeChat.app
 Wireshark.app
 Xcode.app
