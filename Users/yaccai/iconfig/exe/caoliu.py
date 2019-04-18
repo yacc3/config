@@ -28,7 +28,7 @@ class Caoliu:
         }
         # self.torrent_dir = os.environ['HOME']
         self.html_dir = '/Volumes/Store/Torrent/10V/t66y_html'
-        self.torrent_dir = os.path.join(os.environ['HOME'], 'Library/Application Support/Transmission/watch')
+        self.torrent_dir = os.path.join(os.environ['HOME'], 'Library/Application Support/Transmission/watch') # uTorrent
         self.titleInterest = {
             15: [ # fid = 15 亚洲有码区的 兴趣关键词
                 'ABP',

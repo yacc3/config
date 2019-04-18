@@ -49,33 +49,29 @@ def ut_config():
         print('ut api error')
         return
 
-    locations = [
-        '/Volumes/Store/Torrent',
-        '/Volumes/Store/TorrentR',
-        '/Volumes/Googol/Torrent',
-        '/Volumes/Googol/TorrentR'
-    ]
     torrents = app.get_list_my().decode('utf-8')
     torrents = json.loads(torrents).get('torrents')
 
     for it in torrents:
-        if it[-8] != 'Seeding':
-            continue
+        print(it)
+        # break
+        # if it[-8] != 'Seeding':
+        #     continue
 
-        stopit = True  # 已经完成但不在 location 中的，停止
-        for folder in locations:
-            path = os.path.join(folder, it[2])
-            if os.path.exists(path):
-                stopit = False
-                break
-        if stopit:
-            app.stop(it[0])
-            print('            stop  %s' % it[2])
+        # stopit = True  # 已经完成但不在 location 中的，停止
+        # for folder in locations:
+        #     path = os.path.join(folder, it[2])
+        #     if os.path.exists(path):
+        #         stopit = False
+        #         break
+        # if stopit:
+        #     app.stop(it[0])
+        #     print('            stop  %s' % it[2])
 
 
 if __name__ == '__main__':
     tm_config()
-    ut_config()
+    # ut_config()
     pass
 
 print('\n')

@@ -129,9 +129,6 @@ class UTorrentAPI(object):
     def removedata(self, torrentHash):
         return self._torrentaction('removedata', torrentHash)
 
-    def recheck(self, torrentHash):
-        return self._torrentaction('recheck', torrentHash)
-
     def set_priority(self, torrentHash, fileindex, priority):
         # 0 = Don't Download
         # 1 = Low Priority
