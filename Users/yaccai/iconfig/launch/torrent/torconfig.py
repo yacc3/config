@@ -53,7 +53,9 @@ def ut_config():
     torrents = json.loads(torrents).get('torrents')
 
     for it in torrents:
-        print(it)
+        if it[4] == 1000:
+            app.stop(it[0])
+        # print(it[29])
         # break
         # if it[-8] != 'Seeding':
         #     continue
@@ -71,7 +73,7 @@ def ut_config():
 
 if __name__ == '__main__':
     tm_config()
-    # ut_config()
+    ut_config()
     pass
 
 print('\n')

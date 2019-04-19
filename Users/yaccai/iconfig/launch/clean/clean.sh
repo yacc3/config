@@ -43,12 +43,12 @@ test -d "$IC" && {
     rm -rf "$IC"
 }
 
-for app in Vuze uTorrent qBittorrent Transmission; do 
-    test -d /Applications/"$app".app || continue
-    wp=~/Library/Application\ Support/"$app"/watch
-    mkdir -p "$wp"
-    find "$wp" -name "*.torrent" -or -name "*.imported" -Btime +3m -print -delete
-done
+# for app in Vuze uTorrent qBittorrent Transmission; do 
+#     test -d /Applications/"$app".app || continue
+#     wp=~/Library/Application\ Support/"$app"/watch
+#     mkdir -p "$wp"
+#     find "$wp" -name "*.torrent" -or -name "*.imported" -Btime +3m -print -delete
+# done
 
 # echo "clean disabled torrents at uTorrent"
 # stmp=`ps -eo lstart,command | grep "[u]Torrent" | awk -F '/' '{print $1}'`

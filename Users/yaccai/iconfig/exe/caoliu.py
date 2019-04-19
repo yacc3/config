@@ -31,9 +31,13 @@ class Caoliu:
         self.torrent_dir = os.path.join(os.environ['HOME'], 'Library/Application Support/Transmission/watch') # uTorrent
         self.titleInterest = {
             15: [ # fid = 15 亚洲有码区的 兴趣关键词
-                'ABP',
-                '西野翔',
-                '本田岬'
+                # 'ABP',
+                '西野翔', '本田岬', '三上悠亚',
+                '九重环奈', '九重かんな', '明日花绮罗', '明日花キララ',
+                '高桥圣子', '高橋しょう子', '希志爱野', '希志あいの',
+                '彩美旬果', 'あやみ旬果', '上原亚衣', '上原亜衣',
+                '小岛南', '小島みなみ', '铃春爱里', '鈴村あいり',
+                '水卜樱', '水卜さくら'
             ],
             25: [ # fid = 25 国产原创区
                 ''
@@ -157,9 +161,9 @@ class Caoliu:
 if __name__ == "__main__":
     c = Caoliu()
     c.start(type="guochanyuanchuang",page_start = 1, page_end = 1)
-    # c.start(type="yazhouyouma",      page_start = 1, page_end = 1)
-    # c.start(type="zhongziyuanchuang",page_start = 1, page_end = 1)
-    # c.start(type="zhuantiejieliuqu", page_start = 1, page_end = 1)
+    c.start(type="yazhouyouma",      page_start = 1, page_end = 1)
+    c.start(type="zhongziyuanchuang",page_start = 1, page_end = 1)
+    c.start(type="zhuantiejieliuqu", page_start = 1, page_end = 1)
 
 
 

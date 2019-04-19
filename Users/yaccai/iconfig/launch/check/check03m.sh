@@ -4,7 +4,9 @@
 /bin/date +'check @ %Y-%m-%d %T ...'
 
 test -d /Volumes/Store && {
-    /usr/local/bin/gfind /Volumes/Store/Downloads/t66ydone -type f -size -150M -delete
+    /usr/local/bin/gfind /Volumes/Store/Downloads/t66ydone -type f -iname '*.zip' -delete
+    /usr/local/bin/gfind /Volumes/Store/Downloads/t66ydone -type f -iname '*.rar' -delete
+    /usr/local/bin/gfind /Volumes/Store/Downloads/t66ydone -type f -size -150M    -delete
     /usr/local/bin/gfind /Volumes/Store/Downloads/t66ydone -type f -print0 \
         | /usr/local/bin/gxargs -0 -I {} mv {} /Volumes/Store/Torrent/10V
     /usr/local/bin/gfind /Volumes/Store/Downloads/t66ydone -depth -mindepth 1 -type d -delete
