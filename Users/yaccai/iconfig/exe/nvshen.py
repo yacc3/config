@@ -82,7 +82,7 @@ class nvshen:
         for i in range(0, num):
             args.append((img_urlpart, i, fpath))
 
-        with ThreadPoolExecutor(max_workers = 10) as executor:
+        with ThreadPoolExecutor(max_workers = 15) as executor:
             executor.map(lambda p: self.getimg(*p), args)
 
         print("done   ", fpath + '/\n')
