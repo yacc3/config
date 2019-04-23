@@ -198,7 +198,7 @@ EOF
         [[ "$3" == "-t" ]] && app="-exec open -a Typora {} +"
         [[ "$3" == "-s" ]] && app="-exec open -a Sublime\ Text {} +"
         [[ "$3" == "-c" ]] && app="-exec open -a Visual\ Studio\ Code.app {} +"
-        sh -c "find /Volumes/Store/Code/yacc3.github.src/_posts -iname \"*$2*\" -print $app"
+        sh -c "find /Volumes/Store/Code/yacc3.github.src/_posts -iname \"*$2*\" -and -not -name '._*' -print $app"
         ;;
     "searchPoem" )
         poemD=/Volumes/Store/Doc/诗词/

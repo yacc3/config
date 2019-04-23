@@ -30,9 +30,8 @@ alias sp='~/iconfig/shell/edit.sh searchPoem'
 alias gp='~/iconfig/shell/edit.sh gitpush'
 alias tx='~/iconfig/shell/edit.sh newEdit'
 alias bb='~/iconfig/shell/edit.sh buildBlog'
-alias bs='~/iconfig/shell/edit.sh serveBlog'
 alias bp='~/iconfig/shell/edit.sh pushBlog'
-alias bf='~/iconfig/shell/edit.sh findBlog'
+alias bs='~/iconfig/shell/edit.sh findBlog'
 alias be='code /Volumes/Store/Code/yacc3.github.src'
 
 
