@@ -10,6 +10,7 @@ certifi
 cffi
 chardet
 cryptography
+cssselect
 gevent
 greenlet
 idna
@@ -19,13 +20,16 @@ lazy-object-proxy
 lxml
 mccabe
 multidict
+parsel
 Pillow
 pip
+protobuf
 pycparser
 pylint
 PyMySQL
 pypng
 PyQRCode
+PySocks
 rarfile
 requests
 setuptools
@@ -34,6 +38,7 @@ soupsieve
 SubFinder
 transmissionrpc
 urllib3
+w3lib
 wheel
 wrapt
 yarl

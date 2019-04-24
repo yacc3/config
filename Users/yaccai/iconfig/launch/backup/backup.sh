@@ -70,6 +70,7 @@ rsync -a ~/Library/Fonts "$bakd"
                 "/Users/yaccai/Library/Containers/com.tencent.xinWeChat"         \
                 "/Users/yaccai/Library/Metadata"                                 \
                 "/Users/yaccai/Code"                                             \
+                "/Users/yaccai/Desktop"                                          \
                 "/Users/yaccai/Downloads"                                        \
                 "/Users/yaccai/Music"; do
         test -d "$excl" || continue

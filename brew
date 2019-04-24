@@ -71,6 +71,7 @@ libyaml
 little-cms2
 lsusb
 lua
+mitmproxy
 mpfr
 ncurses
 nettle
@@ -88,6 +89,7 @@ p11-kit
 pcre
 pixman
 popt
+protobuf
 python
 python@2
 readline

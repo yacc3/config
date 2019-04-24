@@ -7,6 +7,7 @@ AirServer.app
 Alfred 3.app
 App Store.app
 AppCleaner.app
+Appium.app
 Automator.app
 BackupLoupe.app
 BaiduNetdisk_mac.app
@@ -61,6 +62,7 @@ Photos.app
 Plants vs. Zombies.app
 PopClip.app
 Preview.app
+PyCharm.app
 QQ.app
 QuickTime Player.app
 Reminders.app
@@ -78,7 +80,6 @@ Tank 90.app
 TeX
 TextEdit.app
 The Unarchiver.app
-Thunder.app
 Tickeys.app
 Time Machine.app
 Transmission.app
