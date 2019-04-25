@@ -65,7 +65,7 @@ rsync -a ~/Library/Fonts "$bakd"
                 "/Users/yaccai/Library/Application Support/qBittorrent"          \
                 "/Users/yaccai/Library/Application Support/Transmission"         \
                 "/Users/yaccai/Library/Application Support/uTorrent"             \
-                "/Users/yaccai/Library/Application Support/Vuze/watch"           \
+                "/Users/yaccai/Library/Application Support/Vuze"                 \
                 "/Users/yaccai/Library/Application Support/Code"                 \
                 "/Users/yaccai/Library/Containers/com.tencent.xinWeChat"         \
                 "/Users/yaccai/Library/Metadata"                                 \

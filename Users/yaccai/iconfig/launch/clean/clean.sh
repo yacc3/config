@@ -59,6 +59,8 @@ test -d "$IC" && {
 # done
 # find ~/Library/Application\ Support/Transmission/watch -name "*.torrent" -delete
 
+osascript -e "set volume output volume +5"
+
 echo "done"
 echo
 echo

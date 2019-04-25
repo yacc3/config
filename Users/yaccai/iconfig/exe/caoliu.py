@@ -31,8 +31,7 @@ class Caoliu:
         self.torrent_dir = os.path.join(os.environ['HOME'], 'Library/Application Support/Transmission/watch') # uTorrent
         self.titleInterest = {
             15: [ # fid = 15 亚洲有码区的 兴趣关键词
-                # 'ABP',
-                # '中文字幕',
+                '國產',
                 '西野翔', '本田岬', '三上悠亚',
                 '九重环奈', '九重かんな', '明日花绮罗', '明日花キララ',
                 '高桥圣子', '高橋しょう子', '希志爱野', '希志あいの',
@@ -83,24 +82,25 @@ class Caoliu:
         '''
         针对草榴的第一级页面(浏览帖子题目的页面)
         '''
-        p = re.compile("<h3><a href=\"(htm_data[^<]+?)</a></h3>")
+        p = re.compile("<h3><a href=\"(htm_data[^<]+?)</a>")
+        t = re.compile("padding-left:8px(.*?)</h3>")
         try:
             tmp_url = "http://www.t66y.com/thread0806.php?fid=" + str(fid) + "&search=&page=" + str(offset)
             r = requests.get(tmp_url, proxies=self.proxies)
             r.encoding='gbk'
-            for it in p.findall(r.text): # 用i做缓存的标记
-                url = it.split('\"')[0]
-                html_name=os.path.join(self.html_dir, url.split('/')[-1])
-
+            html = r.text.replace('\r', '').replace('\n', '')
+            for it in t.findall(html): # 用i做缓存的标记
                 isInterest = False # 兴趣白名单
                 for key in self.titleInterest[fid]:
                     if it.upper().find(key) >= 0:
                         isInterest = True
                         break
-
-                if isInterest and not os.path.exists(html_name):
-                    self.detail_page(url)
-                    with open(html_name, 'w'):pass
+                if isInterest:
+                    url = p.findall(it)[0].split('\"')[0]
+                    html_name=os.path.join(self.html_dir, url.split('/')[-1])
+                    if not os.path.exists(html_name):
+                        self.detail_page(url)
+                        with open(html_name, 'w'):pass
         except Exception as e:
             print("index page " + str(offset) + " get failed")
             print(e)
@@ -161,9 +161,9 @@ class Caoliu:
 
 if __name__ == "__main__":
     c = Caoliu()
-    c.start(type="guochanyuanchuang",page_start = 1, page_end = 1)
-    c.start(type="yazhouyouma",      page_start = 1, page_end = 1)
-    c.start(type="zhongziyuanchuang",page_start = 1, page_end = 1)
+    # c.start(type="guochanyuanchuang",page_start = 1, page_end = 1)
+    # c.start(type="yazhouyouma",      page_start = 1, page_end = 1)
+    # c.start(type="zhongziyuanchuang",page_start = 1, page_end = 1)
     c.start(type="zhuantiejieliuqu", page_start = 1, page_end = 1)
 
 

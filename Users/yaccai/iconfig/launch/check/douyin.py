@@ -5,11 +5,6 @@ import re
 import os
 import sys
 from parsel import Selector
-# from __future__ import print_function
-# from pprint import pprint
-# import sys
-# reload(sys)
-# sys.setdefaultencoding("utf-8")
 
 
 class douyin:
@@ -23,10 +18,6 @@ class douyin:
             'Host': 'www.douyin.com',
             'Upgrade-Insecure-Requests': '1',
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36',
-        }
-        self.proxies = {
-            'http': 'http://127.0.0.1:1087',
-            'https': 'http://127.0.0.1:1087',
         }
 
 
@@ -78,9 +69,9 @@ class douyin:
     def fetch(self, url):
         try:
             html = requests.get(url, headers = self.header).text
-        except expression as identifier:
+        except Exception as e:
             print('error:')
-            print(identifier.reason)
+            print(e)
             html = None
         return html
 
@@ -90,7 +81,7 @@ class douyin:
         xbody = Selector(text = html)
 
         douyin_id = xbody.xpath("//p[@class='shortid']").extract_first()
-        douyin_id = re.findall('>([\s\S]+?)<', douyin_id)
+        douyin_id = re.findall(r'>([\s\S]+?)<', douyin_id)
         douyin_id = self.jiexi(douyin_id).replace(u"抖音ID：", '').strip()
         print('ID  ', douyin_id)
 
@@ -98,17 +89,17 @@ class douyin:
         print('昵称', nick_name)
 
         works = xbody.xpath("//div[@class='user-tab active tab get-list']/span").extract_first()
-        works = re.findall('>([\s\S]+?)<', works)
+        works = re.findall(r'>([\s\S]+?)<', works)
         works = self.jiexi(works).strip()
         print('作品', works)
 
         like_num = xbody.xpath("//div[@class='like-tab tab get-list']/span").extract_first()
-        like_num = re.findall('>([\s\S]+?)<', like_num)
+        like_num = re.findall(r'>([\s\S]+?)<', like_num)
         like_num = self.jiexi(like_num).strip()
         print('喜欢', like_num)
 
         guanzhu = xbody.xpath("//span[contains(@class,'focus block')]/span[@class='num']").extract_first()
-        guanzhu = re.findall('>([\s\S]+?)<', guanzhu)
+        guanzhu = re.findall(r'>([\s\S]+?)<', guanzhu)
         guanzhu = self.jiexi(guanzhu)
         print('关注', guanzhu)
 

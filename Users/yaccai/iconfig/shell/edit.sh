@@ -155,7 +155,7 @@ EOF
     "simpleChinese" )
         opencc -c t2s.json -i "$2" -o "$2"
         ;;
-    "toUTF-8" )
+    "utf8" )
         toUTF-8 "${@:2}"
         ;;
     "fcontain" )               # 测试$2是否包含 $3的所有文件

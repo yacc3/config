@@ -86,10 +86,12 @@ EOF
 EOF
         ;;
     "findplist" )
-        find /System/Library/LaunchAgents /System/Library/LaunchDaemons \
-                    /Library/LaunchAgents        /Library/LaunchDaemons \
-            ~/Library/LaunchAgents \
-            -iname "*$2*.plist"    
+        find    /System/Library/LaunchAgents  \
+                /System/Library/LaunchDaemons \
+                /Library/LaunchAgents         \
+                /Library/LaunchDaemons        \
+                ~/Library/LaunchAgents        \
+                -iname "*$2*.plist"    
         ;;
     "findScreenShop" )       # image_folder  copy_path
         [[ $# -lt 3 ]] || mkdir -p "$3" || exit
@@ -101,7 +103,7 @@ EOF
             fi
         done
         ;;
-    "ftime" )
+    "filetime" )
         echo "访问时间             内容修改时间         元数据修改时间"
         /usr/bin/stat -t "%Y-%m-%d %H:%M:%S" -f "%Sa  %Sm  %Sc  -->  %N" "${@:2}"
         ;;
