@@ -73,6 +73,7 @@ lsusb
 lua
 mitmproxy
 mpfr
+mysql
 ncurses
 nettle
 nginx

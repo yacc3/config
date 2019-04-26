@@ -48,4 +48,3 @@ for it in "$@"; do
             ;;
     esac
 done
-

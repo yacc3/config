@@ -59,7 +59,8 @@ test -d "$IC" && {
 # done
 # find ~/Library/Application\ Support/Transmission/watch -name "*.torrent" -delete
 
-osascript -e "set volume output volume +5"
+osascript -e "set volume output volume +8"
+/usr/local/bin/gfind /Volumes/Store/Torrent/10V/t66y_html -type f -regextype 'egrep' -regex '.*/[0-9]{7}\.html' -ctime +3 -exec rm {} +
 
 echo "done"
 echo

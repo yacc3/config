@@ -52,6 +52,7 @@ Microsoft PowerPoint.app
 Microsoft Word.app
 Mission Control.app
 Movist.app
+MySQLWorkbench.app
 News.app
 Notes.app
 OneDrive.app
