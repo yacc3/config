@@ -1,9 +1,11 @@
 #!/usr/local/bin/python3
 # -*- coding: utf-8 -*- 
 import requests
+import pymysql
+import time
+import sys
 import re
 import os
-import sys
 from parsel import Selector
 
 
@@ -19,7 +21,12 @@ class douyin:
             'Upgrade-Insecure-Requests': '1',
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36',
         }
+        self.uids = {'75382141971':'LL', '9330557830':'WD', '101019751610':'HNN'}
+        self.db = pymysql.connect("localhost","yaccai","go","daily" )
+        self.home = os.environ['HOME']
 
+    def __del__(self):
+        self.db.close()
 
     def jiexi(self, lists):
         pat = {
@@ -79,43 +86,75 @@ class douyin:
     def spider(self, uid):
         html = self.fetch("https://www.douyin.com/share/user/%s" % uid)
         xbody = Selector(text = html)
+        stmp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        name = self.uids[uid]
 
-        douyin_id = xbody.xpath("//p[@class='shortid']").extract_first()
-        douyin_id = re.findall(r'>([\s\S]+?)<', douyin_id)
-        douyin_id = self.jiexi(douyin_id).replace(u"抖音ID：", '').strip()
-        print('ID  ', douyin_id)
+        douyinID = xbody.xpath("//p[@class='shortid']").extract_first()
+        douyinID = re.findall(r'>([\s\S]+?)<', douyinID)
+        douyinID = self.jiexi(douyinID).replace(u"抖音ID：", '').strip()
+        # print('ID  ', douyinID)
 
-        nick_name = xbody.xpath("//p[@class='nickname']/text()").extract_first()
-        print('昵称', nick_name)
+        douyinSID = uid
+
+        nickname = xbody.xpath("//p[@class='nickname']/text()").extract_first()
+        # print('昵称', nickname)
 
         works = xbody.xpath("//div[@class='user-tab active tab get-list']/span").extract_first()
         works = re.findall(r'>([\s\S]+?)<', works)
-        works = self.jiexi(works).strip()
-        print('作品', works)
+        works = int(self.jiexi(works).strip())
+        # print('作品', works)
 
-        like_num = xbody.xpath("//div[@class='like-tab tab get-list']/span").extract_first()
-        like_num = re.findall(r'>([\s\S]+?)<', like_num)
-        like_num = self.jiexi(like_num).strip()
-        print('喜欢', like_num)
+        like = xbody.xpath("//div[@class='like-tab tab get-list']/span").extract_first()
+        like = re.findall(r'>([\s\S]+?)<', like)
+        like = int(self.jiexi(like).strip())
+        # print('喜欢', like)
 
-        guanzhu = xbody.xpath("//span[contains(@class,'focus block')]/span[@class='num']").extract_first()
-        guanzhu = re.findall(r'>([\s\S]+?)<', guanzhu)
-        guanzhu = self.jiexi(guanzhu)
-        print('关注', guanzhu)
+        follow = xbody.xpath("//span[contains(@class,'focus block')]/span[@class='num']").extract_first()
+        follow = re.findall(r'>([\s\S]+?)<', follow)
+        follow = int(self.jiexi(follow))
+        # print('关注', follow)
 
-        # fans = xbody.xpath("//span[contains(@class,'follower block')]/span[@class='num']").extract_first()
-        # fans = re.findall('>([\s\S]+?)<', fans)
-        # fans = self.jiexi(fans)
+        fans = xbody.xpath("//span[contains(@class,'follower block')]/span[@class='num']").extract_first()
+        fans = re.findall(r'>([\s\S]+?)<', fans)
+        fans = int(self.jiexi(fans))
         # print('粉丝', fans)
 
-        # zan = xbody.xpath("//span[contains(@class,'liked-num block')]/span[@class='num']").extract_first()
-        # zan = re.findall('>([\s\S]+?)<', zan)
-        # zan = self.jiexi(zan)
-        # print('获赞', zan)
+        liked = xbody.xpath("//span[contains(@class,'liked-num block')]/span[@class='num']").extract_first()
+        liked = re.findall(r'>([\s\S]+?)<', liked)
+        liked = int(self.jiexi(liked))
+        # print('获赞', liked)
+
+        sql_search = "select stmp, name, works, `like`, follow from douyin where name = '%s' order by stmp DESC limit 1" % name
+        cursor = self.db.cursor()
+        cursor.execute(sql_search)
+        predata = cursor.fetchone() # 前面的数据
+        diff = ''
+        flag = 0
+        if predata is not None:
+            if predata[2] != works:
+                diff += ('%-6s: %5d  ==>  %-5d\n' % ('works', predata[2], works))
+                flag |= 0b001
+            if predata[3] != like:
+                diff += ('%-6s: %5d  ==>  %-5d\n' % ('like', predata[3], like))
+                flag |= 0b010
+            if predata[4] != follow:
+                diff += ('%-6s: %5d  ==>  %-5d\n' % ('follow', predata[4], follow))
+                flag |= 0b100
+            if diff != '':
+                fname = time.strftime(name + ".%m-%d_%H-%M.txt", time.localtime())
+                fpath = os.path.join(self.home, 'Desktop', fname)
+                with open(fpath,'w') as f:
+                    f.write(diff)
+                os.system('say , do check ' + name)
+        sql_insert = "insert into douyin values(DEFAULT, '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%d', '%d', '%d')" % (stmp, name, douyinID, douyinSID, nickname, works, like, follow, fans, liked, flag)
+        cursor.execute(sql_insert)
+        self.db.commit()
+
+
+    def start(self):
+        for uid in self.uids:
+            self.spider(uid)
         
-        print('')
-
-
 
 if __name__ == '__main__':
-    douyin().spider(sys.argv[1])
+    douyin().start()

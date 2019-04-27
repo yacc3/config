@@ -96,7 +96,10 @@ class Caoliu:
                         isInterest = True
                         break
                 if isInterest:
-                    url = p.findall(it)[0].split('\"')[0]
+                    res = p.findall(it)
+                    url = None if len(res) == 0 else res[0].split('\"')[0]
+                    if url is None:
+                        continue
                     html_name=os.path.join(self.html_dir, url.split('/')[-1])
                     if not os.path.exists(html_name):
                         self.detail_page(url)
@@ -161,10 +164,10 @@ class Caoliu:
 
 if __name__ == "__main__":
     c = Caoliu()
-    # c.start(type="guochanyuanchuang",page_start = 1, page_end = 1)
+    c.start(type="guochanyuanchuang",page_start = 1, page_end = 1)
     # c.start(type="yazhouyouma",      page_start = 1, page_end = 1)
     # c.start(type="zhongziyuanchuang",page_start = 1, page_end = 1)
-    c.start(type="zhuantiejieliuqu", page_start = 1, page_end = 1)
+    # c.start(type="zhuantiejieliuqu", page_start = 1, page_end = 1)
 
 
 
