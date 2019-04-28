@@ -22,8 +22,10 @@ for it in "$@"; do
             # test -d /Applications/uTorrent.app && \
             #     mv "$it" ~/Library/Application\ Support/uTorrent/watch
             watch=~/Library/Application\ Support/uTorrent/watch
-            if [[ "$it" =~ "^[0-9a-z]{40}\.torrent$" ]]; then
+            if [[ "$it" =~ "^[0-9a-z]{40}\.torrent$" ]]; then # 是t66型种子
                 watch=~/Library/Application\ Support/Transmission/watch
+            else
+                pgrep uTorrent &>/dev/null || open -a uTorrent
             fi
             mv "$it" "$watch"
             ;;

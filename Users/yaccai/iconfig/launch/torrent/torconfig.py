@@ -23,6 +23,28 @@ def tm_config():
         return
 
     for t in torlist:
+        maxsize = 0
+        maxsizesn = -1
+        select_count = 0 # 记录当前种子包含的文件中，选择了几个下载？
+        for k, v in t.files().items():
+            if v['selected'] and v['size'] < 110000000 and v['completed'] < v['size']: # 除掉小文件
+                tc.change_torrent(t.id, files_unwanted = [k])
+            if v['selected'] and v['name'].upper().find('直播') >= 0:  # 除掉直播
+                tc.change_torrent(t.id, files_unwanted = [k])
+            if v['selected'] and v['name'].upper().find('.ZIP') >= 0: # 除掉zip
+                tc.change_torrent(t.id, files_unwanted = [k])
+            if v['selected'] and v['name'].upper().find('.RAR') >= 0: # 除掉rar
+                tc.change_torrent(t.id, files_unwanted = [k])
+            if t.name.find('hjd2048.com_') >= 0:                      # 当前的种子是个hdj2048.com
+                select_count += 1 if v['selected'] else 0
+                if v['size'] > maxsize:
+                    maxsize = v['size']
+                    maxsizesn = k
+        if select_count > 1:
+            rmids = list(t.files().keys())
+            rmids.remove(maxsizesn)
+            tc.change_torrent(t.id, files_unwanted = rmids)
+
         if t.percentDone == 1.0 or t.totalSize < 5000000:
             t.stop()
             tracker = "" if len(t.trackers) == 0 else t.trackers[0]['announce']
@@ -53,7 +75,7 @@ def ut_config():
     torrents = json.loads(torrents).get('torrents')
 
     for it in torrents:
-        if it[4] == 1000:
+        if it[-8] != 'Seeding':
             app.stop(it[0])
         # print(it[29])
         # break
@@ -73,7 +95,7 @@ def ut_config():
 
 if __name__ == '__main__':
     tm_config()
-    ut_config()
+    # ut_config()
     pass
 
 print('\n')
