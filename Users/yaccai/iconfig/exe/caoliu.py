@@ -2,16 +2,14 @@
 # -*- coding: utf-8 -*- 
 
 import requests
+import time
 import re
 import os
-import threading
+import pymysql
+
 
 class Caoliu:
     def __init__(self):
-        '''
-        初始化定义一个请求头，后面省的重复定义。同时创建存种子的文件夹
-        '''
-
         self.header_data = {
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
             'Accept-Encoding': '',
@@ -45,13 +43,35 @@ class Caoliu:
         }
         self.titleInterest[26] = self.titleInterest[15] # 中字原创区
         self.titleInterest[27] = self.titleInterest[15] # 转帖交流区
-        # print(self.titleInterest)
-        
+        self.home = os.environ['HOME']
+        self.stmp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        self.db = None
+        try:
+            self.db = pymysql.connect("localhost","yaccai","go","daily" )
+        except Exception as e:
+            print(e)
+
+
+    def __del__(self):
+        if self.db is not None:
+            self.db.close()        
+
+
+    def check_it_Exists(self, table, it):
+        try:
+            cur = self.db.cursor()
+            cur.execute("select count(*) from %s where string = '%s'" % (table, it))
+            if cur.fetchone()[0] > 0:  # count聚合 不会返回None，至少是0
+                # print('skip           ', it)
+                return True
+            cur.execute("insert into %s values(DEFAULT, '%s', '%s')" % (table, self.stmp, it))
+            self.db.commit()
+        except Exception as e:
+            print(e)
+        return False # 默认不存在
+
 
     def download_page(self, url):
-        '''
-        针对草榴的第三级页面的方法，负责下载链接
-        '''
         header_data2 = {
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
             'Accept-Encoding': 'gzip, deflate',
@@ -65,9 +85,11 @@ class Caoliu:
         }
         try:
             download_text = requests.get(url, headers=header_data2, proxies=self.proxies).text
-            p_ref = re.compile("name=\"ref\" value=\"(.+?)\"")#点击下载时会有表单提交，几个参数都是页面内hidden属性的值，把他们先提取出来
+            p_ref = re.compile("name=\"ref\" value=\"(.+?)\"")
             p_reff = re.compile("NAME=\"reff\" value=\"(.+?)\"")
             ref = p_ref.findall(download_text)[0]
+            if self.check_it_Exists('refs', ref):
+                return
             reff = p_reff.findall(download_text)[0]
             torrent_file=os.path.join(self.torrent_dir, ref + ".torrent")
             r = requests.get("http://www.rmdown.com/download.php?ref="+ref+"&reff="+reff+"&submit=download", proxies=self.proxies)
@@ -78,10 +100,8 @@ class Caoliu:
             print("download page " + url + " failed")
             print(e)
 
+
     def index_page(self, fid=2, offset=1):
-        '''
-        针对草榴的第一级页面(浏览帖子题目的页面)
-        '''
         p = re.compile("<h3><a href=\"(htm_data[^<]+?)</a>")
         t = re.compile("padding-left:8px(.*?)</h3>")
         try:
@@ -90,28 +110,20 @@ class Caoliu:
             r.encoding='gbk'
             html = r.text.replace('\r', '').replace('\n', '')
             for it in t.findall(html): # 用i做缓存的标记
-                isInterest = False # 兴趣白名单
                 for key in self.titleInterest[fid]:
-                    if it.upper().find(key) >= 0:
-                        isInterest = True
-                        break
-                if isInterest:
-                    res = p.findall(it)
-                    url = None if len(res) == 0 else res[0].split('\"')[0]
-                    if url is None:
-                        continue
-                    html_name=os.path.join(self.html_dir, url.split('/')[-1])
-                    if not os.path.exists(html_name):
+                    if it.upper().find(key) >= 0: 
+                        res = p.findall(it)
+                        url = None if len(res) == 0 else res[0].split('\"')[0]
+                        if url is None or self.check_it_Exists('html', url):
+                            continue
                         self.detail_page(url)
-                        with open(html_name, 'w'):pass
+                        break
         except Exception as e:
             print("index page " + str(offset) + " get failed")
             print(e)
 
+
     def detail_page(self, url):
-        '''
-        针对具体一个帖子，提取其中的绿色链接(给网盘链接的太不厚道了)
-        '''
         p1 = re.compile("(http://rmdown.com/link.php.+?)<")
         p2 = re.compile("(http://www.rmdown.com/link.php.+?)<")
         base_url = "http://www.t66y.com/"
@@ -128,20 +140,8 @@ class Caoliu:
         except:
             print("detail page " + url + " get failed")
 
-    def start(self, type, page_start=1, page_end=1):
-        '''
-        启动方法，其中type参数负责类型
-        下载类型 | type
-        -------- | -------
-        亚洲无码 | yazhouwuma
-        亚洲有码 | yazhouyouma
-        欧美原创 | oumeiyuanchuang
-        动漫原创 | dongmanyuanchuang
-        国产原创 | guochanyuanchuang
-        中字原创 | zhongziyuanchuang
-        page_start,page_end代表起始页和终止页 max_thread_num代表允许程序使用的最大线程数
-        '''
 
+    def start(self, type, page_start=1, page_end=1):
         if type == "yazhouwuma":
             fid = 2
         elif type == "yazhouyouma":
@@ -162,12 +162,11 @@ class Caoliu:
         for i in range(page_start, page_end + 1):
             self.index_page(fid, i)
 
+
 if __name__ == "__main__":
-    c = Caoliu()
-    c.start(type="guochanyuanchuang",page_start = 1, page_end = 1)
-    # c.start(type="yazhouyouma",      page_start = 1, page_end = 1)
-    # c.start(type="zhongziyuanchuang",page_start = 1, page_end = 1)
-    c.start(type="zhuantiejieliuqu", page_start = 1, page_end = 1)
-
-
-
+    if os.path.exists('/Volumes/Store'):
+        c = Caoliu()
+        c.start(type="guochanyuanchuang",page_start = 1, page_end = 1)
+        # c.start(type="yazhouyouma",      page_start = 1, page_end = 1)
+        # c.start(type="zhongziyuanchuang",page_start = 1, page_end = 1)
+        c.start(type="zhuantiejieliuqu", page_start = 1, page_end = 1)

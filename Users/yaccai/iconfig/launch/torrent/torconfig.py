@@ -12,9 +12,6 @@ import transmissionrpc
 print('torload   @ ' + com.nowstr + ' ...')
 
 def tm_config():
-    if os.system('pgrep Transmission &>/dev/null') != 0:
-        print('transmission is not running')
-        return
     try:
         tc = transmissionrpc.Client('localhost', port=9091, timeout = 3)
         torlist = tc.get_torrents(timeout = 3)
@@ -27,14 +24,15 @@ def tm_config():
         maxsizesn = -1
         select_count = 0 # 记录当前种子包含的文件中，选择了几个下载？
         for k, v in t.files().items():
-            if v['selected'] and v['size'] < 110000000 and v['completed'] < v['size']: # 除掉小文件
-                tc.change_torrent(t.id, files_unwanted = [k])
-            if v['selected'] and v['name'].upper().find('直播') >= 0:  # 除掉直播
-                tc.change_torrent(t.id, files_unwanted = [k])
-            if v['selected'] and v['name'].upper().find('.ZIP') >= 0: # 除掉zip
-                tc.change_torrent(t.id, files_unwanted = [k])
-            if v['selected'] and v['name'].upper().find('.RAR') >= 0: # 除掉rar
-                tc.change_torrent(t.id, files_unwanted = [k])
+            if v['selected']:
+                if v['size'] < 110000000 and v['completed'] < v['size']: # 除掉小文件
+                    tc.change_torrent(t.id, files_unwanted = [k])
+                if v['name'].upper().find('直播') >= 0:  # 除掉直播
+                    tc.change_torrent(t.id, files_unwanted = [k])
+                if v['name'].upper().find('.ZIP') >= 0: # 除掉zip
+                    tc.change_torrent(t.id, files_unwanted = [k])
+                if v['name'].upper().find('.RAR') >= 0: # 除掉rar
+                    tc.change_torrent(t.id, files_unwanted = [k])
             if t.name.find('hjd2048.com_') >= 0:                      # 当前的种子是个hdj2048.com
                 select_count += 1 if v['selected'] else 0
                 if v['size'] > maxsize:
@@ -63,12 +61,10 @@ def tm_config():
 
 
 def ut_config():
-    if os.system('pgrep uTorrent &>/dev/null') != 0:
-        return
     try:
         app = utorrentapi.UTorrentAPI('http://127.0.0.1:61130/gui', 'admin', 'admin')
     except Exception as e:
-        print('ut api error')
+        print(e)
         return
 
     torrents = app.get_list_my().decode('utf-8')
