@@ -53,7 +53,7 @@ Microsoft Word.app
 Mission Control.app
 Movist.app
 MySQLWorkbench.app
-Navicat for MySQL.app
+Navicat Premium.app
 News.app
 Notes.app
 OneDrive.app
