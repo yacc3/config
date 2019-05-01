@@ -107,7 +107,7 @@ class nvshen:
             print('\033[32m√\033[0m       ==>  %7s  %4d x %4d  %5.1f KB  %5.2f s' % (img_name, img.width, img.height, len(res.content)/1024, res.elapsed.microseconds/1000000))        
 
 
-    def processModel(self, url):       # https://www.nvshens.com/girl/22162/album/
+    def processModel(self, url, update = False):       # https://www.nvshens.com/girl/22162/album/
         res = requests.get(url, headers=self.header_html)
         res.encoding='UTF-8'
 
@@ -132,6 +132,8 @@ class nvshen:
             i += 1
             print('Album   %d/%d' % (i, album_count))
             self.getAlbum(self.server + album, model)
+            if update and i >= 3: # 更新模式只下载前面就可以了
+                break
 
 
 if __name__ == "__main__":
@@ -140,6 +142,6 @@ if __name__ == "__main__":
         nv = nvshen()
         if sys.argv[1] == 'update':
             for url in nv.models:
-                nv.processModel(url)
+                nv.processModel(url, update = True)
         else:
             nv.processModel(sys.argv[1])

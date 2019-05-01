@@ -29,6 +29,8 @@ def tm_config():
                     tc.change_torrent(t.id, files_unwanted = [k])
                 if v['name'].upper().find('直播') >= 0:  # 除掉直播
                     tc.change_torrent(t.id, files_unwanted = [k])
+                if v['name'].upper().find('主播') >= 0:  # 除掉直播
+                    tc.change_torrent(t.id, files_unwanted = [k])
                 if v['name'].upper().find('.ZIP') >= 0: # 除掉zip
                     tc.change_torrent(t.id, files_unwanted = [k])
                 if v['name'].upper().find('.RAR') >= 0: # 除掉rar
