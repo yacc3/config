@@ -24,9 +24,11 @@ class Caoliu:
             'http': 'http://127.0.0.1:1087',
             'https': 'http://127.0.0.1:1087',
         }
-        # self.torrent_dir = os.environ['HOME']
+
+        self.home = os.environ['HOME']
         self.html_dir = '/Volumes/Store/Torrent/10V/t66y_html'
         self.torrent_dir = os.path.join(os.environ['HOME'], 'Library/Application Support/Transmission/watch') # uTorrent
+
         self.titleInterest = {
             15: [ # fid = 15 亚洲有码区的 兴趣关键词
                 '國產',
@@ -43,13 +45,22 @@ class Caoliu:
         }
         self.titleInterest[26] = self.titleInterest[15] # 中字原创区
         self.titleInterest[27] = self.titleInterest[15] # 转帖交流区
-        self.home = os.environ['HOME']
+        
         self.stmp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         self.db = None
         try:
             self.db = pymysql.connect("localhost","yaccai","go","daily" )
         except Exception as e:
             print(e)
+
+        # try: # 测试能否连通
+        #     r = requests.get(url='http://t66y.com', headers=self.header_data, proxies=self.proxies, timeout=2)
+        # except Exception as e:
+        #     print(e)
+        #     exit()
+        # if not r.ok:
+        #     exit()        
+        
 
 
     def __del__(self):
