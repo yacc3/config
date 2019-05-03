@@ -45,21 +45,9 @@ def tm_config():
             rmids.remove(maxsizesn)
             tc.change_torrent(t.id, files_unwanted = rmids)
 
-        if t.percentDone == 1.0 or t.totalSize < 5000000:
-            t.stop()
-            tracker = "" if len(t.trackers) == 0 else t.trackers[0]['announce']
-            if tracker.find("totheglory.im") == -1 and tracker.find("sjtu") == -1: # 不是pt种子
-                tc.move_torrent_data(t.id, '/Volumes/Store/Downloads/t66ydone')
-                tc.remove_torrent(t.id)
-    # for t in torlist:
-    #     if t.trackers[0]['announce'].find("im") >= 0:
-    #         t.download_limit = 2500
-    #     else:
-    #         t.priority = 'low'
-    #         t.upload_limit = 15
-    #         if t.status == 'seeding':
-    #             t.stop(timeout= 1)
-    #             pass
+        if t.percentDone == 1.0 or t.sizeWhenDone < 5000000:
+            tc.move_torrent_data(t.id, '/Volumes/Store/Downloads/t66ydone')
+            tc.remove_torrent(t.id)
 
 
 def ut_config():
