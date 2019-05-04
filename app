@@ -29,7 +29,6 @@ Downie 3.app
 FaceTime.app
 Font Book.app
 GitHub Desktop.app
-Google Chrome.app
 Hammerspoon.app
 Home.app
 IINA.app

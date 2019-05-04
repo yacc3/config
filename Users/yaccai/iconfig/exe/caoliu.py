@@ -99,9 +99,9 @@ class Caoliu:
             p_ref = re.compile("name=\"ref\" value=\"(.+?)\"")
             p_reff = re.compile("NAME=\"reff\" value=\"(.+?)\"")
             ref = p_ref.findall(download_text)[0]
-            if self.check_it_Exists('refs', ref):
-                print('skip         : ', ref)
-                return
+            # if self.check_it_Exists('refs', ref):
+            #     print('skip         : ', ref)
+            #     return
             reff = p_reff.findall(download_text)[0]
             torrent_file=os.path.join(self.torrent_dir, ref + ".torrent")
             r = requests.get("http://www.rmdown.com/download.php?ref="+ref+"&reff="+reff+"&submit=download", proxies=self.proxies)

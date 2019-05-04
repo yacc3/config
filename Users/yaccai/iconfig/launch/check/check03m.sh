@@ -3,13 +3,14 @@
 
 /bin/date +'check @ %Y-%m-%d %T ...'
 
+t66yd=/Volumes/Store/Downloads/t66ydone
 test -d /Volumes/Store && {
-    /usr/local/bin/gfind /Volumes/Store/Downloads/t66ydone -type f -iname '*.zip' -delete
-    /usr/local/bin/gfind /Volumes/Store/Downloads/t66ydone -type f -iname '*.rar' -delete
-    /usr/local/bin/gfind /Volumes/Store/Downloads/t66ydone -type f -size +100M -print0 | /usr/local/bin/gxargs -0 -I {} mv {} /Volumes/Store/Torrent/10V
-    /usr/local/bin/gfind /Volumes/Store/Downloads/t66ydone -type f -delete
+    gfind "${t66yd}" -type f -iname '*.zip' -delete
+    gfind "${t66yd}" -type f -iname '*.rar' -delete
+    gfind "${t66yd}" -type f -size +80M -exec mv '{}' /Volumes/Store/Torrent/10V \;
+    gfind "${t66yd}" -mindepth 1 -depth -delete
 }
-/usr/local/bin/fping -t 50 www.douyin.com &>/dev/null && ./douyin.py
+./douyin.py
 
 
 echo "done"

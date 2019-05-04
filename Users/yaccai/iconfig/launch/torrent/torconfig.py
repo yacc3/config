@@ -25,7 +25,7 @@ def tm_config():
         select_count = 0 # 记录当前种子包含的文件中，选择了几个下载？
         for k, v in t.files().items():
             if v['selected']:
-                if v['size'] < 110000000 and v['completed'] < v['size']: # 除掉小文件
+                if v['size'] < 80000000 and v['completed'] < v['size']: # 除掉小文件
                     tc.change_torrent(t.id, files_unwanted = [k])
                 if v['name'].upper().find('直播') >= 0:  # 除掉直播
                     tc.change_torrent(t.id, files_unwanted = [k])

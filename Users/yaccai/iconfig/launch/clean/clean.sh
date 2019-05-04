@@ -31,11 +31,11 @@ GC=/Applications/Google\ Chrome.app/Contents/Versions
     rm -rf "$GC/$(ls "$GC" | head -n1)"
 }
 
-GU=~/Library/Google/GoogleSoftwareUpdate/GoogleSoftwareUpdate.bundle/Contents/Resources/ksinstall
-test -e "$GU" && {
-    echo "clean GoogleUpdate"
-    "$GU" --nuke
-}
+# GU=~/Library/Google/GoogleSoftwareUpdate/GoogleSoftwareUpdate.bundle/Contents/Resources/ksinstall
+# test -e "$GU" && {
+#     echo "clean GoogleUpdate"
+#     "$GU" --nuke
+# }
 
 IC=~/Library/Application\ Support/com.colliderli.iina/thumb_cache
 test -d "$IC" && {
@@ -60,7 +60,7 @@ test -d "$IC" && {
 # find ~/Library/Application\ Support/Transmission/watch -name "*.torrent" -delete
 
 osascript -e "set volume output volume +8"
-/usr/local/bin/gfind /Volumes/Store/Torrent/10V/t66y_html -type f -regextype 'egrep' -regex '.*/[0-9]{7}\.html' -ctime +3 -exec rm {} +
+# /usr/local/bin/gfind /Volumes/Store/Torrent/10V/t66y_html -type f -regextype 'egrep' -regex '.*/[0-9]{7}\.html' -ctime +3 -exec rm {} +
 
 echo "done"
 echo
