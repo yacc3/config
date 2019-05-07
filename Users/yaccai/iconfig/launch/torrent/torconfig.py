@@ -20,20 +20,29 @@ def tm_config():
         return
 
     for t in torlist:
+        if t.percentDone == 1.0 or t.sizeWhenDone < 5000000:
+            tc.move_torrent_data(t.id, '/Volumes/Store/Downloads/t66ydone')
+            tc.remove_torrent(t.id)
+        if com.nowsec - t.addedDate > 172800 and t.percentDone < 0.3:
+            tc.remove_torrent(t.id, delete_data=True)
+
         maxsize = 0
         maxsizesn = -1
         select_count = 0 # 记录当前种子包含的文件中，选择了几个下载？
         for k, v in t.files().items():
             if v['selected']:
+                NAME = v['name'].upper()
                 if v['size'] < 80000000 and v['completed'] < v['size']: # 除掉小文件
                     tc.change_torrent(t.id, files_unwanted = [k])
-                if v['name'].upper().find('直播') >= 0:  # 除掉直播
+                if NAME.find('直播') >= 0:  # 除掉直播
                     tc.change_torrent(t.id, files_unwanted = [k])
-                if v['name'].upper().find('主播') >= 0:  # 除掉直播
+                if NAME.find('主播') >= 0:  # 除掉直播
                     tc.change_torrent(t.id, files_unwanted = [k])
-                if v['name'].upper().find('.ZIP') >= 0: # 除掉zip
+                if NAME.find('迷奸') >= 0: # 除掉rar
                     tc.change_torrent(t.id, files_unwanted = [k])
-                if v['name'].upper().find('.RAR') >= 0: # 除掉rar
+                if NAME.find('.ZIP') >= 0: # 除掉zip
+                    tc.change_torrent(t.id, files_unwanted = [k])
+                if NAME.find('.RAR') >= 0: # 除掉rar
                     tc.change_torrent(t.id, files_unwanted = [k])
             if t.name.find('hjd2048.com_') >= 0:                      # 当前的种子是个hdj2048.com
                 select_count += 1 if v['selected'] else 0
@@ -44,10 +53,6 @@ def tm_config():
             rmids = list(t.files().keys())
             rmids.remove(maxsizesn)
             tc.change_torrent(t.id, files_unwanted = rmids)
-
-        if t.percentDone == 1.0 or t.sizeWhenDone < 5000000:
-            tc.move_torrent_data(t.id, '/Volumes/Store/Downloads/t66ydone')
-            tc.remove_torrent(t.id)
 
 
 def ut_config():

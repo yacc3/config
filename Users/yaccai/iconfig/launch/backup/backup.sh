@@ -54,7 +54,7 @@ rsync -a ~/Library/Fonts "$bakd"
                 -f '- /System Volume Information' \
                 -f '- /Torrent' \
                 -f '- /Downloads' \
-                /Volumes/Store/  /Volumes/Googol/Doc
+                /Volumes/Store/  /Volumes/Googol/Store
 }
 
 [[ `date +%H` -lt 6 ]] && {

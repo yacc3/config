@@ -53,15 +53,6 @@ class Caoliu:
         except Exception as e:
             print(e)
 
-        # try: # 测试能否连通
-        #     r = requests.get(url='http://t66y.com', headers=self.header_data, proxies=self.proxies, timeout=2)
-        # except Exception as e:
-        #     print(e)
-        #     exit()
-        # if not r.ok:
-        #     exit()        
-        
-
 
     def __del__(self):
         if self.db is not None:
@@ -72,8 +63,7 @@ class Caoliu:
         try:
             cur = self.db.cursor()
             cur.execute("select count(*) from %s where string = '%s'" % (table, it))
-            if cur.fetchone()[0] > 0:  # count聚合 不会返回None，至少是0
-                # print('skip           ', it)
+            if cur.fetchone()[0] > 0:  # count聚合 不会返回None
                 return True
             cur.execute("insert into %s values(DEFAULT, '%s', '%s')" % (table, self.stmp, it))
             self.db.commit()
@@ -99,9 +89,6 @@ class Caoliu:
             p_ref = re.compile("name=\"ref\" value=\"(.+?)\"")
             p_reff = re.compile("NAME=\"reff\" value=\"(.+?)\"")
             ref = p_ref.findall(download_text)[0]
-            # if self.check_it_Exists('refs', ref):
-            #     print('skip         : ', ref)
-            #     return
             reff = p_reff.findall(download_text)[0]
             torrent_file=os.path.join(self.torrent_dir, ref + ".torrent")
             r = requests.get("http://www.rmdown.com/download.php?ref="+ref+"&reff="+reff+"&submit=download", proxies=self.proxies)
