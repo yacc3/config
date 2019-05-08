@@ -6,7 +6,13 @@
 	<false/>
 	<key>XtraFinder_XFArchiveActionPlugin</key>
 	<false/>
+	<key>XtraFinder_XFAttributesMenuPlugin</key>
+	<false/>
+	<key>XtraFinder_XFContentsMenuPlugin</key>
+	<true/>
 	<key>XtraFinder_XFFitColumnWidthPlugin_Name</key>
+	<true/>
+	<key>XtraFinder_XFFoldersOnTopPlugin</key>
 	<true/>
 	<key>XtraFinder_XFGoUpToolbarButtonPlugin</key>
 	<true/>
@@ -14,10 +20,16 @@
 	<true/>
 	<key>XtraFinder_XFNewTerminalActionPlugin_TerminalApp</key>
 	<integer>1</integer>
+	<key>XtraFinder_XFOpenInNewWindowPlugin</key>
+	<true/>
+	<key>XtraFinder_XFPathBarBreadcrumbMenuPlugin</key>
+	<true/>
 	<key>XtraFinder_XFRefreshActionPlugin</key>
 	<true/>
 	<key>XtraFinder_XFRenameActionPlugin</key>
 	<false/>
+	<key>XtraFinder_XFTabPlugin_HotBrowser_Slide</key>
+	<true/>
 	<key>XtraFinder_XFTabPlugin_NewTabShortcut</key>
 	<dict>
 		<key>charactersIgnoringModifiers</key>
@@ -27,8 +39,6 @@
 		<key>modifierFlags</key>
 		<integer>1048576</integer>
 	</dict>
-	<key>XtraFinder_XFTabPlugin_PinnableWindow_Slide</key>
-	<true/>
 	<key>XtraFinder_XFTabPlugin_ReopenClosedTabShortcut</key>
 	<dict>
 		<key>charactersIgnoringModifiers</key>

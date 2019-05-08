@@ -26,33 +26,25 @@ def tm_config():
         if com.nowsec - t.addedDate > 172800 and t.percentDone < 0.3:
             tc.remove_torrent(t.id, delete_data=True)
 
-        maxsize = 0
-        maxsizesn = -1
-        select_count = 0 # 记录当前种子包含的文件中，选择了几个下载？
         for k, v in t.files().items():
             if v['selected']:
                 NAME = v['name'].upper()
-                if v['size'] < 80000000 and v['completed'] < v['size']: # 除掉小文件
+                if v['size'] < 80000000 or NAME.find('迷奸') >= 0 or NAME.find('.ZIP') >= 0 or NAME.find('.RAR') >= 0:
                     tc.change_torrent(t.id, files_unwanted = [k])
-                if NAME.find('直播') >= 0:  # 除掉直播
-                    tc.change_torrent(t.id, files_unwanted = [k])
-                if NAME.find('主播') >= 0:  # 除掉直播
-                    tc.change_torrent(t.id, files_unwanted = [k])
-                if NAME.find('迷奸') >= 0: # 除掉rar
-                    tc.change_torrent(t.id, files_unwanted = [k])
-                if NAME.find('.ZIP') >= 0: # 除掉zip
-                    tc.change_torrent(t.id, files_unwanted = [k])
-                if NAME.find('.RAR') >= 0: # 除掉rar
-                    tc.change_torrent(t.id, files_unwanted = [k])
-            if t.name.find('hjd2048.com_') >= 0:                      # 当前的种子是个hdj2048.com
+
+        maxsize = 0
+        maxsizesn = -1
+        select_count = 0                     # 记录当前种子包含的文件中，选择了几个下载？
+        if t.name.find('hjd2048.com_') >= 0: # 当前的种子是个hdj2048.com
+            for k, v in t.files().items():
                 select_count += 1 if v['selected'] else 0
                 if v['size'] > maxsize:
                     maxsize = v['size']
                     maxsizesn = k
-        if select_count > 1:
-            rmids = list(t.files().keys())
-            rmids.remove(maxsizesn)
-            tc.change_torrent(t.id, files_unwanted = rmids)
+            if select_count > 1:
+                rmids = list(t.files().keys())
+                rmids.remove(maxsizesn)
+                tc.change_torrent(t.id, files_unwanted = rmids)
 
 
 def ut_config():
