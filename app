@@ -7,7 +7,7 @@ AirServer.app
 Alfred 3.app
 App Store.app
 AppCleaner.app
-Appium.app
+Aria2GUI.app
 Automator.app
 BackupLoupe.app
 BaiduNetdisk_mac.app
@@ -29,6 +29,7 @@ Downie 3.app
 FaceTime.app
 Font Book.app
 GitHub Desktop.app
+Google Chrome.app
 Hammerspoon.app
 Home.app
 IINA.app
@@ -81,6 +82,7 @@ Tank 90.app
 TeX
 TextEdit.app
 The Unarchiver.app
+Thunder.app
 Tickeys.app
 Time Machine.app
 Transmission.app

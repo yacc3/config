@@ -56,3 +56,4 @@ alias dy='code ~/iconfig/launch/check'
 
 alias day='open /Volumes/Store/Daily/`date +"%Y/%Y-%m-%d"`'
 alias top='top -n 15 -o cpu -s 2 -stats pid,command,cpu,mem,pstate,time'
+alias gz='hdiutil attach /Volumes/Store/llvm日志文件-需要clang调试'

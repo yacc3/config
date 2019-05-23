@@ -2,14 +2,12 @@
     "trigger",
     "/Users/yaccai/Library/Containers/com.tencent.xinWeChat",
     {
-        "name": "wechat",
+        "name": "wechat2",
         "expression": ["allof",
-            ["pcre", "\\.(jpg|png|gif|mp4|mp3|aac|m4a|mov|silk)$"],
-            ["size", "gt", 2000],
             ["type", "f"],
             ["exists"]
         ],
         "append_files":true,
-        "command": ["/Users/yaccai/iconfig/watchman/command.wechat.sh"]
+        "command": ["/Users/yaccai/iconfig/watchman/command.wechat2.sh"]
     }
 ]
