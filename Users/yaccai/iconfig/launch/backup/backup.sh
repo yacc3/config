@@ -45,7 +45,7 @@ test -d ~/Code && {
 echo "备份 Fonts"
 rsync -a ~/Library/Fonts "$bakd"
 
-[[ -d /Volumes/Googol/Doc ]] && {
+[[ -d /Volumes/Googol/Store ]] && {
     echo "备份 磁盘"
     rsync -a    -f '- /.*' \
                 -f '- ._*' \
