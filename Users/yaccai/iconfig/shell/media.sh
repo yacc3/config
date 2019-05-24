@@ -3,7 +3,7 @@
 
 if [[ $# -eq 0 ]]; then
     echo "subcommand:"
-    cat "$0" | awk  '/"[a-zA-Z\_\-\+0-9]+" \)/{print $0}' | sed 's/"//g; s/)//g'
+    cat "$0" | awk  '/"[a-zA-Z_\-\+0-9]+" \)/{print $0}' | sed 's/"//g; s/)//g'
     exit
 fi
 
@@ -45,15 +45,8 @@ case "$1" in
         pid=`pgrep ffmpeg`
         [[ -z "$pid" ]] || kill -9 "$pid"
         ;;
-    "fp" )                    # find picture 6S:4032x3024
-        find . -name '*.jpg' | while read it; do
-            size=`identify $it | awk '{print $3}'` 
-            [[ "4032x3024" == "$size" ]] || continue
-            echo "$it"
-            if [[ "$2" == "move" && -d "$3" ]]; then
-                mv "$it" "$3"
-            fi
-        done
+    "wav" )                 # $2:<name>[.wav]    切割ape无损音乐为单曲wav
+        bchunk -wv "$2".wav "$2".cue prefix__
         ;;
     * )
         echo "not such pattern"
