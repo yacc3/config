@@ -13,9 +13,9 @@ brew cask list                    > "$bakd/Config/brewc"
 pip3 list | sed "1,2d;s/ .*//"    > "$bakd/Config/pip3"
 
 echo "备份 配置文件"
-cat ~/iconfig/launch/backup/config.include | while read it; do
+while read it; do
     [[ -e "$it" ]] && rsync -aR  "$it" "$bakd/Config"
-done 
+done < ~/iconfig/launch/backup/config.include
 
 fping -t 200 114.114.114.114 &>/dev/null && {
     echo "git  push"

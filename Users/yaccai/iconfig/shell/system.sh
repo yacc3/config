@@ -109,6 +109,7 @@ EOF
         ;;
     "gnufind" )
         /usr/local/bin/gfind  "$2"  -regextype "egrep" "${@:3}"
+        # gfind . -regextype "egrep" -regex ".*__[0-9]{14}\.bak"
         ;;
     *)
         echo "no such pattern"
