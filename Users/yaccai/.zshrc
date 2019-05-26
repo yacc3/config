@@ -33,6 +33,7 @@ alias bb='~/iconfig/shell/edit.sh buildBlog'
 alias bp='~/iconfig/shell/edit.sh pushBlog'
 alias bs='~/iconfig/shell/edit.sh findBlog'
 alias be='code /Volumes/Store/Code/yacc3.github.src'
+alias st='et 2cht'    
 
 
 alias lh='~/iconfig/shell/launchctl.sh'
@@ -57,3 +58,4 @@ alias dy='code ~/iconfig/launch/check'
 alias day='open /Volumes/Store/Daily/`date +"%Y/%Y-%m-%d"`'
 alias top='top -n 15 -o cpu -s 2 -stats pid,command,cpu,mem,pstate,time'
 alias gz='hdiutil attach /Volumes/Store/llvm日志文件-需要clang调试'
+alias yd='youtube-dl --proxy "socks5://127.0.0.1:1086"'

@@ -152,8 +152,13 @@ EOF
         esac
         code "$2"; 
         ;;
-    "simpleChinese" )
-        opencc -c t2s.json -i "$2" -o "$2"
+    "2cht" )                    # 转化为简体
+        opencc -c s2t.json <<< "$2"
+        ;;
+    "2chs" )                    # 转化为简体
+        for it in "${@:2}"; do
+            opencc -c t2s.json -i "$2" -o "${it/cht\./chs.}" && echo "done  $it"
+        done
         ;;
     "utf8" )
         toUTF-8 "${@:2}"
