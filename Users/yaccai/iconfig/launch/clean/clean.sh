@@ -61,6 +61,7 @@ test -d "$IC" && {
 
 osascript -e "set volume output volume +3"
 # /usr/local/bin/gfind /Volumes/Store/Torrent/10V/t66y_html -type f -regextype 'egrep' -regex '.*/[0-9]{7}\.html' -ctime +3 -exec rm {} +
+~/iconfig/exe/nvshen.py update 1>/dev/null
 
 echo "done"
 echo
