@@ -31,11 +31,11 @@ GC=/Applications/Google\ Chrome.app/Contents/Versions
     rm -rf "$GC/$(ls "$GC" | head -n1)"
 }
 
-# GU=~/Library/Google/GoogleSoftwareUpdate/GoogleSoftwareUpdate.bundle/Contents/Resources/ksinstall
-# test -e "$GU" && {
-#     echo "clean GoogleUpdate"
-#     "$GU" --nuke
-# }
+GU=~/Library/Google/GoogleSoftwareUpdate/GoogleSoftwareUpdate.bundle/Contents/Resources/ksinstall
+test -e "$GU" && {
+    echo "clean GoogleUpdate"
+    "$GU" --nuke
+}
 
 IC=~/Library/Application\ Support/com.colliderli.iina/thumb_cache
 test -d "$IC" && {
@@ -43,24 +43,22 @@ test -d "$IC" && {
     rm -rf "$IC"
 }
 
-# for app in Vuze uTorrent qBittorrent Transmission; do 
-#     test -d /Applications/"$app".app || continue
-#     wp=~/Library/Application\ Support/"$app"/watch
-#     mkdir -p "$wp"
-#     find "$wp" -name "*.torrent" -or -name "*.imported" -Btime +3m -print -delete
-# done
+echo "clean torrent"
+find ~/Library/Application\ Support/uTorrent -name "*.torrent" -delete
+find ~/Library/Application\ Support/Transmission/watch -name "*.torrent" -delete
 
-# echo "clean disabled torrents at uTorrent"
-# stmp=`ps -eo lstart,command | grep "[u]Torrent" | awk -F '/' '{print $1}'`
-# secd=`date -j -f "%a %b %d %T %Y" "$stmp" "+%s" 2>/dev/null` # ut启动时间
-# find ~/Library/Application\ Support/uTorrent -name "*.torrent" | while read tor; do
-#     act=`/usr/bin/stat -t '%s' -f "%Sa" "${tor}"`
-#     [[ $secd -gt $act ]] && rm "${tor}"
-# done
-# find ~/Library/Application\ Support/Transmission/watch -name "*.torrent" -delete
+gfind /Volumes/Store/com.tencent.xinWeChat -regextype 'egrep' -regex '.*__[0-9]{14}\.bak' | while read it; do
+    newfile="${it/__*.bak/}"
+    nbsz=`gstat -c '%s' "$newfile"`
+    obsz=`gstat -c '%s' "$it"`
+
+    if [[ "$nbsz" -gt "$obsz" ]]; then
+        echo "remove ${it##*/}"
+        rm "$it"
+    fi
+done
 
 osascript -e "set volume output volume +3"
-# /usr/local/bin/gfind /Volumes/Store/Torrent/10V/t66y_html -type f -regextype 'egrep' -regex '.*/[0-9]{7}\.html' -ctime +3 -exec rm {} +
 ~/iconfig/exe/nvshen.py update 1>/dev/null
 
 echo "done"
