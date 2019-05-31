@@ -132,7 +132,7 @@ class nvshen:
             i += 1
             print('Album   %d/%d' % (i, album_count))
             self.getAlbum(self.server + album, model)
-            if update and i >= 3: # 更新模式只下载前面就可以了
+            if update and i >= 1: # 更新模式只下载前面就可以了
                 break
 
 
