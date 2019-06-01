@@ -4,6 +4,8 @@ asn1crypto
 astroid
 async-timeout
 attrs
+babelfish
+backports.shutil-get-terminal-size
 beautifulsoup4
 bs4
 certifi
@@ -11,8 +13,10 @@ cffi
 chardet
 cryptography
 cssselect
+getsub
 gevent
 greenlet
+guessit
 idna
 isort
 itchat
@@ -30,7 +34,9 @@ PyMySQL
 pypng
 PyQRCode
 PySocks
+python-dateutil
 rarfile
+rebulk
 requests
 setuptools
 six
