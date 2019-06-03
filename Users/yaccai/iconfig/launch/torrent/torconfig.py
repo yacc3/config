@@ -1,5 +1,6 @@
 #!/usr/local/bin/python3
 # -*- coding: utf-8 -*- 
+exit()
 
 import os
 import sys
@@ -23,28 +24,20 @@ def tm_config():
         if t.percentDone == 1.0 or t.sizeWhenDone < 5000000:
             tc.move_torrent_data(t.id, '/Volumes/Store/Downloads/t66ydone')
             tc.remove_torrent(t.id)
-        if com.nowsec - t.addedDate > 172800 and t.percentDone < 0.3:
-            tc.remove_torrent(t.id, delete_data=True)
+        # if com.nowsec - t.addedDate > 172800 and t.percentDone < 0.3:
+        #     tc.remove_torrent(t.id, delete_data=True)
 
-        for k, v in t.files().items():
+        tf = sorted(t.files().items(), key=lambda d: d[1]['size'])
+        for k, v in tf:
             if v['selected']:
                 NAME = v['name'].upper()
-                if v['size'] < 80000000 or NAME.find('迷奸') >= 0 or NAME.find('.ZIP') >= 0 or NAME.find('.RAR') >= 0:
+                if v['size'] < 80000000 or NAME.find('迷奸') >= 0 or NAME.find('直播') >= 0 or NAME.find('主播') >= 0 or NAME.find('.ZIP') >= 0 or NAME.find('.RAR') >= 0:
                     tc.change_torrent(t.id, files_unwanted = [k])
 
-        maxsize = 0
-        maxsizesn = -1
-        select_count = 0                     # 记录当前种子包含的文件中，选择了几个下载？
-        if t.name.find('hjd2048.com_') >= 0: # 当前的种子是个hdj2048.com
-            for k, v in t.files().items():
-                select_count += 1 if v['selected'] else 0
-                if v['size'] > maxsize:
-                    maxsize = v['size']
-                    maxsizesn = k
-            if select_count > 1:
-                rmids = list(t.files().keys())
-                rmids.remove(maxsizesn)
-                tc.change_torrent(t.id, files_unwanted = rmids)
+        if tf[-2][1]['selected'] and tf[-1][1]['name'].find('hjd2048.com_') >= 0:
+            rmids = list(t.files().keys())
+            rmids.remove(tf[-1][0])
+            tc.change_torrent(t.id, files_unwanted = rmids)
 
 
 def ut_config():
@@ -77,7 +70,7 @@ def ut_config():
 
 
 if __name__ == '__main__':
-    tm_config()
+    # tm_config()
     # ut_config()
     pass
 

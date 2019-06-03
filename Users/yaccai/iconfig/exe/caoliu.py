@@ -28,6 +28,8 @@ class Caoliu:
         self.home = os.environ['HOME']
         self.html_dir = '/Volumes/Store/Torrent/10V/t66y_html'
         self.torrent_dir = os.path.join(os.environ['HOME'], 'Library/Application Support/Transmission/watch') # uTorrent
+        # self.torrent_dir = os.path.join(os.environ['HOME'], 'Library/Application Support/uTorrent/watch')
+        
 
         self.titleInterest = {
             15: [ # fid = 15 亚洲有码区的 兴趣关键词
