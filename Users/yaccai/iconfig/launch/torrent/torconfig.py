@@ -26,7 +26,7 @@ def tm_config():
             tc.remove_torrent(t.id, delete_data=True)
 
         tf = sorted(t.files().items(), key=lambda d: d[1]['size']) # 按文件大小，升序
-        if tf[-2][1]['selected'] and tf[-1][1]['name'].find('hjd2048.com_') >= 0:
+        if len(tf) > 2 and tf[-2][1]['selected'] and tf[-1][1]['name'].find('hjd2048.com_') >= 0:
             rmids = list(t.files().keys())
             rmids.remove(tf[-1][0])
             tc.change_torrent(t.id, files_unwanted = rmids)
@@ -36,7 +36,6 @@ def tm_config():
                 NAME = v['name'].upper()
                 if v['size'] < 80000000 or NAME.find('迷奸') >= 0 or NAME.find('直播') >= 0 or NAME.find('主播') >= 0 or NAME.find('.ZIP') >= 0 or NAME.find('.RAR') >= 0:
                     tc.change_torrent(t.id, files_unwanted = [k])
-
 
 def ut_config():
     try:
