@@ -48,6 +48,13 @@ case "$1" in
     "wav" )                 # $2:<name>[.wav]    切割ape无损音乐为单曲wav
         bchunk -wv "$2".wav "$2".cue prefix__
         ;;
+    "douyin" )
+        ls -1 ~/Desktop | while read it; do
+            echo "$it"
+            cat  ~/Desktop/"$it"
+            echo
+        done
+        ;;
     * )
         echo "not such pattern"
         ;;

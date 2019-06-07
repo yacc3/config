@@ -34,7 +34,7 @@ def tm_config():
         for k, v in tf:
             if v['selected']:
                 NAME = v['name'].upper()
-                if v['size'] < 80000000 or NAME.find('迷奸') >= 0 or NAME.find('直播') >= 0 or NAME.find('主播') >= 0 or NAME.find('.ZIP') >= 0 or NAME.find('.RAR') >= 0:
+                if v['size'] < 80000000 or NAME.find('迷奸') >= 0 or NAME.find('直播') >= 0 or NAME.find('主播') >= 0 or NAME.find('.ZIP') >= 0 or NAME.find('.RAR') >= 0 or NAME.find('窺') >= 0 or NAME.find('偷') >= 0:
                     tc.change_torrent(t.id, files_unwanted = [k])
 
 def ut_config():

@@ -67,6 +67,7 @@ PopClip.app
 Preview.app
 PyCharm.app
 QQ.app
+QQLive.app
 QQMusic.app
 QuickTime Player.app
 Reminders.app
@@ -112,3 +113,4 @@ uTorrent.app
 unetbootin.app
 wpsoffice.app
 央视影音.app
+爱奇艺.app
