@@ -111,6 +111,26 @@ EOF
         /usr/local/bin/gfind  "$2"  -regextype "egrep" "${@:3}"
         # gfind . -regextype "egrep" -regex ".*__[0-9]{14}\.bak"
         ;;
+    "backup" )
+        if [ ! -e /Volumes/Googol/Store ]; then
+            echo "Disk Googol not mount"
+            exit
+        fi 
+        rsync -avhP -f '- /.*' \
+                    -f '- ._*' \
+                    -f '- .DS_Store' \
+                    -f '- /$RECYCLE.BIN' \
+                    -f '- /System Volume Information' \
+                    -f '- /Torrent' \
+                    -f '- /Downloads' \
+                    /Volumes/Store/  /Volumes/Googol/Store && {
+                        echo "clean dup"
+                        find /Volumes/Store/Homebrew -type f -print -delete
+                        find /Volumes/Store/Windows -type f -print -delete
+                        find /Volumes/Store/MacOS -type f -print -delete
+                        find /Volumes/Store/Model -type f -print -delete
+                    }
+        ;;
     *)
         echo "no such pattern"
         ;;  

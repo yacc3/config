@@ -45,17 +45,8 @@ test -d ~/Code && {
 echo "备份 Fonts"
 rsync -a ~/Library/Fonts "$bakd"
 
-[[ -d /Volumes/Googol/Store ]] && {
-    echo "备份 磁盘"
-    rsync -a    -f '- /.*' \
-                -f '- ._*' \
-                -f '- .DS_Store' \
-                -f '- /$RECYCLE.BIN' \
-                -f '- /System Volume Information' \
-                -f '- /Torrent' \
-                -f '- /Downloads' \
-                /Volumes/Store/  /Volumes/Googol/Store
-}
+echo "备份 MySQL"
+mysqldump  -uyaccai -pgo --databases daily >/Volumes/Store/Code/daily.sql 2>/dev/null
 
 [[ `date +%H` -lt 6 ]] && {
     echo "调用 TimeMachine"

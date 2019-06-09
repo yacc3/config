@@ -39,6 +39,7 @@ class nvshen:
             'http': 'http://127.0.0.1:1087',
             'https': 'http://127.0.0.1:1087',
         }
+        self.force = False
         self.Model = '/Volumes/Store/Model'
         self.server = 'https://www.nvshens.com'
         self.models = set([
@@ -63,13 +64,16 @@ class nvshen:
         title_pattern = re.compile('(?<=htilte\">)[^>]*(?=</h1>)')
         try:
             title = title_pattern.findall(res.text)[0]
-        except Exception as e:
+        except:
             print('no title \n')
             return
-        fpath = os.path.join(self.Model, Model, title)
+        
+        print("fetch  ", Album_url)
+        fpath = os.path.join(self.Model, Model, title) # 目录 名字 专辑名
         if not os.path.exists(fpath):
             os.makedirs(fpath)
-        print("fetch  ", Album_url)
+        elif not self.force:
+            return
 
         img_pattern = re.compile('http[^=]*?/gallery/[0-9]+/[0-9]+[/s]*/0.jpg')
         img_urlpart = img_pattern.findall(res.text)[0].replace('/s', '').replace('/0.jpg', '')
@@ -98,7 +102,7 @@ class nvshen:
         img_url  = os.path.join(img_urlpart, img_name)
         try:
             res = requests.get(img_url, headers = self.header_img, timeout = 5)
-        except Exception as e:
+        except: # Exception as e:
             print('\033[31mx\033[0m       ==>  %s' % img_url)
             # print(e)
         if res.ok:
@@ -144,4 +148,6 @@ if __name__ == "__main__":
             for url in nv.models:
                 nv.processModel(url, update = True)
         else:
+            if argc == 3 and sys.argv[2] == 'force':
+                nv.force = True
             nv.processModel(sys.argv[1])

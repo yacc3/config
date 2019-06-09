@@ -39,7 +39,7 @@ class Caoliu:
                 '高桥圣子', '高橋しょう子', '希志爱野', '希志あいの',
                 '彩美旬果', 'あやみ旬果', '上原亚衣', '上原亜衣',
                 '小岛南', '小島みなみ', '铃春爱里', '鈴村あいり',
-                '水卜樱', '水卜さくら'
+                '水卜樱', '水卜さくら', '吉沢明歩', '小島みなみ'
             ],
             25: [ # fid = 25 国产原创区
                 ''
@@ -168,6 +168,6 @@ if __name__ == "__main__":
     if os.path.exists('/Volumes/Store'):
         c = Caoliu()
         c.start(type="guochanyuanchuang",page_start = 1, page_end = 1)
-        # c.start(type="yazhouyouma",      page_start = 1, page_end = 1)
+        c.start(type="yazhouyouma",      page_start = 1, page_end = 1)
         # c.start(type="zhongziyuanchuang",page_start = 1, page_end = 1)
         c.start(type="zhuantiejieliuqu", page_start = 1, page_end = 1)
