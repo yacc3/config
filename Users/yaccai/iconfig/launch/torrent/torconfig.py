@@ -19,6 +19,7 @@ def tm_config():
         return
 
     for t in torlist:
+        t.upload_limit = 250
         if t.percentDone == 1.0 or t.sizeWhenDone < 5000000:
             tc.move_torrent_data(t.id, '/Volumes/Store/Downloads/t66ydone')
             tc.remove_torrent(t.id)
@@ -34,7 +35,7 @@ def tm_config():
         for k, v in tf:
             if v['selected']:
                 NAME = v['name'].upper()
-                if v['size'] < 80000000 or NAME.find('STP') >= 0 or NAME.find('迷奸') >= 0 or NAME.find('直播') >= 0 or NAME.find('主播') >= 0 or NAME.find('.ZIP') >= 0 or NAME.find('.RAR') >= 0 or NAME.find('窺') >= 0 or NAME.find('偷') >= 0 or NAME.find('自慰') >= 0 or NAME.find('廁') >= 0 or NAME.find('韩') >= 0 or NAME.find('中年') >= 0 or NAME.find('洋') >= 0 or NAME.find('欧') >= 0 or NAME.find('醉') >= 0 or NAME.find('迷') >= 0 or NAME.find('喝多') >= 0 or NAME.find('灌') >= 0 or NAME.find('美国') >= 0:
+                if v['size'] < 80000000 or NAME.find('STP') >= 0 or NAME.find('迷奸') >= 0 or NAME.find('直播') >= 0 or NAME.find('主播') >= 0 or NAME.find('.ZIP') >= 0 or NAME.find('.RAR') >= 0 or NAME.find('窺') >= 0 or NAME.find('偷') >= 0 or NAME.find('自慰') >= 0 or NAME.find('廁') >= 0 or NAME.find('韩') >= 0 or NAME.find('中年') >= 0 or NAME.find('洋') >= 0 or NAME.find('欧') >= 0 or NAME.find('醉') >= 0 or NAME.find('迷') >= 0 or NAME.find('喝多') >= 0 or NAME.find('灌') >= 0 or NAME.find('美国') >= 0 or NAME.find('水滴') >= 0:
                     tc.change_torrent(t.id, files_unwanted = [k])
 
 def ut_config():
