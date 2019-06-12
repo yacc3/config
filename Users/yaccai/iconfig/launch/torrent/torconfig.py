@@ -23,7 +23,7 @@ def tm_config():
         if t.percentDone == 1.0 or t.sizeWhenDone < 5000000:
             tc.move_torrent_data(t.id, '/Volumes/Store/Downloads/t66ydone')
             tc.remove_torrent(t.id)
-        if com.nowsec - t.addedDate > 3600*24*3 and t.percentDone < 0.3:
+        if com.nowsec - t.addedDate > 3600*24*2 and t.percentDone < 0.3:
             tc.remove_torrent(t.id, delete_data=True)
 
         tf = sorted(t.files().items(), key=lambda d: d[1]['size']) # 按文件大小，升序

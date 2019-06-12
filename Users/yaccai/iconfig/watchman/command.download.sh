@@ -6,6 +6,7 @@ root=/Volumes/Store
 bakd=$root/Daily/`date +'%Y/%Y-%m-%d'`
 mkdir -p "$bakd" || exit
 
+exit
 
 for it in "$@"; do
     [[ $it =~ "[[0-9]{1,2}].mp4" ]] && continue

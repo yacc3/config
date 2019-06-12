@@ -101,6 +101,7 @@ VoiceMemos.app
 WeBack.app
 WeChat.app
 Wireshark.app
+XLPlayer.app
 Xcode.app
 XtraFinder.app
 cd to iterm.app

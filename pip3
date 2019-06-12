@@ -7,6 +7,7 @@ attrs
 babelfish
 backports.shutil-get-terminal-size
 beautifulsoup4
+bencode
 bs4
 certifi
 cffi
