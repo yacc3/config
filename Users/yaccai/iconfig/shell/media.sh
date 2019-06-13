@@ -55,6 +55,14 @@ case "$1" in
             echo
         done
         ;;
+    "thunder" )
+        find ~/Library/Application\ Support/Transmission/watch -name '*.torrent' | while read it; do
+            open -ga Thunder "$it"
+            echo "load ${it##*/}"
+            sleep 1
+            rm "$it"
+        done
+        ;;
     * )
         echo "not such pattern"
         ;;

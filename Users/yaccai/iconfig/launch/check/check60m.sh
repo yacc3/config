@@ -5,7 +5,8 @@
 
 chflags hidden ~/Onedrive
 
-/usr/local/bin/python3 ~/iconfig/exe/caoliu.py
+/usr/local/bin/python3   ~/iconfig/exe/caoliu.py
+~/iconfig/shell/media.sh thunder
 
 echo "done"
 echo
