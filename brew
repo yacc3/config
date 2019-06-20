@@ -75,6 +75,7 @@ mitmproxy
 mpfr
 mysql
 ncurses
+netcat
 nettle
 nginx
 nmap

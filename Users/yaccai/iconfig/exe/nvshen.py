@@ -5,7 +5,9 @@ import requests
 import re
 import os
 import sys
+import time
 import datetime
+import pymysql
 
 from PIL                import Image
 from io                 import BytesIO
@@ -42,20 +44,17 @@ class nvshen:
         self.force = False
         self.Model = '/Volumes/Store/Model'
         self.server = 'https://www.nvshens.com'
-        self.models = set([
-            'https://www.nvshens.com/girl/22162/album/',
-            'https://www.nvshens.com/girl/17936/album/',
-            'https://www.nvshens.com/girl/24936/album/',
-            'https://www.nvshens.com/girl/23448/album/',
-            'https://www.nvshens.com/girl/20763/album/',
-            'https://www.nvshens.com/girl/25666/album/',
-            'https://www.nvshens.com/girl/24691/album/',
-            'https://www.nvshens.com/girl/21887/album/',
-            'https://www.nvshens.com/girl/24986/album/',
-            'https://www.nvshens.com/girl/23033/album/',
-            'https://www.nvshens.com/girl/21511/album/',
-            'https://www.nvshens.com/girl/18879/album/'
-        ])
+        self.stmp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        self.db = None
+        try:
+            self.db = pymysql.connect("localhost","yaccai","go","daily" )
+        except Exception as e:
+            print(e)
+
+
+    def __del__(self):
+        if self.db is not None:
+            self.db.close() 
 
 
     def getAlbum(self, Album_url, Model='Others'): # url => https://www.nvshens.com/g/29365/
@@ -70,6 +69,7 @@ class nvshen:
         
         print("fetch  ", Album_url)
         fpath = os.path.join(self.Model, Model, title) # 目录 名字 专辑名
+        print('        %s' % fpath + '/')
         if not os.path.exists(fpath):
             os.makedirs(fpath)
         elif not self.force:
@@ -80,7 +80,7 @@ class nvshen:
         
         num_pattern = re.compile('(?<=>)[0-9]+(?=张照片</span>)')
         num = int(num_pattern.findall(res.text)[0])
-        print('%d 张   %s' % (num, fpath + '/'))
+        print('        %d 张' % num)
         
         args = []
         for i in range(0, num):
@@ -111,7 +111,7 @@ class nvshen:
             print('\033[32m√\033[0m       ==>  %7s  %4d x %4d  %5.1f KB  %5.2f s' % (img_name, img.width, img.height, len(res.content)/1024, res.elapsed.microseconds/1000000))        
 
 
-    def processModel(self, url, update = False):       # https://www.nvshens.com/girl/22162/album/
+    def processModel(self, url, update = False): # https://www.nvshens.com/girl/22162/album/
         res = requests.get(url, headers=self.header_html)
         res.encoding='UTF-8'
 
@@ -138,16 +138,53 @@ class nvshen:
             self.getAlbum(self.server + album, model)
             if update and i >= 1: # 更新模式只下载前面就可以了
                 break
+    
+
+    def insert(self, string):
+        modelid_pattern = re.compile('[0-9]{5}')
+        modelid = modelid_pattern.findall(string)
+        if len(modelid) == 0:
+            print('没有找到合适的 model id')
+            return
+        modelid = int(modelid[0])
+        print('insert', modelid)
+        cursor = self.db.cursor()
+        cursor.execute("select count(*) from model where modelid = %d" % modelid)
+        if cursor.fetchone()[0] > 0:
+            print('id 已经存在')
+            return
+        sql_insert = "insert into model values(DEFAULT, '%s', '%d')" % (self.stmp, modelid)
+        cursor.execute(sql_insert)
+        self.db.commit()
+
+
+    def delete(self, string):
+        modelid_pattern = re.compile('[0-9]{5}')
+        modelid = modelid_pattern.findall(string)
+        if len(modelid) == 0:
+            print('没有找到合适的 model id')
+            return
+        modelid = int(modelid[0])
+        cursor = self.db.cursor()
+        cursor.execute("delete from model where modelid = %d" % modelid)
+        self.db.commit()
 
 
 if __name__ == "__main__":
     argc = len(sys.argv)
     if argc >= 2:
         nv = nvshen()
-        if sys.argv[1] == 'update':
-            for url in nv.models:
-                nv.processModel(url, update = True)
-        else:
+        cmd = sys.argv[1]
+        if   cmd == 'update':
+            cursor = nv.db.cursor()
+            cursor.execute("select * from model")
+            for it in cursor.fetchall():
+                nv.processModel('https://www.nvshens.com/girl/%s/album/' % it[2], update = True)
+        elif cmd == 'insert':
+            nv.insert(sys.argv[2])
+        elif cmd == 'delete':
+            nv.delete(sys.argv[2])
+        else: # 常规抓取
             if argc == 3 and sys.argv[2] == 'force':
                 nv.force = True
             nv.processModel(sys.argv[1])

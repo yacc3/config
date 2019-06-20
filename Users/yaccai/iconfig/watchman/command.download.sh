@@ -23,9 +23,9 @@ for it in "$@"; do
             watch=~/Library/Application\ Support/uTorrent/watch
             if [[ "$it" =~ "^[0-9a-z]{40}\.torrent$" ]]; then # 是t66型种子
                 watch=~/Library/Application\ Support/Transmission/watch
-                pgrep Transmission &>/dev/null || open -a Transmission
+                # pgrep Transmission &>/dev/null || open -a Transmission
             else
-                pgrep uTorrent &>/dev/null || open -a uTorrent
+                # pgrep uTorrent &>/dev/null || open -a uTorrent
             fi
             mv "$it" "$watch"
             ;;
