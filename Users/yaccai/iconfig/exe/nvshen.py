@@ -114,6 +114,9 @@ class nvshen:
     def processModel(self, url, update = False): # https://www.nvshens.com/girl/22162/album/
         res = requests.get(url, headers=self.header_html)
         res.encoding='UTF-8'
+        if not res.ok:
+            print('response isnot ok')
+            return
 
         if url.find('/g/') >= 0:       # https://www.nvshens.com/g/23951/
             self.getAlbum(url)

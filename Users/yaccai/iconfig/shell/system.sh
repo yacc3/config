@@ -33,6 +33,7 @@ case "$1" in
         ;;
     "ShowAllFiles" )         # <true/false>      : 是否显示隐藏文件
         defaults write com.apple.finder AppleShowAllFiles -bool "$2"
+        killall Finder
         ;;
     "bright" )               # <数字>            : 0 ~ 100
         /usr/bin/osascript <<EOF
@@ -130,6 +131,7 @@ EOF
                         find /Volumes/Store/MacOS -type f -print -delete
                         find /Volumes/Store/Model -type f -print -delete
                     }
+        rsync -avhP -f '+ */' -f '- /.XV/*' -f '- S2' -f '- S3' -f '- ._*' /Volumes/Store/.XV /Volumes/Googol/Store
         ;;
     *)
         echo "no such pattern"

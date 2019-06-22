@@ -68,7 +68,7 @@ def ut_config():
 
 
 if __name__ == '__main__':
-    tm_config()
+    # tm_config()
     # ut_config()
     pass
 

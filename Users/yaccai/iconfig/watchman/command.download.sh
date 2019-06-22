@@ -11,23 +11,13 @@ for it in "$@"; do
     echo "     catch $it"
     type="${it##*.}"
     case "$type" in
-        torrent) 
-            # test -d /Applications/Vuze.app && \
-            #     mv "$it" ~/Library/Application\ Support/Vuze/watch
-            # test -d /Applications/qBittorrent.app && \
-            #     mv "$it" ~/Library/Application\ Support/qBittorrent/watch
-            # test -d /Applications/Transmission.app && \
-            #     mv "$it" ~/Library/Application\ Support/Transmission/watch
-            # test -d /Applications/uTorrent.app && \
-            #     mv "$it" ~/Library/Application\ Support/uTorrent/watch
-            watch=~/Library/Application\ Support/uTorrent/watch
-            if [[ "$it" =~ "^[0-9a-z]{40}\.torrent$" ]]; then # 是t66型种子
-                watch=~/Library/Application\ Support/Transmission/watch
-                # pgrep Transmission &>/dev/null || open -a Transmission
+        torrent)
+            if [[ "$it" =~ "^[0-9a-z]{20,60}\.torrent$" ]]; then # 是t66型种子
+                
             else
-                # pgrep uTorrent &>/dev/null || open -a uTorrent
+                pgrep uTorrent &>/dev/null || open -a uTorrent
+                mv "$it" ~/Library/Application\ Support/uTorrent/watch
             fi
-            mv "$it" "$watch"
             ;;
         dmg) 
             rsync -a -- "$it" "$root/MacOS"
@@ -50,3 +40,12 @@ for it in "$@"; do
             ;;
     esac
 done
+
+            # test -d /Applications/Vuze.app && \
+            #     mv "$it" ~/Library/Application\ Support/Vuze/watch
+            # test -d /Applications/qBittorrent.app && \
+            #     mv "$it" ~/Library/Application\ Support/qBittorrent/watch
+            # test -d /Applications/Transmission.app && \
+            #     mv "$it" ~/Library/Application\ Support/Transmission/watch
+            # test -d /Applications/uTorrent.app && \
+            #     mv "$it" ~/Library/Application\ Support/uTorrent/watch

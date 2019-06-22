@@ -49,6 +49,7 @@ Microsoft Excel.app
 Microsoft OneNote.app
 Microsoft Outlook.app
 Microsoft PowerPoint.app
+Microsoft To-Do.app
 Microsoft Word.app
 Mission Control.app
 Movist.app

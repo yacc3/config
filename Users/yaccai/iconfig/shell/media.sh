@@ -55,28 +55,6 @@ case "$1" in
             echo
         done
         ;;
-    "thunder" )
-        find ~/Library/Application\ Support/Transmission/watch -name '*.torrent' | while read it; do
-            open -ga Thunder "$it"
-            echo "load ${it##*/}"
-            sleep 1
-            rm "$it"
-        done
-        ;;
-    "meck" )
-        now=`date +%s`
-        find . -size +100M | while read it; do
-            chk=`ffmpeg -i "$it" 2>&1 | grep 'Invalid data'`
-            if [[ "$chk" == '' ]]; then
-                sec=`/usr/bin/stat -t "%s" -f "%c" "$it"`
-                gap=$((now - sec))
-                if [[ $gap -gt 600 ]]; then
-                    printf "OK  %5d  ${it%/*}\n" "$gap"
-                    printf "           ${it##*/}\n"
-                fi
-            fi
-        done        
-        ;;
     * )
         echo "not such pattern"
         ;;
