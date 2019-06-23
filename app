@@ -4,7 +4,7 @@ Adobe Creative Cloud
 Adobe Photoshop CC 2018
 AirRadar.app
 AirServer.app
-Alfred 3.app
+Alfred 4.app
 App Store.app
 AppCleaner.app
 Aria2GUI.app
@@ -41,6 +41,7 @@ Karabiner-EventViewer.app
 Keyboard Maestro.app
 LaunchControl.app
 Launchpad.app
+Lingon X.app
 LyricsX.app
 Mail.app
 Maps.app
@@ -52,9 +53,10 @@ Microsoft PowerPoint.app
 Microsoft To-Do.app
 Microsoft Word.app
 Mission Control.app
-Movist.app
+Movist Pro.app
 MySQLWorkbench.app
 Navicat Premium.app
+NeatDownloadManager.app
 NeteaseMusic.app
 News.app
 Notes.app

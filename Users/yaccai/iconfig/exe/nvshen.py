@@ -23,6 +23,7 @@ class nvshen:
             'Cache-Control': 'max-age=0',
             'Connection': 'keep-alive',
             'Host': 'www.nvshens.com',
+            'Referer': 'https://www.nvshens.net/g/29580',
             'Upgrade-Insecure-Requests': '1',
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36',
         }
@@ -58,7 +59,7 @@ class nvshen:
 
 
     def getAlbum(self, Album_url, Model='Others'): # url => https://www.nvshens.com/g/29365/
-        res = requests.get(Album_url, headers=self.header_html)
+        res = requests.get(Album_url) #, headers=self.header_html)
 
         title_pattern = re.compile('(?<=htilte\">)[^>]*(?=</h1>)')
         try:
@@ -112,11 +113,10 @@ class nvshen:
 
 
     def processModel(self, url, update = False): # https://www.nvshens.com/girl/22162/album/
-        res = requests.get(url, headers=self.header_html)
+        res = requests.get(url) #, headers=self.header_html)
         res.encoding='UTF-8'
-        if not res.ok:
-            print('response isnot ok')
-            return
+        # print(res)
+        # return
 
         if url.find('/g/') >= 0:       # https://www.nvshens.com/g/23951/
             self.getAlbum(url)

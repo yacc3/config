@@ -108,9 +108,13 @@ class Caoliu:
             r = requests.get(tmp_url, proxies=self.proxies)
             r.encoding='gbk'
             html = r.text.replace('\r', '').replace('\n', '')
-            for it in t.findall(html): # 用i做缓存的标记
+            for it in t.findall(html): # it是一行一行的 页面入口， 在it中使用p查找url
+                IT = it.upper()
+                if IT.find('VIP') >= 0 or IT.find('STP') >= 0 or IT.find('播') >= 0 or IT.find('偷') >= 0 or IT.find('醉') >= 0  or IT.find('迷') >= 0:
+                    continue # 跳过黑名单 
+                    
                 for key in self.titleInterest[fid]:
-                    if it.upper().find(key) >= 0: 
+                    if IT.find(key) >= 0: 
                         res = p.findall(it)
                         url = None if len(res) == 0 else res[0].split('\"')[0]
                         if url is None or self.check_it_Exists('html', url):

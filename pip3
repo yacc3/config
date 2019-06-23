@@ -43,6 +43,7 @@ setuptools
 six
 soupsieve
 SubFinder
+torrentool
 transmissionrpc
 urllib3
 w3lib

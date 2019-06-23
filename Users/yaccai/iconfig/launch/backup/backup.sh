@@ -71,5 +71,9 @@ mysqldump -uyaccai -pgo --databases daily >"$bakd"/mysql/daily.sql 2>/dev/null
     done
     tmutil startbackup
 }
+
+osascript -e "set volume output volume +3"
+~/iconfig/exe/nvshen.py update 1>/dev/null
+
 echo "done"
 echo

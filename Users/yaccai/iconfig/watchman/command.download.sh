@@ -13,7 +13,7 @@ for it in "$@"; do
     case "$type" in
         torrent)
             if [[ "$it" =~ "^[0-9a-z]{20,60}\.torrent$" ]]; then # 是t66型种子
-                
+
             else
                 pgrep uTorrent &>/dev/null || open -a uTorrent
                 mv "$it" ~/Library/Application\ Support/uTorrent/watch

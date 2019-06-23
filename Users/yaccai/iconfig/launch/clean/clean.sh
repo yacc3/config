@@ -58,9 +58,6 @@ gfind /Volumes/Store/com.tencent.xinWeChat -regextype 'egrep' -regex '.*__[0-9]{
     fi
 done
 
-osascript -e "set volume output volume +3"
-~/iconfig/exe/nvshen.py update 1>/dev/null
-
 echo "done"
 echo
 echo
