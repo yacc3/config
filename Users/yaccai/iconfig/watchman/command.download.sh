@@ -1,7 +1,6 @@
 #!/bin/zsh
 printf "\n\n%s trig -- > %s\n" "$(date +'%Y-%m-%d %T')" "$(basename $0)"
 PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
-
 root=/Volumes/Store
 bakd=$root/Daily/`date +'%Y/%Y-%m-%d'`
 mkdir -p "$bakd" || exit
@@ -13,7 +12,7 @@ for it in "$@"; do
     case "$type" in
         torrent)
             if [[ "$it" =~ "^[0-9a-z]{20,60}\.torrent$" ]]; then # 是t66型种子
-
+                
             else
                 pgrep uTorrent &>/dev/null || open -a uTorrent
                 mv "$it" ~/Library/Application\ Support/uTorrent/watch

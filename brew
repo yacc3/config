@@ -29,7 +29,6 @@ gnu-sed
 gnu-tar
 gnu-which
 gnutls
-go
 gpatch
 graphite2
 grep
@@ -71,6 +70,7 @@ libyaml
 little-cms2
 lsusb
 lua
+lzo
 m-cli
 mitmproxy
 mpfr

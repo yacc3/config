@@ -7,7 +7,6 @@ AirServer.app
 Alfred 4.app
 App Store.app
 AppCleaner.app
-Aria2GUI.app
 Automator.app
 BackupLoupe.app
 BaiduNetdisk_mac.app
@@ -16,7 +15,6 @@ Books.app
 Boom 3D.app
 Calculator.app
 Calendar.app
-CheatSheet.app
 Chess.app
 CloudTV.app
 CodeRunner.app
@@ -28,11 +26,8 @@ Dictionary.app
 Downie 3.app
 FaceTime.app
 Font Book.app
-GitHub Desktop.app
 Google Chrome.app
-Hammerspoon.app
 Home.app
-IINA.app
 Image Capture.app
 Inpaint.app
 Kap.app
@@ -50,13 +45,11 @@ Microsoft Excel.app
 Microsoft OneNote.app
 Microsoft Outlook.app
 Microsoft PowerPoint.app
-Microsoft To-Do.app
 Microsoft Word.app
 Mission Control.app
 Movist Pro.app
 MySQLWorkbench.app
 Navicat Premium.app
-NeatDownloadManager.app
 NeteaseMusic.app
 News.app
 Notes.app
@@ -82,7 +75,6 @@ Skim.app
 Spectacle.app
 Stickies.app
 Stocks.app
-Sublime Text.app
 System Preferences.app
 Tank 90.app
 TeX
@@ -110,7 +102,6 @@ cd to iterm.app
 iMazing.app
 iStat Menus.app
 iTerm.app
-iTools.app
 iTunes.app
 uTorrent.app
 unetbootin.app

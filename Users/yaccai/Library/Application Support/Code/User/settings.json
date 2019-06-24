@@ -109,5 +109,7 @@
                 "%DOCFILE%"
             ]
         }
-    ]
+    ],
+    "C_Cpp.updateChannel": "Insiders",
+    "http.proxySupport": "off"
 }
