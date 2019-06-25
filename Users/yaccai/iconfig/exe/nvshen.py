@@ -60,13 +60,8 @@ class nvshen:
 
     def getAlbum(self, Album_url, Model='Others'): # url => https://www.nvshens.com/g/29365/
         res = requests.get(Album_url) #, headers=self.header_html)
-
         title_pattern = re.compile('(?<=htilte\">)[^>]*(?=</h1>)')
-        try:
-            title = title_pattern.findall(res.text)[0]
-        except:
-            print('no title \n')
-            return
+        title = title_pattern.findall(res.text)[0]
         
         print("fetch  ", Album_url)
         fpath = os.path.join(self.Model, Model, title) # 目录 名字 专辑名
@@ -83,12 +78,13 @@ class nvshen:
         num = int(num_pattern.findall(res.text)[0])
         print('        %d 张' % num)
         
-        args = []
+        # args = []
+        # for i in range(0, num):
+        #     args.append((img_urlpart, i, fpath))
+        # with ThreadPoolExecutor(max_workers = 15) as executor:
+        #     executor.map(lambda p: self.getimg(*p), args)
         for i in range(0, num):
-            args.append((img_urlpart, i, fpath))
-
-        with ThreadPoolExecutor(max_workers = 15) as executor:
-            executor.map(lambda p: self.getimg(*p), args)
+            self.getimg(img_urlpart, i, fpath)
 
         print("done   ", fpath + '/\n')
 

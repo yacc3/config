@@ -46,6 +46,12 @@
                 ]
             },
             {
+                "name": "latexmk",
+                "tools": [
+                    "latexmk"
+                ]
+                },
+            {
                 "name": "xelatexb",
                 "tools": [
                 "xelatex",
@@ -53,12 +59,6 @@
                 "xelatex",
                 "xelatex"
                 ]
-            },
-            {
-            "name": "latexmk",
-            "tools": [
-                "latexmk"
-            ]
             },
             {
             "name": "pdflatex -> bibtex -> pdflatex*2",
@@ -72,16 +72,6 @@
         ],
     "latex-workshop.latex.tools": [
         {
-            "name": "xelatex",
-            "command": "xelatex",
-            "args": [
-                "-synctex=1",
-                "-interaction=nonstopmode",
-                "-file-line-error",
-                "%DOC%"
-            ]
-        },
-        {
             "name": "latexmk",
             "command": "latexmk",
             "args": [
@@ -89,6 +79,16 @@
                 "-interaction=nonstopmode",
                 "-file-line-error",
                 "-pdf",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "xelatex",
+            "command": "xelatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
                 "%DOC%"
             ]
         },
@@ -111,5 +111,6 @@
         }
     ],
     "C_Cpp.updateChannel": "Insiders",
-    "http.proxySupport": "off"
+    "http.proxySupport": "off",
+    "window.zoomLevel": 0
 }

@@ -1,4 +1,3 @@
-Adguard.app
 Adobe Audition CC 2018
 Adobe Creative Cloud
 Adobe Photoshop CC 2018
@@ -16,8 +15,6 @@ Boom 3D.app
 Calculator.app
 Calendar.app
 Chess.app
-CloudTV.app
-CodeRunner.app
 Contacts.app
 DaisyDisk.app
 Dash.app
@@ -41,15 +38,9 @@ LyricsX.app
 Mail.app
 Maps.app
 Messages.app
-Microsoft Excel.app
-Microsoft OneNote.app
-Microsoft Outlook.app
-Microsoft PowerPoint.app
-Microsoft Word.app
 Mission Control.app
 Movist Pro.app
 MySQLWorkbench.app
-Navicat Premium.app
 NeteaseMusic.app
 News.app
 Notes.app
@@ -77,7 +68,6 @@ Stickies.app
 Stocks.app
 System Preferences.app
 Tank 90.app
-TeX
 TextEdit.app
 The Unarchiver.app
 Thunder.app

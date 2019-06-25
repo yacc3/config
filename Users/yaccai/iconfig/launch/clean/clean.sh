@@ -10,6 +10,8 @@ echo "clean homebrew"
 brew cleanup
 
 echo "clean caches"
+find ~/Library                      -iname "cache"   -mindepth 2  -exec rm -rf {} +
+find ~/Library                      -iname "caches"  -mindepth 2  -exec rm -rf {} +
 find ~/Library/Caches                                     -type f -exec rm -rf {} +
 find ~/Library/Caches                                     -type l -exec rm -rf {} +
 find ~/Library/Containers           -iname "Caches"  -d 4 -type d -exec rm -rf {} +

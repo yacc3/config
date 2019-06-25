@@ -127,9 +127,9 @@ EOF
                     /Volumes/Store/  /Volumes/Googol/Store && {
                         echo "clean dup"
                         find /Volumes/Store/Homebrew -type f -print -delete
-                        find /Volumes/Store/Windows -type f -print -delete
-                        find /Volumes/Store/MacOS -type f -print -delete
-                        find /Volumes/Store/Model -type f -print -delete
+                        find /Volumes/Store/Windows  -type f -print -delete
+                        find /Volumes/Store/MacOS    -type f -print -delete
+                        find /Volumes/Store/Model    -type f -print -delete
                     }
         rsync -avhP -f '+ */' -f '- /.XV/*' -f '- S2' -f '- S3' -f '- ._*' /Volumes/Store/.XV /Volumes/Googol/Store
         ;;
