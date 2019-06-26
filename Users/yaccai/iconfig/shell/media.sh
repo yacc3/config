@@ -55,9 +55,17 @@ case "$1" in
             echo
         done
         ;;
+    "togglemovist" )
+        /usr/bin/osascript <<EOF
+        tell application "Movist Pro" to activate
+        tell application "System Events"
+            tell process "Movist Pro"
+                keystroke " "
+            end tell
+        end tell
+EOF
+        ;;
     * )
         echo "not such pattern"
         ;;
 esac
-
-

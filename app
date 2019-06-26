@@ -1,6 +1,3 @@
-Adobe Audition CC 2018
-Adobe Creative Cloud
-Adobe Photoshop CC 2018
 AirRadar.app
 AirServer.app
 Alfred 4.app
@@ -62,10 +59,10 @@ Safari.app
 Script Debugger.app
 ShadowsocksX-NG.app
 Siri.app
-Skim.app
 Spectacle.app
 Stickies.app
 Stocks.app
+Sublime Text.app
 System Preferences.app
 Tank 90.app
 TextEdit.app
