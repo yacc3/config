@@ -78,13 +78,11 @@ class nvshen:
         num = int(num_pattern.findall(res.text)[0])
         print('        %d 张' % num)
         
-        # args = []
-        # for i in range(0, num):
-        #     args.append((img_urlpart, i, fpath))
-        # with ThreadPoolExecutor(max_workers = 15) as executor:
-        #     executor.map(lambda p: self.getimg(*p), args)
+        args = []
         for i in range(0, num):
-            self.getimg(img_urlpart, i, fpath)
+            args.append((img_urlpart, i, fpath))
+        with ThreadPoolExecutor(max_workers = 20) as executor:
+            executor.map(lambda p: self.getimg(*p), args)
 
         print("done   ", fpath + '/\n')
 
