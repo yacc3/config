@@ -38,6 +38,7 @@ Messages.app
 Mission Control.app
 Movist Pro.app
 MySQLWorkbench.app
+Navicat Premium.app
 NeteaseMusic.app
 News.app
 Notes.app
@@ -55,6 +56,7 @@ QQLive.app
 QQMusic.app
 QuickTime Player.app
 Reminders.app
+Resilio Sync.app
 Safari.app
 Script Debugger.app
 ShadowsocksX-NG.app

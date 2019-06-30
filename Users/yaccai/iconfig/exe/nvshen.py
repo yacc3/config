@@ -107,10 +107,9 @@ class nvshen:
 
 
     def processModel(self, url, update = False): # https://www.nvshens.com/girl/22162/album/
+        print()
         res = requests.get(url) #, headers=self.header_html)
         res.encoding='UTF-8'
-        # print(res)
-        # return
 
         if url.find('/g/') >= 0:       # https://www.nvshens.com/g/23951/
             self.getAlbum(url)
@@ -125,8 +124,13 @@ class nvshen:
         model_pattern = re.compile(model_pattern)
         album_pattern = re.compile(album_pattern)
 
-        model = model_pattern.findall(res.text)[0]
-        album_list = album_pattern.findall(res.text)
+        try:
+            model = model_pattern.findall(res.text)[0]
+            album_list = album_pattern.findall(res.text)
+        except:
+            print("fail    %s" % url)
+            return
+
         album_count = len(album_list)
         i = 0
         for album in album_list:
@@ -138,10 +142,10 @@ class nvshen:
     
 
     def insert(self, string):
-        modelid_pattern = re.compile('[0-9]{5}')
+        modelid_pattern = re.compile('(?<=/girl/)[0-9]{5}')
         modelid = modelid_pattern.findall(string)
         if len(modelid) == 0:
-            print('没有找到合适的 model id')
+            print('没有找到合适的 模式 /girl/[0-9{5}]')
             return
         modelid = int(modelid[0])
         print('insert', modelid)

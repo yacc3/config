@@ -45,10 +45,6 @@ test -d ~/Code && {
 echo "备份 Fonts"
 rsync -a ~/Library/Fonts "$bakd"
 
-echo "备份 MySQL"
-rsync -a /usr/local/var/mysql "$bakd"
-mysqldump -uyaccai -pgo --databases daily >"$bakd"/mysql/daily.sql 2>/dev/null
-
 [[ `date +%H` -lt 6 ]] && {
     echo "调用 TimeMachine"
     for excl in "/Users/yaccai/Library/Application Support/com.colliderli.iina"  \
