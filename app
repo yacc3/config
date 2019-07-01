@@ -42,7 +42,6 @@ Navicat Premium.app
 NeteaseMusic.app
 News.app
 Notes.app
-OneDrive.app
 OnyX.app
 Permute.app
 Photo Booth.app

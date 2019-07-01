@@ -63,11 +63,11 @@ EOF
     "createDMG" )            # <folder>    <dmg_name>
         hdiutil create -srcfolder "$2" "$3"
         ;;
-    "filetime" )
-        find "$2" -d 1 ! -name ".DS_Store" | while read it; do
-            stat -t "%Y-%m-%d %H:%M:%S" -f "%S${1}  %N" "$it" | sed "s#$2/##"
-        done
-        ;;
+    # "filetime" )
+    #     find "$2" -d 1 ! -name ".DS_Store" | while read it; do
+    #         stat -t "%Y-%m-%d %H:%M:%S" -f "%S${1}  %N" "$it" | sed "s#$2/##"
+    #     done
+    #     ;;
     "accessPoint" )
         /usr/bin/osascript <<EOF
             tell application "System Preferences"
@@ -105,6 +105,7 @@ EOF
         done
         ;;
     "filetime" )
+        echo "${@:2}"
         echo "访问时间             内容修改时间         元数据修改时间"
         /usr/bin/stat -t "%Y-%m-%d %H:%M:%S" -f "%Sa  %Sm  %Sc  -->  %N" "${@:2}"
         ;;

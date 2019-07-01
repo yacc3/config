@@ -1,0 +1,23 @@
+[
+    "trigger", 
+    "/Users/yaccai/Resilio Sync", 
+    {
+        "name": "resilio",
+        "expression": ["allof",
+            ["anyof",   ["allof", 
+                            ["pcre", "\\.(jpg|png|bmp|gif|mp4|mov|m4a|flv|None|jpeg)$"],
+                            ["dirname", "iPhone Camera backup"]
+                            ], 
+                        ["allof",
+                            ["pcre", "\\.(torrent)$"],
+                            ["dirname", "sync"]
+                            ]
+                    ],
+            ["type", "f"],
+            ["exists"]
+        ],
+        "append_files":true,
+        "command": ["/Users/yaccai/iconfig/watchman/command.resilio.sh"]
+    }
+]
+
