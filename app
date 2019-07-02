@@ -47,7 +47,6 @@ Permute.app
 Photo Booth.app
 Photos.app
 Plants vs. Zombies.app
-PopClip.app
 Preview.app
 PyCharm.app
 QQ.app
@@ -78,11 +77,9 @@ Typora.app
 UI Browser.app
 Utilities
 VLC.app
-VNC Viewer.app
 Visual Studio Code.app
 VoiceMemos.app
 WeChat.app
-Wireshark.app
 XLPlayer.app
 Xcode.app
 XtraFinder.app
