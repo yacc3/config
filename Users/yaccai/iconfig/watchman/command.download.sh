@@ -15,6 +15,7 @@ for it in "$@"; do
                 
             else
                 pgrep uTorrent &>/dev/null || open -a uTorrent
+                mkdir -p ~/Library/Application\ Support/uTorrent/watch
                 mv "$it" ~/Library/Application\ Support/uTorrent/watch
             fi
             ;;
