@@ -19,7 +19,7 @@ for it in "$@"; do
                 mv "$it" ~/Library/Application\ Support/uTorrent/watch
             fi
             ;;
-        dmg) 
+        dmg|pkg) 
             rsync -a -- "$it" "$root/MacOS"
             ;;
         exe)

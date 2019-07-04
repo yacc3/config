@@ -70,7 +70,6 @@ The Unarchiver.app
 Thunder.app
 Tickeys.app
 Time Machine.app
-Transmission.app
 Transmit.app
 Tuxera Disk Manager.app
 Typora.app

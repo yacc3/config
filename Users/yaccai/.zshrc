@@ -42,6 +42,7 @@ alias me='~/iconfig/shell/media.sh'
 alias yx='~/iconfig/shell/media.sh yixiu'
 alias ck='~/iconfig/shell/media.sh douyin'
 
+alias rf='rm -rf '
 alias nv='~/iconfig/exe/nvshen.py'
 alias gz='hdiutil attach /Volumes/Store/llvm日志文件-需要clang调试'
 alias yd='youtube-dl --proxy "socks5://127.0.0.1:1086"'

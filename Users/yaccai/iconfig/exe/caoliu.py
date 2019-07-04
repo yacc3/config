@@ -110,7 +110,7 @@ class Caoliu:
             html = r.text.replace('\r', '').replace('\n', '')
             for it in t.findall(html): # it是一行一行的 页面入口， 在it中使用p查找url
                 IT = it.upper()
-                if IT.find('VIP') >= 0 or IT.find('STP') >= 0 or IT.find('播') >= 0 or IT.find('偷') >= 0 or IT.find('醉') >= 0  or IT.find('迷') >= 0:
+                if IT.find('VIP') >= 0 or IT.find('STP') >= 0 or IT.find('播') >= 0 or IT.find('偷') >= 0 or IT.find('醉') >= 0 or IT.find('迷') >= 0 or IT.find('SM') >= 0:
                     continue # 跳过黑名单 
                     
                 for key in self.titleInterest[fid]:

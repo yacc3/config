@@ -4,7 +4,7 @@
     {
         "name": "download",
         "expression": ["allof",
-            ["pcre", "\\.(jpg|png|gif|mp4|flv|torrent|dmg|exe|mp3|aac|m4a|wav)$"],
+            ["pcre", "\\.(jpg|png|gif|mp4|flv|torrent|dmg|pkg|exe|mp3|aac|m4a|wav)$"],
             ["dirname", "", ["depth", "eq", 0]],
             ["size", "le", 100000000],
             ["size", "gt", 100],

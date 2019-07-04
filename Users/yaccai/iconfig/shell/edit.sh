@@ -5,7 +5,7 @@ new() {
     [[ -z "$1" ]] && return
     echo "create new blog: $1"
     date=`/bin/date +%Y-%m-%d`
-    file=/Volumes/Store/Code/yacc3.github.src/_posts/"${date}-$1.md"
+    file=/Volumes/Store/yaccai.github.src/_posts/"${date}-$1.md"
 
     if [[ -f "$file" ]]; then
         echo "already exists: $1"
@@ -27,7 +27,7 @@ new() {
 
 renameblog() {
     i=0
-    ls /Volumes/Store/Code/yacc3.github.src/_posts/*.md | while read it; do
+    ls /Volumes/Store/yaccai.github.src/_posts/*.md | while read it; do
         printf "%3d  ${it##*/}\n" "$((++i))"
         name=`gawk -F ':' '/^title/ {print $2}' "$it" | gsed "s/\ *//g"`
         date=`gawk -F ':' '/^.ate / {print $2}' "$it" | gsed "s/\ *//g"`
@@ -60,7 +60,7 @@ fcontain () {
 
 format() {
     i=0
-    ls /Volumes/Store/Code/yacc3.github.src/_posts/*.md | while read it; do
+    ls /Volumes/Store/yaccai.github.src/_posts/*.md | while read it; do
     printf "processing  %3d  ${it##*/}\n" "$((++i))"
     gsed "s/^layout[\ \t]*/layout    /;\
           s/^title[\ \t]*/title     /;\
@@ -175,22 +175,22 @@ EOF
         new "$2"
         ;;
     "buildBlog" )
-        jekyll build -s /Volumes/Store/Code/yacc3.github.src -d /Volumes/Store/Code/yacc3.github.io
+        jekyll build -s /Volumes/Store/yaccai.github.src -d /Volumes/Store/yaccai.github.io
         ;;
     "serveBlog" )
-        jekyll serve -s /Volumes/Store/Code/yacc3.github.src -d /Volumes/Store/Code/yacc3.github.io --watch
+        jekyll serve -s /Volumes/Store/yaccai.github.src -d /Volumes/Store/yaccai.github.io --watch
         ;;
     "pushBlog" )
-        jekyll build -s /Volumes/Store/Code/yacc3.github.src \
-                     -d /Volumes/Store/Code/yacc3.github.io
+        jekyll build -s /Volumes/Store/yaccai.github.src \
+                     -d /Volumes/Store/yaccai.github.io
         # tar -cJf src.xz \
         #         --exclude='css' \
         #         --exclude='img' \
         #         --exclude='js' \
-        #         -C /Volumes/Store/Code/yacc3.github.io ../yacc3.github.src
-        git -C /Volumes/Store/Code/yacc3.github.io add .
-        git -C /Volumes/Store/Code/yacc3.github.io commit -m "$(date +'%Y-%m-%d %T')"
-        git -C /Volumes/Store/Code/yacc3.github.io push origin "${2:-master}"
+        #         -C /Volumes/Store/yaccai.github.io ../yacc3.github.src
+        git -C /Volumes/Store/yaccai.github.io add .
+        git -C /Volumes/Store/yaccai.github.io commit -m "$(date +'%Y-%m-%d %T')"
+        git -C /Volumes/Store/yaccai.github.io push origin "${2:-master}"
         ;;
     "renameBlog" )             # 根据md头部的日期，更新文件名中的日期
         renameblog
@@ -199,11 +199,7 @@ EOF
         format
         ;;
     "findBlog" )
-        app=""
-        [[ "$3" == "-t" ]] && app="-exec open -a Typora {} +"
-        [[ "$3" == "-s" ]] && app="-exec open -a Sublime\ Text {} +"
-        [[ "$3" == "-c" ]] && app="-exec open -a Visual\ Studio\ Code.app {} +"
-        sh -c "find /Volumes/Store/Code/yacc3.github.src/_posts -iname \"*$2*\" -and -not -name '._*' -print $app"
+        find /Volumes/Store/yaccai.github.src/_posts -iname "*$2*" -and -not -name '._*'
         ;;
     "searchPoem" )
         poemD=/Volumes/Store/Doc/诗词/

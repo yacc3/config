@@ -45,9 +45,9 @@ test -d "$IC" && {
     rm -rf "$IC"
 }
 
-echo "clean torrent"
-find ~/Library/Application\ Support/uTorrent -name "*.torrent" -delete
-find ~/Library/Application\ Support/Transmission/watch -name "*.torrent" -delete
+# echo "clean torrent"
+# find ~/Library/Application\ Support/uTorrent -name "*.torrent" -delete
+# find ~/Library/Application\ Support/Transmission/watch -name "*.torrent" -delete
 
 gfind /Volumes/Store/com.tencent.xinWeChat -regextype 'egrep' -regex '.*__[0-9]{14}\.bak' | while read it; do
     newfile="${it/__*.bak/}"

@@ -42,6 +42,9 @@ test -d ~/Code && {
     rsync -a ~/Code "$bakd"   
 }
 
+echo "备份 MySQL"
+rsync -a  /usr/local/var/mysql  /Volumes/Store
+
 echo "备份 Fonts"
 rsync -a ~/Library/Fonts "$bakd"
 
@@ -61,9 +64,10 @@ rsync -a ~/Library/Fonts "$bakd"
                 "/Users/yaccai/Desktop"                                          \
                 "/Users/yaccai/Downloads"                                        \
                 "/Users/yaccai/Music"; do
-        test -d "$excl" || continue
-        tmutil isexcluded   "$excl" &>/dev/null && continue
-        tmutil addexclusion "$excl"
+        if [[ -d "$excl" && ! -L "$excl" ]]; then
+            tmutil isexcluded    "$excl" &>/dev/null && continue
+            tmutil addexclusion  "$excl"
+        fi
     done
     tmutil startbackup
 }
