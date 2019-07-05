@@ -41,10 +41,10 @@ watchman() {
     touch /usr/local/var/run/watchman/sock
     touch /usr/local/var/run/watchman/state
     touch /usr/local/var/run/watchman/pid
-    alias mwm='watchman  --logfile=/usr/local/var/run/watchman/log \
-                                --sockname=/usr/local/var/run/watchman/sock \
+    alias mwm='watchman  --logfile=/usr/local/var/run/watchman/log            \
+                                --sockname=/usr/local/var/run/watchman/sock   \
                                 --statefile=/usr/local/var/run/watchman/state \
-                                --pidfile=/usr/local/var/run/watchman/pid \
+                                --pidfile=/usr/local/var/run/watchman/pid     \
                                 --log-level=1'
     while read -r it; do
         mwm watch -j < ~/iconfig/watchman/watch."$it".json
@@ -62,18 +62,6 @@ mas() {
 }
 
 
-repos() {
-    echo "git repo"; read -r
-    mkdir -p ~/Code
-    git clone https://github.com/yaccai/MenuApp.git           ~/Code/MenuApp
-    git clone https://github.com/yaccai/leetcode.git          ~/Code/leetcode
-    git clone https://github.com/yaccai/lintcode.git          ~/Code/lintcode
-    git clone https://github.com/yaccai/yaccai.github.io.git  ~/Code/yaccai.github.io
-
-    cd ~/Code/yaccai.github.io
-    git branch -t origin/source
-    git checkout source
-}
 
 other() {
     echo "安装 iterm-zsh"; read -r

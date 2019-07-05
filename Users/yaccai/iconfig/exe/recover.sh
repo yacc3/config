@@ -38,4 +38,4 @@ function recover_others () {
 function backup () {
     echo "backup data to /Volumes/Store, before reinstall OS"
     ~/iconfig/launch/backup/backup.sh
-} 
+}

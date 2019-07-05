@@ -17,11 +17,12 @@ while read it; do
     [[ -e "$it" ]] && rsync -aR  "$it" "$bakd/Config"
 done < ~/iconfig/launch/backup/config.include
 
-fping -t 200 114.114.114.114 &>/dev/null && {
+fping -qt 200 114.114.114.114 && {
     echo "git  push"
     for repo in /Volumes/Store/Code/yacc3.github.io  \
                 /Volumes/Store/Code/yacc3.github.src \
                 /Volumes/Store/Config; do
+        [[ -d "$repo" ]] || continue
         git -C "$repo" add -A . &>/dev/null
         git -C "$repo" commit -m "$(date +'%Y-%m-%d %T')" &>/dev/null
         git -C "$repo" push origin master &>/dev/null
@@ -42,8 +43,10 @@ test -d ~/Code && {
     rsync -a ~/Code "$bakd"   
 }
 
-echo "备份 MySQL"
-rsync -a  /usr/local/var/mysql  /Volumes/Store
+test -d /usr/local/var/mysql && {
+    echo "备份 MySQL"
+    rsync -a  /usr/local/var/mysql  "$bakd"
+}
 
 echo "备份 Fonts"
 rsync -a ~/Library/Fonts "$bakd"
@@ -72,7 +75,7 @@ rsync -a ~/Library/Fonts "$bakd"
     tmutil startbackup
 }
 
-osascript -e "set volume output volume +3"
+# osascript -e "set volume output volume +3"
 ~/iconfig/exe/nvshen.py update 1>/dev/null
 
 echo "done"
