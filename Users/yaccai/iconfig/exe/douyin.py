@@ -147,8 +147,8 @@ class douyin:
             if diff != '':
                 fname = time.strftime(name + ".%m-%d_%H-%M.txt", time.localtime())
                 fpath = os.path.join(self.home, 'Desktop', fname)
-                # with open(fpath,'w') as f:
-                #     f.write(diff)
+                with open(fpath,'w') as f:
+                    f.write(diff)
                 # os.system('say , do check ' + name)
         sql_insert = "insert into douyin values(DEFAULT, '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%d', '%d', '%d', '%s')" % (stmp, name, douyinID, douyinSID, works, like, follow, fans, liked, flag, nickname)
         cursor.execute(sql_insert)
