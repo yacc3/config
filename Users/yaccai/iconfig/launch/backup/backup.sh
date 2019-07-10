@@ -29,8 +29,8 @@ fping -qt 200 114.114.114.114 && {
     done
 }
 
-echo "备份 Sublime Text 3"
-rsync -af '- Cache' ~/Library/Application\ Support/Sublime\ Text\ 3  "$bakd"
+# echo "备份 Sublime Text 3"
+# rsync -af '- Cache' ~/Library/Application\ Support/Sublime\ Text\ 3  "$bakd"
 
 echo "备份 微信"
 suffix="__$(date +%Y%m%d%H%M%S).bak"
@@ -60,7 +60,6 @@ rsync -a ~/Library/Fonts "$bakd"
                 "/Users/yaccai/Library/Application Support/Transmission"         \
                 "/Users/yaccai/Library/Application Support/uTorrent"             \
                 "/Users/yaccai/Library/Application Support/Vuze"                 \
-                "/Users/yaccai/Library/Application Support/Code"                 \
                 "/Users/yaccai/Library/Containers/com.tencent.xinWeChat"         \
                 "/Users/yaccai/Library/Metadata"                                 \
                 "/Users/yaccai/Code"                                             \

@@ -42,7 +42,9 @@ class nvshen:
             'http': 'http://127.0.0.1:1087',
             'https': 'http://127.0.0.1:1087',
         }
+        self.update = False
         self.force = False
+        self.home = os.environ['HOME']
         self.Model = '/Volumes/Store/Model'
         self.server = 'https://www.nvshens.com'
         self.stmp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
@@ -93,7 +95,13 @@ class nvshen:
         if os.path.exists(img_file):
             print('exists  ==>  %7s' % img_name)
             return
-
+        if self.update:
+            pass
+            syn_dir = os.path.join(self.home, 'Resilio Sync/sync', img_dir.split('/')[-1])
+            if not os.path.exists(syn_dir):
+                os.makedirs(syn_dir)
+            syn_img = os.path.join(syn_dir,  img_name)
+            
         img_url  = os.path.join(img_urlpart, img_name)
         try:
             res = requests.get(img_url, headers = self.header_img, timeout = 5)
@@ -103,10 +111,11 @@ class nvshen:
         if res.ok:
             img = Image.open(BytesIO(res.content))
             img.save(img_file, 'JPEG')
+            img.save(syn_img,  'JPEG')
             print('\033[32m√\033[0m       ==>  %7s  %4d x %4d  %5.1f KB  %5.2f s' % (img_name, img.width, img.height, len(res.content)/1024, res.elapsed.microseconds/1000000))        
 
 
-    def processModel(self, url, update = False): # https://www.nvshens.com/girl/22162/album/
+    def processModel(self, url): # https://www.nvshens.com/girl/22162/album/
         print()
         res = requests.get(url) #, headers=self.header_html)
         res.encoding='UTF-8'
@@ -137,7 +146,7 @@ class nvshen:
             i += 1
             print('Album   %d/%d' % (i, album_count))
             self.getAlbum(self.server + album, model)
-            if update and i >= 1: # 更新模式只下载前面就可以了
+            if self.update and i >= 1: # 更新模式只下载前面就可以了
                 break
     
 
@@ -177,10 +186,11 @@ if __name__ == "__main__":
         nv = nvshen()
         cmd = sys.argv[1]
         if   cmd == 'update':
+            nv.update = True
             cursor = nv.db.cursor()
             cursor.execute("select * from model")
             for it in cursor.fetchall():
-                nv.processModel('https://www.nvshens.com/girl/%s/album/' % it[2], update = True)
+                nv.processModel('https://www.nvshens.com/girl/%s/album/' % it[2])
         elif cmd == 'insert':
             nv.insert(sys.argv[2])
         elif cmd == 'delete':

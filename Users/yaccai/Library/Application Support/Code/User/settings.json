@@ -2,5 +2,8 @@
     "editor.renderControlCharacters": false,
     "editor.renderWhitespace": "none",
     "editor.minimap.enabled": false,
-    "workbench.colorTheme": "Material Theme Darker High Contrast"
+    "workbench.colorTheme": "Material Theme Darker High Contrast",
+    "editor.wordWrap": "on",
+    "editor.multiCursorModifier": "ctrlCmd",
+    "terminal.integrated.cursorStyle": "underline"
 }

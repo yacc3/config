@@ -48,12 +48,26 @@ case "$1" in
     "wav" )                 # $2:<name>[.wav]    切割ape无损音乐为单曲wav
         bchunk -wv "$2".wav "$2".cue prefix__
         ;;
-    "douyin" )
+    "douyin_check" )
         ls -1 ~/Desktop | while read it; do
             echo "$it"
             cat  ~/Desktop/"$it"
             echo
         done
+        ;;
+    "douyin_download" )     # 抖音url -->  http://v.douyin.com/katEpn/
+        url=`echo "$2" | ggrep -oP "http://v.douyin.com/[0-9a-zA-Z]{6}/"`
+        url=`curl -s "$url" | ggrep -oP '(?<=").*(?=")' | gsed 's/amp;//g'`
+        # 以上获取跳转后，加了一堆参数的url，这个是点击后能播放的页面
+        html=`curl -s "$url" -H 'authority: www.iesdouyin.com' -H 'cache-control: max-age=0' -H 'upgrade-insecure-requests: 1' -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36' -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3' -H 'accept-encoding: gzip, deflate, br' -H 'accept-language: zh-CN,zh;q=0.9,en;q=0.8,pt;q=0.7' -H 'cookie: _ga=GA1.2.1989596399.1562658925; _gid=GA1.2.1691794912.1562658925; tt_webid=6711599768907761164; _ba=BA0.2-20190709-5199e-cy7wZzFZzaalz7yuZIcq' --compressed`
+        # 播放页面的html源文件
+        vurl=`echo "$html" | ggrep -oP "(?<=playAddr: \").*(?=\")"`
+        name=`echo "$html" | ggrep -oP "(?<=class=\"desc\">)[^<>]*"`
+        svid=`echo "$html" | ggrep -oP "(?<=s_vid\\=)[0-9a-z]*"`
+        [ -z "$name" ] && name=$svid
+        user=`echo "$html" | ggrep -oP "(?<=name nowrap\">@)[^<]*"`
+        mkdir -p "/Volumes/Store/douyin/$user/"
+        wget --show-progress -qc -O "/Volumes/Store/douyin/$user/$name.mp4" "${vurl}"
         ;;
     "togglemovist" )
         /usr/bin/osascript <<EOF

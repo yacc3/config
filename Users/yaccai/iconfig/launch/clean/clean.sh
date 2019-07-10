@@ -33,12 +33,6 @@ GC=/Applications/Google\ Chrome.app/Contents/Versions
     rm -rf "$GC/$(ls "$GC" | head -n1)"
 }
 
-GU=~/Library/Google/GoogleSoftwareUpdate/GoogleSoftwareUpdate.bundle/Contents/Resources/ksinstall
-test -e "$GU" && {
-    echo "clean GoogleUpdate"
-    "$GU" --nuke
-}
-
 IC=~/Library/Application\ Support/com.colliderli.iina/thumb_cache
 test -d "$IC" && {
     echo "clean iina cache"
