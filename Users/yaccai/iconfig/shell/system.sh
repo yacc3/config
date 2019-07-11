@@ -134,7 +134,7 @@ EOF
                     }
         rsync -avhP -f '+ */' -f '- /.XV/*' -f '- S2' -f '- S3' -f '- ._*' /Volumes/Store/.XV /Volumes/Googol/Store
         ;;
-        "pip_proxy" )
+    "pip_proxy" )
         pip3 install "$2" -i "https://mirrors.aliyun.com/pypi/simple/"
         ;;
     *)
