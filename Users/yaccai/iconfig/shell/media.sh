@@ -71,7 +71,7 @@ case "$1" in
         ;;
     "togglemovist" )
         /usr/bin/osascript <<EOF
-        tell application "Movist Pro"
+        tell application "Movist"
             if it is running then
                 activate
                 tell application "System Events" to keystroke " "

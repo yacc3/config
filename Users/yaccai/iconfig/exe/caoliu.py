@@ -44,7 +44,7 @@ class Caoliu:
             ]
         }
         self.titleInterest[26] = self.titleInterest[15] # 中字原创区
-        self.titleInterest[27] = self.titleInterest[15] # 转帖交流区
+        self.titleInterest[27] = self.titleInterest[15] + ['有碼']# 转帖交流区
         
         self.stmp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         self.db = None
@@ -170,6 +170,6 @@ if __name__ == "__main__":
     if os.path.exists('/Volumes/Store'):
         c = Caoliu()
         c.start(type="guochanyuanchuang",page_start = 1, page_end = 1)
-        c.start(type="yazhouyouma",      page_start = 1, page_end = 1)
+        # c.start(type="yazhouyouma",      page_start = 1, page_end = 1)
         # c.start(type="zhongziyuanchuang",page_start = 1, page_end = 1)
         c.start(type="zhuantiejieliuqu", page_start = 1, page_end = 1)

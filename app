@@ -22,6 +22,7 @@ FaceTime.app
 Font Book.app
 Google Chrome.app
 Home.app
+IINA.app
 Image Capture.app
 Inpaint.app
 Kap.app
@@ -36,7 +37,7 @@ Mail.app
 Maps.app
 Messages.app
 Mission Control.app
-Movist Pro.app
+Movist.app
 MySQLWorkbench.app
 Navicat Premium.app
 NeteaseMusic.app
