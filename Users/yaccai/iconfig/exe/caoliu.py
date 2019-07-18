@@ -44,7 +44,7 @@ class Caoliu:
             ]
         }
         self.titleInterest[26] = self.titleInterest[15] # 中字原创区
-        self.titleInterest[27] = self.titleInterest[15] + ['有碼']# 转帖交流区
+        self.titleInterest[27] = self.titleInterest[15] #+ ['有碼']# 转帖交流区
         
         self.stmp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         self.db = None
