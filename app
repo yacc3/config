@@ -31,7 +31,6 @@ Karabiner-EventViewer.app
 Keyboard Maestro.app
 LaunchControl.app
 Launchpad.app
-Lingon X.app
 LyricsX.app
 Mail.app
 Maps.app

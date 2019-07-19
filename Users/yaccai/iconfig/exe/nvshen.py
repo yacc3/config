@@ -111,8 +111,10 @@ class nvshen:
         if res.ok:
             img = Image.open(BytesIO(res.content))
             img.save(img_file, 'JPEG')
-            img.save(syn_img,  'JPEG')
-            print('\033[32m√\033[0m       ==>  %7s  %4d x %4d  %5.1f KB  %5.2f s' % (img_name, img.width, img.height, len(res.content)/1024, res.elapsed.microseconds/1000000))        
+            if self.update:
+                img.save(syn_img,  'JPEG')
+            print('\033[32m√\033[0m       ==>  %7s  %4d x %4d  %5.1f KB  %5.2f s' % (img_name, img.width, img.height, len(res.content)/1024, res.elapsed.microseconds/1000000)) 
+        # print(res.code)
 
 
     def processModel(self, url): # https://www.nvshens.com/girl/22162/album/
