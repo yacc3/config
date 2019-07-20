@@ -172,4 +172,4 @@ if __name__ == "__main__":
         c.start(type="guochanyuanchuang",page_start = 1, page_end = 1)
         # c.start(type="yazhouyouma",      page_start = 1, page_end = 1)
         # c.start(type="zhongziyuanchuang",page_start = 1, page_end = 1)
-        c.start(type="zhuantiejieliuqu", page_start = 1, page_end = 1)
+        # c.start(type="zhuantiejieliuqu", page_start = 1, page_end = 1)
