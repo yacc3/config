@@ -42,11 +42,10 @@ alias pi='~/iconfig/shell/system.sh pip_proxy'
 alias me='~/iconfig/shell/media.sh'
 alias yx='~/iconfig/shell/media.sh yixiu'
 alias dl='~/iconfig/shell/media.sh douyin_download'
-alias dc='~/iconfig/shell/media.sh douyin_check'
-
 
 alias rf='rm -rf '
 alias nv='~/iconfig/exe/nvshen.py'
+alias dc='~/iconfig/exe/douyin.py check'
 alias gz='hdiutil attach /Volumes/Store/llvm日志文件-需要clang调试'
 alias yd='youtube-dl --proxy "socks5://127.0.0.1:1086"'
 alias cl='~/iconfig/exe/caoliu.py'

@@ -160,5 +160,26 @@ class douyin:
             self.spider(uid)
         
 
+    def check_database(self, uid, limit = 6):
+        cursor = self.db.cursor()
+        sql_search = "select stmp, flag, works, `like`, follow, nickName from douyin where douyinSID = %s and flag > 0 order by stmp DESC limit %d" % (uid, limit)
+        print()
+        cursor.execute(sql_search)
+        for it in cursor.fetchall():
+            print('%19s  %3d  %4d  %5d  %s' % (it[0].strftime("%Y-%m-%d %H:%M:%S"), it[2], it[3], it[4], it[5]))
+
+
 if __name__ == '__main__':
-    douyin().start()
+    argc = len(sys.argv)
+    dy = douyin()
+    if argc == 1:
+        for uid in dy.uids:
+            dy.spider(uid)
+    elif argc > 1 and sys.argv[1] == 'check':
+        limit = 6
+        if argc == 3:
+            res = re.compile('[0-9]+').findall(sys.argv[2])
+            if len(res) == 1:
+                limit = int(sys.argv[2])
+        for uid in dy.uids:
+            dy.check_database(uid, limit) # datetime.datetime(2019, 7, 22, 20, 43, 12)
