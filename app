@@ -80,6 +80,7 @@ Visual Studio Code.app
 VoiceMemos.app
 WeChat.app
 XLPlayer.app
+Xcode.app
 XtraFinder.app
 cd to iterm.app
 iMazing.app
