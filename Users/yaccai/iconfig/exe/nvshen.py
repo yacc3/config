@@ -72,6 +72,7 @@ class nvshen:
             os.makedirs(fpath)
         elif not self.force:
             return
+            pass
 
         img_pattern = re.compile('http[^=]*?/gallery/[0-9]+/[0-9]+[/s]*/0.jpg')
         img_urlpart = img_pattern.findall(res.text)[0].replace('/s', '').replace('/0.jpg', '')
