@@ -29,6 +29,7 @@ gnu-sed
 gnu-tar
 gnu-which
 gnutls
+go
 gpatch
 graphite2
 grep
