@@ -52,3 +52,5 @@ alias cl='~/iconfig/exe/caoliu.py'
 alias kxl='killall Thunder;launchctl remove com.xunlei.Thunder.ThunderHelper'
 alias day='open /Volumes/Store/Daily/`date +"%Y/%Y-%m-%d"`'
 alias top='top -n 15 -o cpu -s 2 -stats pid,command,cpu,mem,pstate,time'
+
+# hdiutil create -type SPARSEBUNDLE -fs JHFS+ -size 1t -volname Daily -autostretch Daily
