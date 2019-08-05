@@ -46,7 +46,7 @@ test -d ~/Code && {
 test -d /usr/local/var/mysql && {
     echo "备份 MySQL"
     rsync -a  /usr/local/var/mysql  "$bakd"
-    mysqldump -u yaccai -pgo daily passwd > "$bakd/daily.passwd.sql"
+    mysqldump -u yaccai -pgo daily passwd > "$bakd/mysql/daily.passwd.sql"
 }
 
 echo "备份 Fonts"
