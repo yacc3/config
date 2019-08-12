@@ -42,6 +42,7 @@ alias pi='~/iconfig/shell/system.sh pip_proxy'
 alias me='~/iconfig/shell/media.sh'
 alias yx='~/iconfig/shell/media.sh yixiu'
 alias dl='~/iconfig/shell/media.sh douyin_download'
+alias tm='~/iconfig/shell/media.sh togglemovist'
 
 alias rf='rm -rf '
 alias nv='~/iconfig/exe/nvshen.py'
