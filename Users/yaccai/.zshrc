@@ -39,10 +39,11 @@ alias  b='~/iconfig/shell/system.sh bright'
 alias  v='~/iconfig/shell/system.sh volume'
 alias pi='~/iconfig/shell/system.sh pip_proxy'
 
-alias me='~/iconfig/shell/media.sh'
-alias yx='~/iconfig/shell/media.sh yixiu'
-alias dl='~/iconfig/shell/media.sh douyin_download'
-alias tm='~/iconfig/shell/media.sh togglemovist'
+alias  me='~/iconfig/shell/media.sh'
+alias  yx='~/iconfig/shell/media.sh yixiu'
+alias  dl='~/iconfig/shell/media.sh douyin_download'
+alias  tm='~/iconfig/shell/media.sh togglemovist'
+alias day='~/iconfig/shell/media.sh openDailyMedia'
 
 alias rf='rm -rf '
 alias nv='~/iconfig/exe/nvshen.py'
@@ -52,7 +53,6 @@ alias gz='hdiutil attach /Volumes/Store/llvm日志文件-需要clang调试'
 alias yd='youtube-dl --proxy "socks5://127.0.0.1:1086"'
 alias cl='~/iconfig/exe/caoliu.py'
 alias kxl='killall Thunder;launchctl remove com.xunlei.Thunder.ThunderHelper'
-alias day='open /Volumes/Store/Daily/`date +"%Y/%Y-%m-%d"`'
 alias top='top -n 15 -o cpu -s 2 -stats pid,command,cpu,mem,pstate,time'
 
 # hdiutil create -type SPARSEBUNDLE -fs JHFS+ -size 1t -volname Daily -autostretch Daily

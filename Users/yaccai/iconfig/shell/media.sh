@@ -72,6 +72,13 @@ case "$1" in
         end tell
 EOF
         ;;
+    "openDailyMedia" )
+        if [[ -d /Volumes/Store/Daily ]]; then
+            day=`date +"%Y/%Y-%m-%d"`
+            mkdir -p /Volumes/Store/Daily/"$day"
+            open     /Volumes/Store/Daily/"$day"
+        fi
+        ;;
     * )
         echo "not such pattern"
         ;;

@@ -21,38 +21,38 @@ echo "clean apps"
 find /usr/local/Caskroom -name "*.pkg" -exec rm -rf {} +
 find /usr/local/Caskroom -name "*.app" -exec rm -rf {} +
 
-XL=/Applications/Thunder.app/Contents/Bundles/XLPlayer.app
-test -d "$XL" && {
-    echo "clean Thunder"
-    rm -rf "$XL"
-}
+# XL=/Applications/Thunder.app/Contents/Bundles/XLPlayer.app
+# test -d "$XL" && {
+#     echo "clean Thunder"
+#     rm -rf "$XL"
+# }
 
-GC=/Applications/Google\ Chrome.app/Contents/Versions
-[[ -d "$GC" && `ls "$GC" | wc -l` -gt 1 ]] && {
-    echo "clean Chrome version"
-    rm -rf "$GC/$(ls "$GC" | head -n1)"
-}
+# GC=/Applications/Google\ Chrome.app/Contents/Versions
+# [[ -d "$GC" && `ls "$GC" | wc -l` -gt 1 ]] && {
+#     echo "clean Chrome version"
+#     rm -rf "$GC/$(ls "$GC" | head -n1)"
+# }
 
-IC=~/Library/Application\ Support/com.colliderli.iina/thumb_cache
-test -d "$IC" && {
-    echo "clean iina cache"
-    rm -rf "$IC"
-}
+# IC=~/Library/Application\ Support/com.colliderli.iina/thumb_cache
+# test -d "$IC" && {
+#     echo "clean iina cache"
+#     rm -rf "$IC"
+# }
 
 # echo "clean torrent"
 # find ~/Library/Application\ Support/uTorrent -name "*.torrent" -delete
 # find ~/Library/Application\ Support/Transmission/watch -name "*.torrent" -delete
 
-gfind /Volumes/Store/com.tencent.xinWeChat -regextype 'egrep' -regex '.*__[0-9]{14}\.bak' | while read it; do
-    newfile="${it/__*.bak/}"
-    nbsz=`gstat -c '%s' "$newfile"`
-    obsz=`gstat -c '%s' "$it"`
+# gfind /Volumes/Store/com.tencent.xinWeChat -regextype 'egrep' -regex '.*__[0-9]{14}\.bak' | while read it; do
+#     newfile="${it/__*.bak/}"
+#     nbsz=`gstat -c '%s' "$newfile"`
+#     obsz=`gstat -c '%s' "$it"`
 
-    if [[ "$nbsz" -gt "$obsz" ]]; then
-        echo "remove ${it##*/}"
-        rm "$it"
-    fi
-done
+#     if [[ "$nbsz" -gt "$obsz" ]]; then
+#         echo "remove ${it##*/}"
+#         rm "$it"
+#     fi
+# done
 
 echo "done"
 echo
