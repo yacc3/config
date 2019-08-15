@@ -25,6 +25,7 @@ Home.app
 IINA.app
 Image Capture.app
 Inpaint.app
+Install WD Discovery.app
 Kap.app
 Karabiner-Elements.app
 Karabiner-EventViewer.app

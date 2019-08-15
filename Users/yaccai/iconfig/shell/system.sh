@@ -114,7 +114,7 @@ EOF
         # gfind . -regextype "egrep" -regex ".*__[0-9]{14}\.bak"
         ;;
     "backup" )
-        if [ ! -e /Volumes/Googol/Store ]; then
+        if [ ! -e /Volumes/Googol ]; then
             echo "Disk Googol not mount"
             exit
         fi 
@@ -125,8 +125,8 @@ EOF
                     -f '- /System Volume Information' \
                     -f '- /Torrent' \
                     -f '- /Downloads' \
-                    /Volumes/Store/  /Volumes/Googol/setairportpower
-        rsync -avhP -f '+ */' -f '- /.XV/*' -f '- S2' -f '- S3' -f '- ._*' /Volumes/Store/.XV /Volumes/Googol/Store
+                    /Volumes/Store/  /Volumes/Googol
+        # rsync -avhP -f '+ */' -f '- /.XV/*' -f '- S2' -f '- S3' -f '- ._*' /Volumes/Store/.XV /Volumes/Googol
         ;;
     "pip_proxy" )
         pip3 install "$2" -i "https://mirrors.aliyun.com/pypi/simple/"

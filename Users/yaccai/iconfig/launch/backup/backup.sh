@@ -52,29 +52,29 @@ test -d /usr/local/var/mysql && {
 echo "备份 Fonts"
 rsync -a ~/Library/Fonts "$bakd"
 
-[[ `date +%H` -lt 6 ]] && {
-    echo "调用 TimeMachine"
-    for excl in "/Users/yaccai/Library/Application Support/com.colliderli.iina"  \
-                "/Users/yaccai/Library/Application Support/iMazing"              \
-                "/Users/yaccai/Library/Application Support/iMazing Mini"         \
-                "/Users/yaccai/Library/Application Support/qBittorrent"          \
-                "/Users/yaccai/Library/Application Support/Transmission"         \
-                "/Users/yaccai/Library/Application Support/uTorrent"             \
-                "/Users/yaccai/Library/Application Support/Vuze"                 \
-                "/Users/yaccai/Library/Containers/com.tencent.xinWeChat"         \
-                "/Users/yaccai/Library/Metadata"                                 \
-                "/Users/yaccai/Code"                                             \
-                "/Users/yaccai/Resilio Sync"                                     \
-                "/Users/yaccai/Desktop"                                          \
-                "/Users/yaccai/Downloads"                                        \
-                "/Users/yaccai/Music"; do
-        if [[ -d "$excl" && ! -L "$excl" ]]; then
-            tmutil isexcluded    "$excl" &>/dev/null && continue
-            tmutil addexclusion  "$excl"
-        fi
-    done
-    tmutil startbackup
-}
+# [[ `date +%H` -lt 6 ]] && {
+#     echo "调用 TimeMachine"
+#     for excl in "/Users/yaccai/Library/Application Support/com.colliderli.iina"  \
+#                 "/Users/yaccai/Library/Application Support/iMazing"              \
+#                 "/Users/yaccai/Library/Application Support/iMazing Mini"         \
+#                 "/Users/yaccai/Library/Application Support/qBittorrent"          \
+#                 "/Users/yaccai/Library/Application Support/Transmission"         \
+#                 "/Users/yaccai/Library/Application Support/uTorrent"             \
+#                 "/Users/yaccai/Library/Application Support/Vuze"                 \
+#                 "/Users/yaccai/Library/Containers/com.tencent.xinWeChat"         \
+#                 "/Users/yaccai/Library/Metadata"                                 \
+#                 "/Users/yaccai/Code"                                             \
+#                 "/Users/yaccai/Resilio Sync"                                     \
+#                 "/Users/yaccai/Desktop"                                          \
+#                 "/Users/yaccai/Downloads"                                        \
+#                 "/Users/yaccai/Music"; do
+#         if [[ -d "$excl" && ! -L "$excl" ]]; then
+#             tmutil isexcluded    "$excl" &>/dev/null && continue
+#             tmutil addexclusion  "$excl"
+#         fi
+#     done
+#     tmutil startbackup
+# }
 
 # osascript -e "set volume output volume +3"
 ~/iconfig/exe/nvshen.py update 1>/dev/null
